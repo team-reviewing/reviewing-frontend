@@ -1,7 +1,18 @@
-import type { NextPage } from 'next';
+import Template from '../components/Main/Template';
+import Header from '../components/Header';
+import useGetUserQuery from '../queries/getUserQuery';
 
-const Home: NextPage = () => {
-  return <div>main</div>;
+const Home = () => {
+  const { data } = useGetUserQuery();
+
+  return (
+    <>
+      <Header image_url={data} />
+      <div className="w-full h-full flex justify-center">
+        <Template />
+      </div>
+    </>
+  );
 };
 
 export default Home;

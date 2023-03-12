@@ -2,7 +2,10 @@ import type { AppProps } from 'next/app';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { RecoilRoot } from 'recoil';
 import '../styles/globals.css';
-import Header from '../components/Header';
+
+if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
+  require('../mocks');
+}
 
 const client = new QueryClient({
   defaultOptions: {
@@ -16,7 +19,6 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={client}>
       <RecoilRoot>
-        <Header />
         <Component {...pageProps} />
       </RecoilRoot>
     </QueryClientProvider>

@@ -1,0 +1,9 @@
+public
+.next
+node_modules
+public
+.eslintrc.js
+.prettierrc.js
+tsconfig.json
+src/styles
+.github
