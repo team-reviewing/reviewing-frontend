@@ -1,13 +1,13 @@
 import Image from 'next/image';
 import img from 'styles/images/person.png';
 import Link from 'next/link';
-import { IData } from '../globalType';
+import { UserType } from './userInfomation/informationType';
 import { useState } from 'react';
 import lena from 'styles/images/lena.jpg';
 import GithubLogInButton from './HeaderSub/GithubLogInButton';
 import HeaderDropDown from './HeaderSub/HeaderDropDown';
 
-const Header = ({ image_url }: Partial<IData>) => {
+const Header = ({ imageUrl }: Partial<Pick<UserType, 'imageUrl'>>) => {
   const [dropdown, setDropdown] = useState<boolean>(false);
 
   return (
@@ -16,7 +16,7 @@ const Header = ({ image_url }: Partial<IData>) => {
         <Link href="/">
           <span className="cursor-pointer font-bold">Logo</span>
         </Link>
-        {image_url ? (
+        {imageUrl ? (
           <>
             <ul className="cursor-pointer font-bold" onClick={() => setDropdown((prev) => !prev)}>
               <div className="flex">
@@ -27,9 +27,7 @@ const Header = ({ image_url }: Partial<IData>) => {
             </ul>
           </>
         ) : (
-          <Link href="/login">
-            <GithubLogInButton />
-          </Link>
+          <GithubLogInButton />
         )}
       </div>
       <div className="w-full h-80 bg-cyan-200">
@@ -37,9 +35,9 @@ const Header = ({ image_url }: Partial<IData>) => {
           <Image src={img} alt="person" />
           <div className="w-full text-4xl font-bold leading-10 tracking-widest">
             <div className="w-full flex justify-center items-center flex-col">
-              <span>개인 프로젝트의 코드리뷰가</span>
+              <span className="text-2xl sm:text-2xl md:text-3xl lg:text-4xl">개인 프로젝트의 코드리뷰가</span>
               <br />
-              <span>필요하신가요?</span>
+              <span className="text-2xl sm:text-2xl md:text-3xl lg:text-4xl">필요하신가요?</span>
             </div>
           </div>
         </div>

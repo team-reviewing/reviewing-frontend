@@ -9,12 +9,12 @@ module.exports = {
     './src/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    screens: {
-      msm: { max: '639px' },
-      mmd: { max: '757px' },
-      mlg: { max: '1023px' },
-    },
     extend: {
+      screens: {
+        msm: { max: '639px' },
+        mmd: { max: '757px' },
+        mlg: { max: '1023px' },
+      },
       keyframes: {
         dropdown: {
           '0%': { transform: 'translateY(-5%)' },

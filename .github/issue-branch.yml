@@ -1,11 +1,11 @@
 defaultBranch: 'develop'
 branchName: '${issue.number}'
 branches:
-  - label: feature
+  - label: 🚀 feature
     prefix: feature/
-  - label: refactor
+  - label: 🛠 refactor
     prefix: refactor/
-  - label: bug
+  - label: 🐞 bug
     prefix: bugfix/
   - label: '*'
     prefix: issues/

@@ -7,7 +7,7 @@ const Home = () => {
 
   return (
     <>
-      <Header image_url={data} />
+      <Header imageUrl={data} />
       <div className="w-full h-full flex justify-center">
         <Template />
       </div>

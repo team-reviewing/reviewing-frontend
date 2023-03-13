@@ -65,15 +65,6 @@ export const handlers = [
     );
   }),
 
-  rest.get('http://localhost:3000/members', (req, res, ctx) => {
-    return res(
-      ctx.status(200),
-      ctx.json({
-        image_url: 'image.png',
-      }),
-    );
-  }),
-
   rest.post('http://localhost:3000/auth/refresh', (req, res, ctx) => {
     console.log('access token 만료시 refresh API');
     return res(

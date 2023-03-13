@@ -6,7 +6,7 @@ function CategoryCard() {
   return (
     <div className="max-w-md rounded-md shadow-md border-2 border-neutral-400 flex justify-center items-center px-3 py-3">
       <div className="flex flex-col w-full h-full">
-        <p className="w-full line-clamp-3 overflow-ellipsis whitespace-normal max-h-18 leading-6">
+        <p className="w-full line-clamp-3 overflow-ellipsis whitespace-normal min-h-[4rem] leading-6">
           introduce introduce introduce introduce introduc eintroduceintrod uceintroduc eintrodu ceintr oduceintrod
           uceintrodu ceintr oduceintro duceintr oduce
         </p>

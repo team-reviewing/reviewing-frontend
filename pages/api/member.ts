@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IData } from '../../globalType';
+import { UserType } from '../../components/userInfomation/informationType';
 import { getAccessToken } from '../../utils/authLogic';
 
 export const setAxiosHeaderAuth = () => {
@@ -20,9 +20,9 @@ export const logIn = async (params: string | string[]) => {
 export const logInUser = async () => {
   console.log('logInUser 실행');
   setAxiosHeaderAuth();
-  const response = await axios.get('http://localhost:3000/members');
-  const data: IData = response.data;
-  return data.image_url;
+  const response = await axios.get('http://localhost:3000/members/me');
+  const data: UserType = response.data;
+  return data.imageUrl;
 };
 
 export const refreshUser = async () => {
