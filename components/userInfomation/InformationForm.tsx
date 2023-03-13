@@ -31,7 +31,9 @@ const InformationForm = ({ data }: UserPageProps) => {
     try {
       await reviewerStatusUpdate();
       setReviewerStatus((prev) => !prev);
-      toast.success('리뷰어 활동을 시작합니다!');
+      !reviewerStatus
+        ? toast('리뷰어 활동을 시작합니다!', { icon: '😁' })
+        : toast('리뷰어 활동을 중단합니다!', { icon: '👋' });
     } catch (err) {
       toast.error('리뷰어 활동 업데이트 오류가 발생했습니다!');
     }

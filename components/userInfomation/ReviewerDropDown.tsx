@@ -28,7 +28,9 @@ function ReviewerDropDown({ name, dropList, ment, select, etc, setEtc, setSelect
             toast.error('최대 3개 선택 가능합니다.');
             return prev;
           } else {
-            return prev.includes(el) ? [el, ...prev.filter((val) => val.id !== el.id)] : [el, ...prev];
+            return prev.map((v) => v.id).includes(el.id)
+              ? [el, ...prev.filter((val) => val.id !== el.id)]
+              : [el, ...prev];
           }
         } else {
           return prev;
