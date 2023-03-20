@@ -1,21 +1,62 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import clsx from 'clsx';
+import { IFilterCategoryPropsType, ICategoryType, ITagType } from './mainType';
+import CategoryTagBox from './CategoryTagBox';
+import PickTagCard from './PickTagCard';
 
-const categoryArray = ['백엔드', '프론트엔드', '모바일', '게임', '기타'];
+function FilterCategory({ setCategory, categories, setSelectedTags, selectedTags }: IFilterCategoryPropsType) {
+  const [isClicked, setClicked] = useState<number>(1);
 
-function FilterCategory({ setCategory }: { setCategory: React.Dispatch<React.SetStateAction<string>> }) {
+  const filterTag = (data: Pick<IFilterCategoryPropsType, 'categories'>) => {
+    const filterData = data.categories?.filter((item: ICategoryType) => {
+      if (item.id === isClicked) {
+        return item;
+      }
+    });
+    return filterData[0].tags;
+  };
+
+  useEffect(() => {
+    setCategory(categories[0]);
+  }, []);
+
   return (
-    <div className="w-full flex flex-wrap font-bold border-b text-xl">
-      {categoryArray.map((item: string, index: number) => {
-        return (
-          <div
-            key={index}
-            className="mr-3 tracking-wide cursor-pointer p-3 hover:border-b-2 hover:border-cyan-200"
-            onClick={() => setCategory(item)}>
-            {item}
-          </div>
-        );
-      })}
-    </div>
+    <>
+      <div className="w-full flex flex-wrap font-bold border-b text-xl mb-3">
+        {categories &&
+          categories.map((item: ICategoryType) => {
+            return (
+              <div
+                key={item.id}
+                className={clsx(`mr-3 border-b-2 tracking-wide cursor-pointer p-3 text-gray-500 hover:text-black`, {
+                  ['border-b-cyan-300']: item.id === isClicked,
+                  ['border-b-transparent']: item.id !== isClicked,
+                })}
+                onClick={() => {
+                  setCategory(item);
+                  setClicked(item.id);
+                }}>
+                {item.name}
+              </div>
+            );
+          })}
+      </div>
+      <div>{categories && <CategoryTagBox tags={filterTag({ categories })} setSelectTags={setSelectedTags} />}</div>
+
+      {Array.isArray(selectedTags) && selectedTags.length > 0 && (
+        <div className="flex flex-wrap gap-3 mt-3">
+          {selectedTags.map((v: ITagType) => (
+            <PickTagCard key={v.id} tag={v} setSelectTags={setSelectedTags} />
+          ))}
+          <button
+            onClick={() => {
+              setSelectedTags([]);
+            }}>
+            태그 초기화
+          </button>
+        </div>
+      )}
+    </>
   );
 }
 

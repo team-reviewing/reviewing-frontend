@@ -4,6 +4,73 @@ import { IUserUpdateType } from '../components/userInfomation/informationType';
 let username = 'kuku';
 let email = 'kuku@gmail.com';
 
+const categoriesMockData = [
+  {
+    id: 1,
+    name: '백엔드',
+    tags: [
+      {
+        id: 1,
+        name: 'Java',
+      },
+      {
+        id: 2,
+        name: 'Spring',
+      },
+      {
+        id: 3,
+        name: 'Kotlin',
+      },
+      {
+        id: 4,
+        name: 'Python',
+      },
+    ],
+  },
+  {
+    id: 2,
+    name: '프론트엔드',
+    tags: [
+      {
+        id: 5,
+        name: 'Javascript',
+      },
+      {
+        id: 6,
+        name: 'React',
+      },
+    ],
+  },
+  {
+    id: 3,
+    name: '모바일',
+    tags: [
+      {
+        id: 7,
+        name: 'Android',
+      },
+      {
+        id: 8,
+        name: 'Ios',
+      },
+    ],
+  },
+  {
+    id: 4,
+    name: '기타',
+    tags: [
+      {
+        id: 9,
+        name: 'C++',
+      },
+      {
+        id: 10,
+        name: 'C',
+      },
+    ],
+  },
+];
+
 export const handlers = [
   rest.get('http://localhost:3000/members/me', (req, res, ctx) => {
     return res(
@@ -82,6 +149,238 @@ export const handlers = [
       ctx.status(204),
       ctx.json({
         message: 'logout',
+      }),
+    );
+  }),
+
+  rest.get('http://localhost:3000/tags', (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        categories: categoriesMockData,
+      }),
+    );
+  }),
+
+  rest.get('http://localhost:3000/reviewers', (req, res, ctx) => {
+    console.log('리뷰어 get 요청이 들어왔습니다');
+    console.log('Request query parameters:', req.url.searchParams.toString());
+    return res(
+      ctx.status(200),
+      ctx.delay(1000),
+      ctx.json({
+        hasNext: true,
+        reviewers: [
+          {
+            id: 1,
+            username: '1',
+            imageUrl: 'https://upload.wikimedia.org/wikipedia/ko/thumb/2/24/Lenna.png/440px-Lenna.png',
+            profileUrl: 'https://github.com/leeuihyun',
+            job: '백엔드',
+            career: '1~3년차',
+            techStack: [
+              {
+                id: 1,
+                name: 'Java',
+              },
+              {
+                id: 2,
+                name: 'Kotlin',
+              },
+              {
+                id: 3,
+                name: 'Python',
+              },
+            ],
+            introduction: '안녕하세요 어떠어떠한 개발자입니다.',
+          },
+          {
+            id: 2,
+            username: '2',
+            imageUrl: 'https://upload.wikimedia.org/wikipedia/ko/thumb/2/24/Lenna.png/440px-Lenna.png',
+            profileUrl: 'https://github.com/leeuihyun',
+            job: '백엔드',
+            career: '1~3년차',
+            techStack: [
+              {
+                id: 1,
+                name: 'Java',
+              },
+              {
+                id: 2,
+                name: 'Kotlin',
+              },
+              {
+                id: 3,
+                name: 'Python',
+              },
+            ],
+            introduction: '안녕하세요 어떠어떠한 개발자입니다.',
+          },
+          {
+            id: 3,
+            username: '3',
+            imageUrl: 'https://upload.wikimedia.org/wikipedia/ko/thumb/2/24/Lenna.png/440px-Lenna.png',
+            profileUrl: 'https://github.com/leeuihyun',
+            job: '백엔드',
+            career: '1~3년차',
+            techStack: [
+              {
+                id: 1,
+                name: 'Java',
+              },
+              {
+                id: 2,
+                name: 'Kotlin',
+              },
+              {
+                id: 3,
+                name: 'Python',
+              },
+            ],
+            introduction: '안녕하세요 어떠어떠한 개발자입니다.',
+          },
+          {
+            id: 4,
+            username: '4',
+            imageUrl: 'https://upload.wikimedia.org/wikipedia/ko/thumb/2/24/Lenna.png/440px-Lenna.png',
+            profileUrl: 'https://github.com/leeuihyun',
+            job: '백엔드',
+            career: '1~3년차',
+            techStack: [
+              {
+                id: 1,
+                name: 'Java',
+              },
+              {
+                id: 2,
+                name: 'Kotlin',
+              },
+              {
+                id: 3,
+                name: 'Python',
+              },
+            ],
+            introduction: '안녕하세요 어떠어떠한 개발자입니다.',
+          },
+          {
+            id: 5,
+            username: '5',
+            imageUrl: 'https://upload.wikimedia.org/wikipedia/ko/thumb/2/24/Lenna.png/440px-Lenna.png',
+            profileUrl: 'https://github.com/leeuihyun',
+            job: '백엔드',
+            career: '1~3년차',
+            techStack: [
+              {
+                id: 1,
+                name: 'Java',
+              },
+              {
+                id: 2,
+                name: 'Kotlin',
+              },
+              {
+                id: 3,
+                name: 'Python',
+              },
+            ],
+            introduction: '안녕하세요 어떠어떠한 개발자입니다.',
+          },
+          {
+            id: 6,
+            username: '6',
+            imageUrl: 'https://upload.wikimedia.org/wikipedia/ko/thumb/2/24/Lenna.png/440px-Lenna.png',
+            profileUrl: 'https://github.com/leeuihyun',
+            job: '백엔드',
+            career: '1~3년차',
+            techStack: [
+              {
+                id: 1,
+                name: 'Java',
+              },
+              {
+                id: 2,
+                name: 'Kotlin',
+              },
+              {
+                id: 3,
+                name: 'Python',
+              },
+            ],
+            introduction: '안녕하세요 어떠어떠한 개발자입니다.',
+          },
+          {
+            id: 7,
+            username: '7',
+            imageUrl: 'https://upload.wikimedia.org/wikipedia/ko/thumb/2/24/Lenna.png/440px-Lenna.png',
+            profileUrl: 'https://github.com/leeuihyun',
+            job: '백엔드',
+            career: '1~3년차',
+            techStack: [
+              {
+                id: 1,
+                name: 'Java',
+              },
+              {
+                id: 2,
+                name: 'Kotlin',
+              },
+              {
+                id: 3,
+                name: 'Python',
+              },
+            ],
+            introduction:
+              '안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕하세요 안녕',
+          },
+          {
+            id: 8,
+            username: '8',
+            imageUrl: 'https://upload.wikimedia.org/wikipedia/ko/thumb/2/24/Lenna.png/440px-Lenna.png',
+            profileUrl: 'https://github.com/leeuihyun',
+            job: '백엔드',
+            career: '1~3년차',
+            techStack: [
+              {
+                id: 1,
+                name: 'Java',
+              },
+              {
+                id: 2,
+                name: 'Kotlin',
+              },
+              {
+                id: 3,
+                name: 'Python',
+              },
+            ],
+            introduction:
+              '안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 ',
+          },
+          {
+            id: 9,
+            username: '9',
+            imageUrl: 'https://upload.wikimedia.org/wikipedia/ko/thumb/2/24/Lenna.png/440px-Lenna.png',
+            profileUrl: 'https://github.com/leeuihyun',
+            job: '백엔드',
+            career: '1~3년차',
+            techStack: [
+              {
+                id: 1,
+                name: 'Java',
+              },
+              {
+                id: 2,
+                name: 'Kotlin',
+              },
+              {
+                id: 3,
+                name: 'Python',
+              },
+            ],
+            introduction: '안녕하세요 어떠어떠한 개발자입니다.',
+          },
+        ],
       }),
     );
   }),
