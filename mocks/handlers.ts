@@ -153,6 +153,10 @@ export const handlers = [
     );
   }),
 
+  rest.post(`http://localhost:3000/reviewers/:id/reviews`, (req, res, ctx) => {
+    return res(ctx.status(200));
+  }),
+
   rest.get('http://localhost:3000/tags', (req, res, ctx) => {
     return res(
       ctx.status(200),

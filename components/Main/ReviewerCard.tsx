@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import img from '../../styles/images/lena.jpg';
 import { IReviewerType } from './mainType';
+import Link from 'next/link';
 
 function ReviewerCard({ reviewerProps }: { reviewerProps: IReviewerType }) {
   return (
@@ -30,7 +31,17 @@ function ReviewerCard({ reviewerProps }: { reviewerProps: IReviewerType }) {
             <Image src={img} alt="img" width={30} height={30} className="rounded-full mr-3"></Image>
             <span className="text-black">{reviewerProps.username}</span>
           </div>
-          <button className=" bg-slate-200  text-black font-bold py-2 px-4  rounded">리뷰요청</button>
+          <Link
+            href={{
+              pathname: '/register',
+              query: {
+                reviewerId: reviewerProps.id,
+                username: reviewerProps.username,
+              },
+            }}
+            className=" bg-slate-200 text-black font-bold py-2 px-4 rounded">
+            리뷰요청
+          </Link>
         </div>
       </div>
     </div>

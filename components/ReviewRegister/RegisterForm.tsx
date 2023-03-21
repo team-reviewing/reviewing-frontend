@@ -1,53 +1,124 @@
 import ReviewEditor from './ReviewEditor';
+import { useForm } from 'react-hook-form';
+import ErrorMent from './ErrorMent';
+import { ILinkUserIdType, IReviewRegisterType } from './ReviewRegisterType';
+import { reviewRegister } from '../../pages/api/reviewRegister';
+import { useRef, useState } from 'react';
+import Loading from '../Loading';
+import { toast } from 'react-hot-toast';
+import { useRouter } from 'next/router';
+import ReactQuill from 'react-quill';
 
-function RegisterForm() {
+function RegisterForm({ reviewerId, reviewerName }: ILinkUserIdType) {
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    trigger,
+    setError,
+    formState: { errors },
+  } = useForm<IReviewRegisterType>({
+    mode: 'onTouched',
+  });
+  const [loading, setLoading] = useState(false);
+  const editorRef = useRef<ReactQuill>(null);
+
+  const router = useRouter();
+
+  const onSubmitHandler = async ({ title, content, prUrl }: IReviewRegisterType) => {
+    try {
+      if (editorRef.current?.unprivilegedEditor?.getText().trim().length) {
+        setLoading((prev) => !prev);
+        await reviewRegister({ id: Number(reviewerId), title, content, prUrl }).then(() => {
+          setLoading(false);
+          toast.success('리뷰 신청이 완료되었습니다.');
+          router.push('/');
+        });
+      } else {
+        setError('content', { type: 'minLength', message: '필수 사항입니다.' });
+      }
+    } catch (err) {
+      setLoading(false);
+      toast.error('리뷰 신청이 진행되지 않았습니다. 다시 진행 부탁드립니다.');
+    }
+  };
+
   return (
-    <form className="flex flex-col p-3 gap-6">
-      <div>
-        <p className="text-slate-400 text-lg">리뷰어 : KuKu</p>
-      </div>
-      <div>
-        <div className="">
-          <label htmlFor="title" className="text-lg">
-            제목
-          </label>
+    <>
+      {loading && <Loading />}
+      <form className="flex flex-col p-3 gap-6" onSubmit={handleSubmit(onSubmitHandler)}>
+        <div>
+          <p className="text-slate-400 text-lg">리뷰어 : {reviewerName}</p>
         </div>
         <div>
-          <input
-            id="title"
-            type="text"
-            placeholder="제목을 입력해주세요."
-            className="p-2 w-full border-solid border-2 rounded-md outline-none"
-          />
+          <div className="">
+            <label htmlFor="title" className="text-lg">
+              제목
+            </label>
+          </div>
+          <div>
+            <input
+              id="title"
+              type="text"
+              {...register('title', {
+                required: '필수 사항입니다.',
+                maxLength: {
+                  value: 50,
+                  message: '최대 50자 입니다.',
+                },
+              })}
+              placeholder="제목을 입력해주세요. 최대 50자입니다."
+              maxLength={50}
+              className="p-2 w-full border-solid border-2 rounded-md outline-none"
+            />
+            {errors.title && <ErrorMent>{errors.title.message}</ErrorMent>}
+          </div>
         </div>
-      </div>
-      <div>
         <div>
-          <p className="text-lg">리뷰요청 상세내용</p>
+          <div>
+            <p className="text-lg">리뷰요청 상세내용</p>
+          </div>
+          <div>
+            <ReviewEditor
+              register={register}
+              setValue={setValue}
+              watch={watch}
+              trigger={trigger}
+              editorRef={editorRef}
+            />
+            {errors.content && <ErrorMent>{errors.content.message}</ErrorMent>}
+          </div>
         </div>
         <div>
-          <ReviewEditor />
+          <div>
+            <label htmlFor="pullRequestEmail" className="text-lg">
+              Github PULL REQUEST URL
+            </label>
+          </div>
+          <div>
+            <input
+              // 추후 pattern 적용
+              {...register('prUrl', {
+                required: '필수 사항입니다.',
+                pattern: {
+                  value: /^(https:\/\/)?github.com\/.+\/.+\/pull\/[0-9]+$/,
+                  message: 'PR 규칙에 어긋나는 형식입니다.',
+                },
+              })}
+              id="pullRequestEmail"
+              type="text"
+              placeholder="Pull Request URL을 입력해주세요."
+              className="p-2 w-full border-solid border-2 rounded-md outline-none"
+            />
+            {errors.prUrl && <ErrorMent>{errors.prUrl.message}</ErrorMent>}
+          </div>
         </div>
-      </div>
-      <div>
-        <div>
-          <label htmlFor="pullRequestEmail" className="text-lg">
-            Github PULL REQUEST URL
-          </label>
+        <div className="flex justify-end">
+          <button className="w-40 flex justify-center items-center bg-black text-white h-10 rounded-md">요청</button>
         </div>
-        <div>
-          <input
-            id="pullRequestEmail"
-            type="email"
-            placeholder="Pull Request URL을 입력해주세요."
-            className="p-2 w-full border-solid border-2 rounded-md outline-none"
-          />
-        </div>
-      </div>
-      <div className="flex justify-end">
-        <button className="w-40 flex justify-center items-center bg-black text-white h-10 rounded-md">요청</button>
-      </div>
-    </form>
+      </form>
+    </>
   );
 }
 
