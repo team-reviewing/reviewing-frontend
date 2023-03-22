@@ -153,7 +153,11 @@ export const handlers = [
     );
   }),
 
-  rest.post(`http://localhost:3000/reviewers/:id/reviews`, (req, res, ctx) => {
+  rest.post(`http://localhost:3000/reviewers/:reviewerId/reviews`, (req, res, ctx) => {
+    return res(ctx.status(200));
+  }),
+
+  rest.patch('http://localhost:3000/reviewers/:reviewerId/reviews/:reviewId', (req, res, ctx) => {
     return res(ctx.status(200));
   }),
 

@@ -2,14 +2,14 @@ import ReviewEditor from './ReviewEditor';
 import { useForm } from 'react-hook-form';
 import ErrorMent from './ErrorMent';
 import { ILinkUserIdType, IReviewRegisterType } from './ReviewRegisterType';
-import { reviewRegister } from '../../pages/api/reviewRegister';
+import { reviewModify, reviewRegister } from '../../pages/api/reviewRegister';
 import { useRef, useState } from 'react';
 import Loading from '../Loading';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import ReactQuill from 'react-quill';
 
-function RegisterForm({ reviewerId, reviewerName }: ILinkUserIdType) {
+function RegisterForm({ reviewerId, reviewerName, reviewId, title, content, prUrl }: ILinkUserIdType) {
   const {
     register,
     handleSubmit,
@@ -20,6 +20,11 @@ function RegisterForm({ reviewerId, reviewerName }: ILinkUserIdType) {
     formState: { errors },
   } = useForm<IReviewRegisterType>({
     mode: 'onTouched',
+    defaultValues: {
+      title: title || '',
+      content: content || '',
+      prUrl: prUrl || '',
+    },
   });
   const [loading, setLoading] = useState(false);
   const editorRef = useRef<ReactQuill>(null);
@@ -30,7 +35,7 @@ function RegisterForm({ reviewerId, reviewerName }: ILinkUserIdType) {
     try {
       if (editorRef.current?.unprivilegedEditor?.getText().trim().length) {
         setLoading((prev) => !prev);
-        await reviewRegister({ id: Number(reviewerId), title, content, prUrl }).then(() => {
+        await reviewRegister({ reviewerId, title, content, prUrl }).then(() => {
           setLoading(false);
           toast.success('리뷰 신청이 완료되었습니다.');
           router.push('/');
@@ -43,11 +48,28 @@ function RegisterForm({ reviewerId, reviewerName }: ILinkUserIdType) {
       toast.error('리뷰 신청이 진행되지 않았습니다. 다시 진행 부탁드립니다.');
     }
   };
+  const onModifyHandler = async ({ content }: Pick<IReviewRegisterType, 'content'>) => {
+    try {
+      if (editorRef.current?.unprivilegedEditor?.getText().trim().length && reviewId) {
+        setLoading((prev) => !prev);
+        await reviewModify({ reviewId, content, reviewerId }).then(() => {
+          setLoading(false);
+          toast.success('리뷰 수정이 완료되었습니다.');
+          router.push('/');
+        });
+      } else {
+        setError('content', { type: 'minLength', message: '필수 사항입니다.' });
+      }
+    } catch (err) {
+      setLoading(false);
+      toast.error('리뷰 수정이 진행되지 않았습니다. 다시 진행 부탁드립니다.');
+    }
+  };
 
   return (
     <>
       {loading && <Loading />}
-      <form className="flex flex-col p-3 gap-6" onSubmit={handleSubmit(onSubmitHandler)}>
+      <form className="flex flex-col p-3 gap-6" onSubmit={handleSubmit(reviewId ? onModifyHandler : onSubmitHandler)}>
         <div>
           <p className="text-slate-400 text-lg">리뷰어 : {reviewerName}</p>
         </div>
@@ -71,6 +93,7 @@ function RegisterForm({ reviewerId, reviewerName }: ILinkUserIdType) {
               placeholder="제목을 입력해주세요. 최대 50자입니다."
               maxLength={50}
               className="p-2 w-full border-solid border-2 rounded-md outline-none"
+              readOnly={reviewId ? true : false}
             />
             {errors.title && <ErrorMent>{errors.title.message}</ErrorMent>}
           </div>
@@ -110,6 +133,7 @@ function RegisterForm({ reviewerId, reviewerName }: ILinkUserIdType) {
               type="text"
               placeholder="Pull Request URL을 입력해주세요."
               className="p-2 w-full border-solid border-2 rounded-md outline-none"
+              readOnly={reviewId ? true : false}
             />
             {errors.prUrl && <ErrorMent>{errors.prUrl.message}</ErrorMent>}
           </div>

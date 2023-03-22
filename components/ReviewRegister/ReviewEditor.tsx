@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import { editorModule, IQuillEditorType, IRegisterType } from './ReviewRegisterType';
 import ReactQuill from 'react-quill';
 import Loading from '../Loading';
@@ -44,7 +44,9 @@ const EDITORMAX = 500;
 
 function ReviewEditor({ register, setValue, watch, trigger, editorRef }: IRegisterType) {
   const modules = useMemo(() => editorModule, []);
-
+  register('content', {
+    required: '필수 사항입니다.',
+  });
   const editorContentChange = (content: string) => {
     if (editorRef.current) {
       const getLength = editorRef.current.unprivilegedEditor?.getText().length;
@@ -59,12 +61,6 @@ function ReviewEditor({ register, setValue, watch, trigger, editorRef }: IRegist
   const editorContentLength = (content: number) => {
     return content > EDITORMAX ? EDITORMAX : content;
   };
-
-  useEffect(() => {
-    register('content', {
-      required: '필수 사항입니다.',
-    });
-  }, [register]);
 
   return (
     <div>

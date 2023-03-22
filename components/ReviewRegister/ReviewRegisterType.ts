@@ -19,7 +19,11 @@ export const editorModule = {
 };
 
 export interface IReviewRegisterApiType extends IReviewRegisterType {
-  id: number;
+  reviewerId: string;
+}
+
+export interface IReviewModifyApiType extends Pick<IReviewRegisterApiType, 'content' | 'reviewerId'> {
+  reviewId: string;
 }
 
 export interface IReviewRegisterType {
@@ -51,6 +55,10 @@ export interface IMentType {
 }
 
 export interface ILinkUserIdType extends ParsedUrlQuery {
+  reviewId?: string;
+  title?: string;
+  content?: string;
+  prUrl?: string;
   reviewerId: string;
   reviewerName: string;
 }
