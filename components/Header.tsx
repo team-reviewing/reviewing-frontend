@@ -1,14 +1,18 @@
 import Image from 'next/image';
 import img from 'styles/images/person.png';
 import Link from 'next/link';
-import { UserType } from './userInfomation/informationType';
 import { useState } from 'react';
 import lena from 'styles/images/lena.jpg';
 import GithubLogInButton from './HeaderSub/GithubLogInButton';
 import HeaderDropDown from './HeaderSub/HeaderDropDown';
+import { useRecoilValue } from 'recoil';
+import { userState } from '../atoms/userState';
+import useLoginMaintain from '../useHooks/useLoginMaintain';
 
-const Header = ({ imageUrl }: Partial<Pick<UserType, 'imageUrl'>>) => {
+const Header = () => {
   const [dropdown, setDropdown] = useState<boolean>(false);
+  useLoginMaintain();
+  const user = useRecoilValue(userState);
 
   return (
     <div className="w-full sticky mb-3">
@@ -16,7 +20,7 @@ const Header = ({ imageUrl }: Partial<Pick<UserType, 'imageUrl'>>) => {
         <Link href="/">
           <span className="cursor-pointer font-bold">Logo</span>
         </Link>
-        {imageUrl ? (
+        {user ? (
           <>
             <ul className="cursor-pointer font-bold" onClick={() => setDropdown((prev) => !prev)}>
               <div className="flex">

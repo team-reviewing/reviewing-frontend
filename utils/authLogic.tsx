@@ -1,12 +1,12 @@
-export const getAccessToken = () => {
+export const getAccessTokenInCookie = () => {
   if (typeof window !== 'undefined') {
-    const access_token = sessionStorage.getItem('access_token');
-    return access_token;
+    const data = document.cookie.split(';');
+    const accessTokenCookie = data.find((cookie) => cookie.trim().startsWith('access_token='));
+    if (!accessTokenCookie) return null;
+    return accessTokenCookie.split('=')[1];
   }
 };
 
-export const setAccessToken = (param: string) => {
-  if (typeof window !== 'undefined') {
-    sessionStorage.setItem('access_token', param);
-  }
+export const setAccessTokenInCookie = (param: string) => {
+  document.cookie = `access_token=${param}`;
 };
