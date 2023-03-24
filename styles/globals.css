@@ -10,3 +10,7 @@
 .quill > .ql-container {
   @apply h-96 rounded-b-md;
 }
+
+.modal > .quill > .ql-container {
+  @apply rounded-lg;
+}

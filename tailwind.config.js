@@ -20,14 +20,14 @@ module.exports = {
           '0%': { transform: 'translateY(-5%)' },
           '100%': { transform: 'translateY(0%)' },
         },
-        dropup: {
-          '0%': { transform: 'translateY(0%)' },
-          '100%': { transform: 'translateY(-100%)' },
+        modalup: {
+          '0%': { transform: 'translateY(100%)' },
+          '100%': { transform: 'translateY(0%)' },
         },
       },
       animation: {
         'down-animation': 'dropdown 0.5s ease',
-        'up-animation': 'dropup 0.4s ease',
+        'up-animation': 'modalup 0.2s ease',
       },
     },
   },

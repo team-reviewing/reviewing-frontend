@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { IReviewerDropDownPropsType, ISkillType } from './informationType';
-import cancel from '../userInfomation/Vector.svg';
+import cancel from '../../styles/images/cancel.svg';
 import { toast } from 'react-hot-toast';
 function ReviewerDropDown({ name, dropList, ment, select, etc, setEtc, setSelect }: IReviewerDropDownPropsType) {
   const [drop, setDrop] = useState<boolean>(false);
