@@ -1,4 +1,4 @@
-import { AxiosResponse } from 'axios';
+import { UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 
 export interface IRegisterInputType {
   name: string;
@@ -67,5 +67,23 @@ export interface UserPageProps {
 
 export interface IRegisterMutationProps {
   register: IReviewerRegisterUpdateType;
-  mutationFnCb: (regi: IReviewerRegisterUpdateType) => Promise<AxiosResponse<any, any>>;
+  mutationFnCb: (regi: IReviewerRegisterUpdateType) => Promise<number>;
+}
+
+export interface IHookFormType extends IReviewerRegisterDataType {
+  etc: string;
+}
+
+export interface IReviewSubmitType extends IHookFormType {
+  mutationFn: (regi: IReviewerRegisterUpdateType) => Promise<number>;
+}
+
+export interface IHookDropDownType {
+  name: string;
+  dropList: string[] | ISkillType[];
+  regiId: keyof IHookFormType;
+  ment: string;
+  setValue: UseFormSetValue<IHookFormType>;
+  watch: UseFormWatch<IHookFormType>;
+  register?: UseFormRegister<IHookFormType>;
 }

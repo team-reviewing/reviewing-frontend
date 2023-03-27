@@ -1,16 +1,19 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { AxiosResponse } from 'axios';
-import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import { toast } from 'react-hot-toast';
 import { registerUpdate, reviewerGet, reviewerRegister } from '../../pages/api/userInfo';
 import {
+  IHookFormType,
   IModalPropsType,
   IRegister,
   IRegisterMutationProps,
-  IReviewerRegisterUpdateType,
-  ISkillType,
+  IReviewSubmitType,
 } from './informationType';
-import ReviewerDropDown from './ReviewerDropDown';
+import cancel from '../../styles/images/cancel.svg';
+import Loading from '../Loading';
+import HookFormDropDown from './HookFormDropDown';
+import { useForm } from 'react-hook-form';
+import { useEffect } from 'react';
 
 function ReviewerRegisterModal({ setModal }: IModalPropsType) {
   const queryClient = useQueryClient();
@@ -34,40 +37,36 @@ function ReviewerRegisterModal({ setModal }: IModalPropsType) {
     },
   });
 
-  const modalRef = useRef<HTMLDivElement>(null);
-  const [job, setJob] = useState<string>('');
-  const [etc, setEtc] = useState<string>('');
-  const [career, setCareer] = useState<string>('');
-  const [techStack, setTechStack] = useState<ISkillType[]>([]);
-  const [introduce, setIntroduce] = useState<string>('');
-
-  useEffect(() => {
-    const handler = (event: any) => {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
-        setModal(false);
-      }
-    };
-    document.addEventListener('mousedown', handler);
-
-    return () => {
-      document.removeEventListener('mousedown', handler);
-    };
-  }, []);
+  const { register, setValue, watch, handleSubmit } = useForm<IHookFormType>({
+    defaultValues: {
+      job: '',
+      career: '',
+      etc: '',
+      introduce: '',
+      techStack: [],
+    },
+  });
 
   useEffect(() => {
     if (data) {
-      setJob(data.job);
-      setCareer(data.career);
-      setIntroduce(data.introduce);
-      setTechStack(data.techStack);
+      setValue('job', data.job);
+      setValue('career', data.career);
+      setValue('introduce', data.introduce);
+      setValue('techStack', data.techStack);
     }
   }, [data]);
 
-  // reviewer 등록 함수
-  const reviewerSubmit = (mutationFn: (regi: IReviewerRegisterUpdateType) => Promise<AxiosResponse<any, any>>) => {
+  useEffect(() => {
+    register('job', { required: true });
+    register('career', { required: true });
+    register('introduce', { required: true });
+    register('techStack', { required: true });
+  }, []);
+
+  const reviewerSubmit = ({ job, career, introduce, techStack, etc, mutationFn }: IReviewSubmitType) => {
     mutate({
       register: {
-        job: etc ? etc : job,
+        job: job === '기타' ? etc : job,
         career: career,
         techStack: techStack.map((el) => el.id),
         introduce: introduce,
@@ -76,72 +75,80 @@ function ReviewerRegisterModal({ setModal }: IModalPropsType) {
     });
   };
 
-  const checkValidation = (): boolean => {
-    if (job && career && techStack && introduce) {
-      return true;
-    } else {
+  const submitValidationHandler = () => {
+    toast.error('전부 필수 내용입니다.');
+  };
+
+  const submitHandler = ({ job, career, etc, introduce, techStack }: IHookFormType) => {
+    if (job === '기타' && etc === '') {
       toast.error('전부 필수 내용입니다.');
-      return false;
+    } else {
+      if (data && data.job) {
+        reviewerSubmit({ job, career, etc, introduce, techStack, mutationFn: registerUpdate });
+      } else {
+        reviewerSubmit({ job, career, etc, introduce, techStack, mutationFn: reviewerRegister });
+      }
     }
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   return (
-    <div>
-      <div className="absolute inset-0 bg-[#0b131e5e]"></div>
-      <div
-        ref={modalRef}
-        className="absolute w-[32rem] h-[38rem] border-solid border-2 rounded-md z-50 left-2/4 top-2/4 -translate-y-2/4 -translate-x-2/4 bg-white msm:w-11/12">
+    <div className="fixed flex inset-0 z-10 flex-col items-center justify-center">
+      <div className="absolute inset-0 bg-[#0b131e5e]" onClick={() => setModal((prev) => !prev)} />
+      <div className="relative p-7 w-[32rem] h-[38rem] flex rounded-lg z-20 bg-white msm:w-11/12">
         {data && (
-          <div className="w-full h-full p-7 flex flex-col">
-            <div className="text-center text-2xl">리뷰어 등록</div>
+          <form
+            className="w-full h-full flex flex-col relative"
+            onSubmit={handleSubmit(submitHandler, submitValidationHandler)}>
+            <div className="flex items-center justify-center">
+              <div className="text-2xl">리뷰어 정보</div>
+              <div className="absolute right-0 cursor-pointer">
+                <Image width={15} height={15} src={cancel} alt="cancel" onClick={() => setModal((prev) => !prev)} />
+              </div>
+            </div>
             <div className="overflow-y-auto flex flex-col h-full">
-              <ReviewerDropDown
-                select={job}
-                setSelect={(value: React.SetStateAction<string | ISkillType[]>) => setJob(value as string)}
-                name="직무"
+              <HookFormDropDown
                 dropList={data.positionList}
-                etc={etc}
-                setEtc={setEtc}
+                name="직무"
                 ment="직무를 선택해주세요"
+                setValue={setValue}
+                regiId="job"
+                watch={watch}
+                register={register}
               />
-              <ReviewerDropDown
-                select={career}
-                setSelect={(value: React.SetStateAction<string | ISkillType[]>) => setCareer(value as string)}
-                name="경력"
+              <HookFormDropDown
                 dropList={data.careerList}
+                name="경력"
                 ment="경력을 선택해주세요"
+                setValue={setValue}
+                regiId="career"
+                watch={watch}
               />
-              <ReviewerDropDown
-                select={techStack}
-                setSelect={(value: React.SetStateAction<string | ISkillType[]>) => setTechStack(value as ISkillType[])}
-                name="기술 스택"
+              <HookFormDropDown
                 dropList={data.techList}
+                name="기술 스택"
                 ment="스킬을 선택해주세요"
+                setValue={setValue}
+                regiId="techStack"
+                watch={watch}
               />
               <div className="mt-6">
                 <span className="w-full flex flex-col items-start">소개글</span>
                 <textarea
                   className="p-2 w-full h-20 border-solid border-2 rounded-md outline-none"
-                  value={introduce}
-                  onChange={(e) => setIntroduce(e.currentTarget.value)}
+                  {...register('introduce')}
                 />
               </div>
             </div>
             <div className="text-center flex justify-center">
-              <button
-                className="w-full flex justify-center items-center bg-black text-white h-10 rounded-md"
-                onClick={() =>
-                  checkValidation() && data.job ? reviewerSubmit(registerUpdate) : reviewerSubmit(reviewerRegister)
-                }>
-                {/* 추후 정보가 있는지 없는지 여부에 따른 멘트 변경 */}
+              <button className="w-full flex justify-center items-center bg-black text-white h-10 rounded-md">
                 {data.job ? '리뷰어 수정' : '리뷰어 등록'}
               </button>
             </div>
-          </div>
+          </form>
         )}
       </div>
     </div>
