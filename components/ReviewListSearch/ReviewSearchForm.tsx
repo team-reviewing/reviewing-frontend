@@ -1,28 +1,40 @@
 import React, { useState } from 'react';
 import ReviewInquireBox from './ReviewInquireBox';
 import ReviewModeButtonGroup from './ReviewRoleButtonGroup';
-
-const reviewerDummy = {
-  id: 2,
-  username: 'usertest',
-  imageUrl: 'userImageUrl',
-};
+import { useGetRoleReviews } from './queries/getReviewsQuery';
+import Loading from '../Loading';
+import { useRecoilValue } from 'recoil';
+import { userState } from '../../atoms/userState';
+import { useRouter } from 'next/router';
 
 function ReviewSearchForm() {
   const [role, setRole] = useState<boolean>(false);
+  const reviewRole = useGetRoleReviews(role);
+  const user = useRecoilValue(userState);
+  const router = useRouter();
+
+  if (reviewRole.isLoading) {
+    return <Loading />;
+  }
+
+  if (!user) {
+    router.push('/');
+  }
 
   return (
     <div className="flex items-center justify-center flex-col">
       <ReviewModeButtonGroup role={role} setRole={setRole} />
       <div className="w-full flex justify-center items-center flex-col">
-        {/* react-query 사용해서 map 함수 사용 예정*/}
-        <ReviewInquireBox
-          role={role}
-          id={1}
-          title={'안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요'}
-          reviewer={reviewerDummy}
-        />
-        <ReviewInquireBox role={role} id={1} title={'안녕하세요 코드리뷰 부탁드립니다.'} reviewer={reviewerDummy} />
+        {reviewRole.data?.reviews.map((review) => (
+          <ReviewInquireBox
+            key={review.id}
+            role={role}
+            id={review.id}
+            title={review.title}
+            reviewer={review.reviewer && review.reviewer}
+            reviewee={review.reviewee && review.reviewee}
+          />
+        ))}
       </div>
     </div>
   );

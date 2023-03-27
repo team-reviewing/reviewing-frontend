@@ -6,9 +6,7 @@ import { IUserReviewType, ReviewCommonWithRole } from './ReviewListType';
 function ReviewInquireBox({ id, title, reviewee, reviewer, role }: ReviewCommonWithRole<IUserReviewType>) {
   const onClickBox = () => {
     console.log(id);
-    //추후 세부 페이지로 이동하는 로직
   };
-  //mode false - 요청 한 리뷰
 
   return (
     <div className="w-full mt-6 max-w-[80%] flex flex-col" onClick={onClickBox}>

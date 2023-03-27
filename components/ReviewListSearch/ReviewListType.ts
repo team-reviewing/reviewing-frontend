@@ -8,6 +8,10 @@ export interface IUserReviewType extends IReviewType {
   reviewee?: IReviewCommonType;
 }
 
+export interface IReviewsType {
+  reviews: IUserReviewType[];
+}
+
 export interface IReviewCommonType {
   id: number;
   username: string;

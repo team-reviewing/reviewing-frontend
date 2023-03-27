@@ -392,4 +392,85 @@ export const handlers = [
       }),
     );
   }),
+
+  rest.get('http://localhost:3000/reviews', (req, res, ctx) => {
+    const role = req.url.searchParams.get('role');
+
+    if (role === 'reviewee') {
+      return res(
+        ctx.status(200),
+        ctx.delay(1000),
+        ctx.json({
+          reviews: [
+            {
+              id: 1,
+              title: '요청한 리뷰 리스트 첫번째 목록',
+              reviewer: {
+                id: 1,
+                username: '리뷰어 이름 1',
+                imageUrl: '리뷰어 1 imageUrl',
+              },
+            },
+            {
+              id: 2,
+              title: '요청한 리뷰 리스트 두번째 목록',
+              reviewer: {
+                id: 2,
+                username: '리뷰어 이름 2',
+                imageUrl: '리뷰어 2 imageUrl',
+              },
+            },
+            {
+              id: 3,
+              title: '요청한 리뷰 리스트 세번째 목록',
+              reviewer: {
+                id: 3,
+                username: '리뷰어 이름 3',
+                imageUrl: '리뷰어 3 imageUrl',
+              },
+            },
+          ],
+        }),
+      );
+    } else if (role === 'reviewer') {
+      return res(
+        ctx.status(200),
+        ctx.delay(1000),
+        ctx.json({
+          reviews: [
+            {
+              id: 1,
+              title: '요청받은 리뷰 리스트 첫번째 목록',
+              reviewee: {
+                id: 1,
+                username: '리뷰이 이름 1',
+                imageUrl: '리뷰이 1 imageUrl',
+              },
+            },
+            {
+              id: 2,
+              title: '요청받은 리뷰 리스트 두번째 목록',
+              reviewee: {
+                id: 2,
+                username: '리뷰이 이름 2',
+                imageUrl: '리뷰이 2 imageUrl',
+              },
+            },
+            {
+              id: 3,
+              title: '요청받은 리뷰 리스트 세번째 목록',
+              reviewee: {
+                id: 3,
+                username: '리뷰이 이름 3',
+                imageUrl: '리뷰이 3 imageUrl',
+              },
+            },
+          ],
+        }),
+      );
+    } else {
+      return res(ctx.status(400));
+    }
+    return res();
+  }),
 ];
