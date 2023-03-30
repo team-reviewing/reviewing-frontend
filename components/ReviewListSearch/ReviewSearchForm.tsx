@@ -3,22 +3,16 @@ import ReviewInquireBox from './ReviewInquireBox';
 import ReviewModeButtonGroup from './ReviewRoleButtonGroup';
 import { useGetRoleReviews } from './queries/getReviewsQuery';
 import Loading from '../Loading';
-import { useRecoilValue } from 'recoil';
-import { userState } from '../../atoms/userState';
-import { useRouter } from 'next/router';
+import useRedirectMain from '../../useHooks/useRedirectMain';
 
 function ReviewSearchForm() {
   const [role, setRole] = useState<boolean>(false);
   const reviewRole = useGetRoleReviews(role);
-  const user = useRecoilValue(userState);
-  const router = useRouter();
+
+  useRedirectMain();
 
   if (reviewRole.isLoading) {
     return <Loading />;
-  }
-
-  if (!user) {
-    router.push('/');
   }
 
   return (
@@ -31,8 +25,8 @@ function ReviewSearchForm() {
             role={role}
             id={review.id}
             title={review.title}
-            reviewer={review.reviewer && review.reviewer}
-            reviewee={review.reviewee && review.reviewee}
+            member={review.member}
+            reviewerId={review.reviewerId}
           />
         ))}
       </div>

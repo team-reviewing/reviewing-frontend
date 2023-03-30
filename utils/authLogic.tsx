@@ -1,12 +1,14 @@
-export const getAccessTokenInCookie = () => {
+export const getAccessTokenInStorage = () => {
   if (typeof window !== 'undefined') {
-    const data = document.cookie.split(';');
-    const accessTokenCookie = data.find((cookie) => cookie.trim().startsWith('access_token='));
-    if (!accessTokenCookie) return null;
-    return accessTokenCookie.split('=')[1];
+    const data = window.sessionStorage.getItem('accessToken');
+    return data;
   }
 };
 
-export const setAccessTokenInCookie = (param: string) => {
-  document.cookie = `access_token=${param}`;
+export const setAccessTokenInStorage = (param: string) => {
+  window.sessionStorage.setItem('accessToken', param);
+};
+
+export const deleteAccessTokenInStorage = () => {
+  window.sessionStorage.removeItem('accessToken');
 };

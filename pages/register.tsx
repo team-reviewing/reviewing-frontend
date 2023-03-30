@@ -1,7 +1,6 @@
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import ReviewRegisterTemplate from '../components/ReviewRegister/ReviewRegisterTemplate';
-import { IGetTokenType, ILinkUserIdType, IRegisterPropsType } from '../components/ReviewRegister/ReviewRegisterType';
-import cookies from 'next-cookies';
+import { ILinkUserIdType, IRegisterPropsType } from '../components/ReviewRegister/ReviewRegisterType';
 
 const Register = ({ reviewerInfo }: IRegisterPropsType) => {
   return (
@@ -13,9 +12,8 @@ const Register = ({ reviewerInfo }: IRegisterPropsType) => {
 
 export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const reviewerInfo = ctx.query as ILinkUserIdType;
-  const requestToken = cookies(ctx) as IGetTokenType;
-  // Refresh => Access로 추후 변경
-  if (reviewerInfo.reviewerId && requestToken.refresh_token) {
+
+  if (reviewerInfo.reviewerId) {
     if (reviewerInfo.reviewId) {
       return {
         props: {

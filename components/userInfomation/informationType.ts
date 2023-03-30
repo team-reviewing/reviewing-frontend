@@ -62,7 +62,7 @@ export interface IUserGetType {
 }
 
 export interface UserPageProps {
-  data: IUserGetType;
+  data: UserType;
 }
 
 export interface IRegisterMutationProps {

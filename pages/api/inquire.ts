@@ -1,9 +1,9 @@
-import axios from 'axios';
 import { IReviewsType } from '../../components/ReviewListSearch/ReviewListType';
+import instance from './core';
 
 export const getReviewsRole = async (role: boolean) => {
   const params = !role ? { role: 'reviewee' } : { role: 'reviewer' };
-  const response = await axios.get<IReviewsType>('http://localhost:3000/reviews', {
+  const response = await instance.get<IReviewsType>('/reviews', {
     withCredentials: true,
     params: params,
   });

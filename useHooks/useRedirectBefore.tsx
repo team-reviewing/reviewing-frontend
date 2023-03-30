@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { logIn } from '../pages/api/member';
-import { setAccessTokenInCookie } from '../utils/authLogic';
+import { setAccessTokenInStorage } from '../utils/authLogic';
 
 function useRedirectBefore() {
   const router = useRouter();
@@ -11,7 +11,7 @@ function useRedirectBefore() {
       console.log(router.query.code);
       logIn(router.query.code).then((res) => {
         if (res?.status === 200) {
-          setAccessTokenInCookie(res.data.access_token);
+          setAccessTokenInStorage(res.data.access_token);
           router.replace(localStorage.getItem('path') || '/');
         }
       });

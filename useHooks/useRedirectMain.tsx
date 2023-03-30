@@ -1,14 +1,19 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import { useRecoilValue } from 'recoil';
+import { userState } from '../atoms/userState';
+import { getAccessTokenInStorage } from '../utils/authLogic';
 
 function useRedirectMain() {
+  const user = useRecoilValue(userState);
   const router = useRouter();
+
   useEffect(() => {
-    if (!sessionStorage.getItem('access_token')) {
-      alert('로그인 후 이용가능합니다.');
+    const token = getAccessTokenInStorage();
+    if (!user && !token) {
       router.push('/');
     }
-  }, []);
+  }, [user]);
 }
 
 export default useRedirectMain;

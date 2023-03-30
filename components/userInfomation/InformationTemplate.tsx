@@ -1,11 +1,22 @@
+import { useRecoilValue } from 'recoil';
+import { userState } from '../../atoms/userState';
+import Loading from '../Loading';
 import InformationForm from './InformationForm';
-import { UserPageProps } from './informationType';
+import useRedirectMain from '../../useHooks/useRedirectMain';
 
-const InformationTemplate = ({ data }: UserPageProps) => {
+const InformationTemplate = () => {
+  const user = useRecoilValue(userState);
+
+  useRedirectMain();
+
+  if (!user) {
+    return <Loading />;
+  }
+
   return (
     <div className="h-full w-full max-w-md">
       <h2 className="text-center text-3xl">계정 정보</h2>
-      <InformationForm data={data} />
+      <InformationForm data={user} />
     </div>
   );
 };

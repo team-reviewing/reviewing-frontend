@@ -8,13 +8,14 @@ import UserInput from './UserInput';
 import { reviewerStatusUpdate } from '../../pages/api/userInfo';
 
 const InformationForm = ({ data }: UserPageProps) => {
-  const [userId, setUserId] = useState<string>(data.userInfo.username);
-  const [email, setEmail] = useState<string>(data.userInfo.email);
-  const [profileUrl, setProfileUrl] = useState<string>(data.userInfo.profileUrl);
+  const [userId, setUserId] = useState<string>(data.username);
+  const [email, setEmail] = useState<string>(data.email);
+  const [profileUrl, setProfileUrl] = useState<string>(data.profileUrl);
   const [modal, setModal] = useState<boolean>(false);
   const [modify, setModify] = useState<boolean>(false);
   const [updateLoading, setUpdateLoading] = useState<boolean>(false);
-  const [reviewerStatus, setReviewerStatus] = useState<boolean>(data.userInfo.isReviewer);
+  const [reviewerStatus, setReviewerStatus] = useState<boolean>(data.isReviewer);
+
   const userUpdateHandler = async () => {
     setUpdateLoading((prev) => !prev);
     try {

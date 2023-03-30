@@ -84,6 +84,7 @@ export const handlers = [
       }),
     );
   }),
+
   rest.get('http://localhost:3000/members/me/reviewer', (req, res, ctx) => {
     return res(
       ctx.status(200),
@@ -144,13 +145,7 @@ export const handlers = [
   }),
 
   rest.delete('http://localhost:3000/auth/logout', (req, res, ctx) => {
-    console.log('logout');
-    return res(
-      ctx.status(204),
-      ctx.json({
-        message: 'logout',
-      }),
-    );
+    return res(ctx.status(204));
   }),
 
   rest.post(`http://localhost:3000/reviewers/:reviewerId/reviews`, (req, res, ctx) => {
@@ -405,7 +400,8 @@ export const handlers = [
             {
               id: 1,
               title: '요청한 리뷰 리스트 첫번째 목록',
-              reviewer: {
+              reviewerId: 1,
+              member: {
                 id: 1,
                 username: '리뷰어 이름 1',
                 imageUrl: '리뷰어 1 imageUrl',
@@ -414,7 +410,8 @@ export const handlers = [
             {
               id: 2,
               title: '요청한 리뷰 리스트 두번째 목록',
-              reviewer: {
+              reviewerId: 2,
+              member: {
                 id: 2,
                 username: '리뷰어 이름 2',
                 imageUrl: '리뷰어 2 imageUrl',
@@ -423,7 +420,8 @@ export const handlers = [
             {
               id: 3,
               title: '요청한 리뷰 리스트 세번째 목록',
-              reviewer: {
+              reviewerId: 3,
+              member: {
                 id: 3,
                 username: '리뷰어 이름 3',
                 imageUrl: '리뷰어 3 imageUrl',
@@ -441,7 +439,8 @@ export const handlers = [
             {
               id: 1,
               title: '요청받은 리뷰 리스트 첫번째 목록',
-              reviewee: {
+              reviewerId: 1,
+              member: {
                 id: 1,
                 username: '리뷰이 이름 1',
                 imageUrl: '리뷰이 1 imageUrl',
@@ -450,7 +449,8 @@ export const handlers = [
             {
               id: 2,
               title: '요청받은 리뷰 리스트 두번째 목록',
-              reviewee: {
+              reviewerId: 1,
+              member: {
                 id: 2,
                 username: '리뷰이 이름 2',
                 imageUrl: '리뷰이 2 imageUrl',
@@ -459,7 +459,8 @@ export const handlers = [
             {
               id: 3,
               title: '요청받은 리뷰 리스트 세번째 목록',
-              reviewee: {
+              reviewerId: 1,
+              member: {
                 id: 3,
                 username: '리뷰이 이름 3',
                 imageUrl: '리뷰이 3 imageUrl',
@@ -471,6 +472,5 @@ export const handlers = [
     } else {
       return res(ctx.status(400));
     }
-    return res();
   }),
 ];

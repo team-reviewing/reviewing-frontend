@@ -1,11 +1,11 @@
 export interface IReviewType {
   id: number;
   title: string;
+  reviewerId: number;
 }
 
 export interface IUserReviewType extends IReviewType {
-  reviewer?: IReviewCommonType;
-  reviewee?: IReviewCommonType;
+  member: IReviewCommonType;
 }
 
 export interface IReviewsType {
