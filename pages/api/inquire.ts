@@ -17,3 +17,11 @@ export const getReviewDetailInfo = async ({ reviewerId, reviewId }: IReviewDetai
   });
   return response.data;
 };
+
+export const acceptReview = async ({ reviewerId, reviewId }: IReviewDetailInfoApiPropsType) => {
+  await instance.patch(`/reviewers/${reviewerId}/reviews/${reviewId}/status`, null, { withCredentials: true });
+};
+
+export const refuseReview = async ({ reviewerId, reviewId }: IReviewDetailInfoApiPropsType) => {
+  await instance.delete(`/reviewers/${reviewerId}/reviews/${reviewId}`, { withCredentials: true });
+};
