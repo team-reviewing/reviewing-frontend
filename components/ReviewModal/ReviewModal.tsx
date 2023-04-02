@@ -8,6 +8,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getReviewDetailInfo } from '../../pages/api/inquire';
 import { IReviewModalApiDetailType, IReviewModalPropsType } from './reviewModalType';
 import ReviewModifyLink from './ReviewModifyLink';
+import { useAcceptReview, useRefuseReview } from '../ReviewListSearch/queries/getReviewsQuery';
 
 const QuillEditor = dynamic(import('react-quill'), {
   ssr: false,
@@ -20,6 +21,9 @@ function ReviewModal({ reviewId, reviewerId, userImage, username, role, closeMod
     queryFn: () => getReviewDetailInfo({ reviewerId, reviewId }),
     staleTime: 1000 * 20,
   });
+
+  const { mutate: mutateAccept } = useAcceptReview({ reviewerId: reviewerId, reviewId: reviewId });
+  const { mutate: mutateRefuse } = useRefuseReview({ reviewerId: reviewerId, reviewId: reviewId });
 
   const closeModalHandler = () => {
     closeModal((prev) => !prev);
@@ -91,8 +95,8 @@ function ReviewModal({ reviewId, reviewerId, userImage, username, role, closeMod
               </>
             ) : (
               <>
-                <ButtonWrapper>리뷰 수락</ButtonWrapper>
-                <ButtonWrapper>리뷰 거절</ButtonWrapper>
+                <ButtonWrapper onClick={() => mutateAccept()}>리뷰 수락</ButtonWrapper>
+                <ButtonWrapper onClick={() => mutateRefuse()}>리뷰 거절</ButtonWrapper>
                 <ButtonWrapper>리뷰 승인</ButtonWrapper>
               </>
             )}
