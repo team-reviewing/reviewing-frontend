@@ -43,23 +43,6 @@ function ReviewerCard({ reviewerProps }: { reviewerProps: IReviewerType }) {
             className=" bg-slate-200 text-black font-bold py-2 px-4 rounded">
             리뷰요청
           </Link>
-          {/* 임시 수정 버튼 */}
-          <Link
-            as="/register"
-            href={{
-              pathname: '/register',
-              query: {
-                reviewId: '10',
-                title: 'Modify 타이틀',
-                content: '<p>안녕하세요 이건 모디파이 입니다.</p>',
-                prUrl: 'https://github.com/codestates-seb/seb40_main_032/pull/417',
-                reviewerId: reviewerProps.id,
-                username: reviewerProps.username,
-              },
-            }}
-            className=" bg-slate-200 text-black font-bold py-2 px-4 rounded">
-            리뷰수정요청
-          </Link>
         </div>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import { rest } from 'msw';
 import { IUserUpdateType } from '../components/userInfomation/informationType';
+import img from 'styles/images/person.png';
 
 let username = 'kuku';
 let email = 'kuku@gmail.com';
@@ -150,6 +151,19 @@ export const handlers = [
 
   rest.post(`http://localhost:3000/reviewers/:reviewerId/reviews`, (req, res, ctx) => {
     return res(ctx.status(200));
+  }),
+
+  rest.get('http://localhost:3000/reviewers/:reviewerId/reviews/:reviewId', (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        id: 1,
+        reviewerId: 1,
+        title: '코드 리뷰 부탁드립니다!!',
+        content: 'Spring 관련 개인 프로젝트를 진행하고 있는데 코드 리뷰를 받고 싶습니다.',
+        prUrl: 'https://github.com/name/project/pull/1',
+      }),
+    );
   }),
 
   rest.patch('http://localhost:3000/reviewers/:reviewerId/reviews/:reviewId', (req, res, ctx) => {
@@ -404,7 +418,7 @@ export const handlers = [
               member: {
                 id: 1,
                 username: '리뷰어 이름 1',
-                imageUrl: '리뷰어 1 imageUrl',
+                imageUrl: img,
               },
             },
             {
@@ -414,7 +428,7 @@ export const handlers = [
               member: {
                 id: 2,
                 username: '리뷰어 이름 2',
-                imageUrl: '리뷰어 2 imageUrl',
+                imageUrl: img,
               },
             },
             {
@@ -424,7 +438,7 @@ export const handlers = [
               member: {
                 id: 3,
                 username: '리뷰어 이름 3',
-                imageUrl: '리뷰어 3 imageUrl',
+                imageUrl: img,
               },
             },
           ],
@@ -443,7 +457,7 @@ export const handlers = [
               member: {
                 id: 1,
                 username: '리뷰이 이름 1',
-                imageUrl: '리뷰이 1 imageUrl',
+                imageUrl: img,
               },
             },
             {
@@ -453,7 +467,7 @@ export const handlers = [
               member: {
                 id: 2,
                 username: '리뷰이 이름 2',
-                imageUrl: '리뷰이 2 imageUrl',
+                imageUrl: img,
               },
             },
             {
@@ -463,7 +477,7 @@ export const handlers = [
               member: {
                 id: 3,
                 username: '리뷰이 이름 3',
-                imageUrl: '리뷰이 3 imageUrl',
+                imageUrl: img,
               },
             },
           ],

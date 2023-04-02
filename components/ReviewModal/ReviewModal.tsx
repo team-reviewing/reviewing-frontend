@@ -3,19 +3,24 @@ import Loading from '../Loading';
 import cancel from '../../styles/images/cancel.svg';
 import Image from 'next/image';
 import ReviewSection from './ReviewSection';
-import person from '../../styles/images/lena.jpg';
 import ButtonWrapper from '../ButtonWrapper';
-
-interface IProps {
-  closeModal: React.Dispatch<React.SetStateAction<boolean>>;
-}
+import { useQuery } from '@tanstack/react-query';
+import { getReviewDetailInfo } from '../../pages/api/inquire';
+import { IReviewModalApiDetailType, IReviewModalPropsType } from './reviewModalType';
+import ReviewModifyLink from './ReviewModifyLink';
 
 const QuillEditor = dynamic(import('react-quill'), {
   ssr: false,
   loading: () => <Loading />,
 });
 
-function ReviewModal({ closeModal }: IProps) {
+function ReviewModal({ reviewId, reviewerId, userImage, username, role, closeModal }: IReviewModalPropsType) {
+  const { data } = useQuery<IReviewModalApiDetailType>({
+    queryKey: ['modalDetail', reviewId],
+    queryFn: () => getReviewDetailInfo({ reviewerId, reviewId }),
+    staleTime: 1000 * 20,
+  });
+
   const closeModalHandler = () => {
     closeModal((prev) => !prev);
   };
@@ -44,21 +49,16 @@ function ReviewModal({ closeModal }: IProps) {
           </div>
           <div className="flex-1 overflow-y-auto flex flex-col h-full">
             <ReviewSection option="flex">
-              <Image src={person} alt="registerImage" className="w-6 h-6 rounded-full" />
-              <span className="ml-2">UserId</span>
+              <Image src={userImage} alt="registerImage" className="w-6 h-6 rounded-full" />
+              <span className="ml-2">{username}</span>
             </ReviewSection>
             <ReviewSection>
               <h2 className="font-medium text-base">리뷰 제목</h2>
-              <p>리뷰제목나오는곳리뷰 제목나오는 곳리뷰 제목 나오는 곳리뷰 제목 나오는 곳리뷰 제목목목목목목</p>
+              <p>{data?.title}</p>
             </ReviewSection>
             <ReviewSection option="modal">
               <h2 className="font-medium text-base">리뷰 상세 내용</h2>
-              <QuillEditor
-                modules={{ toolbar: false }}
-                theme="snow"
-                readOnly
-                value="<p><h1>리뷰 상세 내용 테스트야!</h1><br/>안녕!!!!!</p>"
-              />
+              <QuillEditor modules={{ toolbar: false }} theme="snow" readOnly value={data?.content} />
             </ReviewSection>
             <div className="mt-6 flex flex-col ">
               <h2 className="font-medium text-base">Pull Request URL</h2>
@@ -67,19 +67,35 @@ function ReviewModal({ closeModal }: IProps) {
                 target="_blank"
                 href="http://localhost:3000">
                 <span className="inline-block whitespace-nowrap overflow-hidden text-ellipsis max-w-full">
-                  https://github.com/codestates-seb/seb40_main_032/pull/417
+                  {data?.prUrl}
                 </span>
               </a>
             </div>
           </div>
           <div className="text-center flex justify-center gap-2">
-            {/* 리뷰어 adn 리뷰이 입장에서의 버튼 */}
-            <ButtonWrapper>리뷰 수정</ButtonWrapper>
-            <ButtonWrapper>리뷰 취소</ButtonWrapper>
-
-            <ButtonWrapper>리뷰 수락</ButtonWrapper>
-            <ButtonWrapper>리뷰 거절</ButtonWrapper>
-            <ButtonWrapper>리뷰 승인</ButtonWrapper>
+            {!role ? (
+              <>
+                {data && (
+                  <>
+                    <ReviewModifyLink
+                      reviewId={reviewId}
+                      reviewerId={reviewerId}
+                      title={data.title}
+                      content={data.content}
+                      prUrl={data.prUrl}
+                      username={username}
+                    />
+                    <ButtonWrapper>리뷰 취소</ButtonWrapper>
+                  </>
+                )}
+              </>
+            ) : (
+              <>
+                <ButtonWrapper>리뷰 수락</ButtonWrapper>
+                <ButtonWrapper>리뷰 거절</ButtonWrapper>
+                <ButtonWrapper>리뷰 승인</ButtonWrapper>
+              </>
+            )}
           </div>
         </div>
       </div>
