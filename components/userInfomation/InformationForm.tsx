@@ -6,6 +6,7 @@ import { UserPageProps } from './informationType';
 import ReviewerRegisterModal from './ReviewerRegisterModal';
 import UserInput from './UserInput';
 import { reviewerStatusUpdate } from '../../pages/api/userInfo';
+import Loading from '../Loading';
 
 const InformationForm = ({ data }: UserPageProps) => {
   const [userId, setUserId] = useState<string>(data.username);
@@ -39,9 +40,9 @@ const InformationForm = ({ data }: UserPageProps) => {
       toast.error('리뷰어 활동 업데이트 오류가 발생했습니다!');
     }
   };
-  // 추후 로딩 컴포넌트를 사용할 예정
+
   if (updateLoading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   return (
@@ -81,13 +82,13 @@ const InformationForm = ({ data }: UserPageProps) => {
             <div
               onClick={userReviewerStatusUpdate}
               className={clsx(
-                "w-11 h-6  peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700  after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:after:border-white",
+                "w-11 h-6  peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue300 dark:peer-focus:ring-blue800 rounded-radius-full peer dark:bg-gray700  after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-c-white after:border-gray300 after:border after:rounded-radius-full after:h-5 after:w-5 after:transition-all dark:border-gray600 peer-checked:after:border-c-white",
                 {
-                  ['bg-blue-600 after:translate-x-full']: reviewerStatus,
-                  ['bg-gray-200 after:translate-x-0']: !reviewerStatus,
+                  ['bg-blue600 after:translate-x-full']: reviewerStatus,
+                  ['bg-gray200 after:translate-x-0']: !reviewerStatus,
                 },
               )}></div>
-            <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Reviewer 활동여부</span>
+            <span className="ml-3 text-sm font-medium text-c-black dark:text-gray300">Reviewer 활동여부</span>
           </label>
         </div>
         <div className="flex gap-2">
@@ -100,13 +101,13 @@ const InformationForm = ({ data }: UserPageProps) => {
                 setModify((prev) => !prev);
               }
             }}
-            className="w-full flex justify-center items-center bg-black text-white h-10 rounded-md">
+            className="w-full flex justify-center items-center bg-c-black text-c-white h-10 rounded-radius-m">
             {modify ? '수정 반영' : '정보 수정'}
           </button>
           <button
             onClick={() => setModal(true)}
             type="submit"
-            className="w-full flex justify-center items-center bg-black text-white h-10 rounded-md">
+            className="w-full flex justify-center items-center bg-c-black text-c-white h-10 rounded-radius-m">
             리뷰어 정보
           </button>
         </div>

@@ -10,7 +10,7 @@ function PickTagCard({ tag, setSelectTags }: ICategoryTagButtonPropsType) {
 
   return (
     <div
-      className="mr-1 bg-slate-200 text-black font-bold py-2 px-4 rounded-full hover:scale-110 cursor-pointer"
+      className="mr-1 bg-gray200 text-c-black font-bold py-2 px-4 rounded-full hover:scale-110 cursor-pointer"
       onClick={onClickDeleteTag}>
       <span className="mr-2">{tag.name}</span>
       <button>x</button>

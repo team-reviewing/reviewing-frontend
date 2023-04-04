@@ -97,8 +97,8 @@ function ReviewerRegisterModal({ setModal }: IModalPropsType) {
 
   return (
     <div className="fixed flex inset-0 z-10 flex-col items-center justify-center">
-      <div className="absolute inset-0 bg-[#0b131e5e]" onClick={() => setModal((prev) => !prev)} />
-      <div className="relative p-7 w-[32rem] h-[38rem] flex rounded-lg z-20 bg-white msm:w-11/12">
+      <div className="absolute inset-0 bg-b-modal" onClick={() => setModal((prev) => !prev)} />
+      <div className="relative p-7 w-[32rem] h-[38rem] flex rounded-radius-m z-20 bg-c-white msm:w-11/12">
         {data && (
           <form
             className="w-full h-full flex flex-col relative"
@@ -138,13 +138,13 @@ function ReviewerRegisterModal({ setModal }: IModalPropsType) {
               <div className="mt-6">
                 <span className="w-full flex flex-col items-start">소개글</span>
                 <textarea
-                  className="p-2 w-full h-20 border-solid border-2 rounded-md outline-none"
+                  className="p-2 w-full h-20 border-solid border-2 rounded-radius-m outline-none"
                   {...register('introduce')}
                 />
               </div>
             </div>
             <div className="text-center flex justify-center">
-              <button className="w-full flex justify-center items-center bg-black text-white h-10 rounded-md">
+              <button className="w-full flex justify-center items-center bg-c-black text-c-white h-10 rounded-radius-m">
                 {data.job ? '리뷰어 수정' : '리뷰어 등록'}
               </button>
             </div>

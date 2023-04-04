@@ -1,5 +1,5 @@
 import { RefObject } from 'react';
-import { UseFormRegister, UseFormSetValue, UseFormWatch, UseFormTrigger } from 'react-hook-form';
+import { UseFormSetValue, UseFormWatch, UseFormTrigger, UseFormSetError } from 'react-hook-form';
 import { ReactNode } from 'react';
 import { ParsedUrlQuery } from 'querystring';
 import { NextApiRequestCookies } from 'next/dist/server/api-utils';
@@ -36,6 +36,7 @@ export interface IQuillEditorType<T> {
   forwardedRef: RefObject<T>;
   value: string;
   onChange: (e: string) => void;
+  onBlur: (e: ReactQuill.Range) => void;
   placeholder: string;
   modules: typeof editorModule;
   formats: string[];
@@ -43,8 +44,8 @@ export interface IQuillEditorType<T> {
 }
 
 export interface IRegisterType {
-  register: UseFormRegister<IReviewRegisterType>;
   setValue: UseFormSetValue<IReviewRegisterType>;
+  setError: UseFormSetError<IReviewRegisterType>;
   watch: UseFormWatch<IReviewRegisterType>;
   trigger: UseFormTrigger<IReviewRegisterType>;
   editorRef: RefObject<ReactQuill>;

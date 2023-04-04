@@ -4,7 +4,7 @@ import { IReviewModifyLinkProps } from './reviewModalType';
 function ReviewModifyLink({ reviewId, title, content, prUrl, reviewerId, username }: IReviewModifyLinkProps) {
   return (
     <Link
-      className="w-full flex justify-center items-center bg-black text-white h-10 rounded-md"
+      className="w-full flex justify-center items-center bg-c-black text-c-white h-10 rounded-radius-m"
       href={{
         pathname: '/register',
         query: {

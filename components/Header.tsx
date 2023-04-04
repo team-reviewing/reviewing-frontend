@@ -40,7 +40,7 @@ const Header = () => {
                 ref={ref}
                 className="flex items-center cursor-pointer relative"
                 onClick={() => setDropdown((prev) => !prev)}>
-                <Image src={lena} alt="userProfile" width={45} height={45} className="rounded-full" />
+                <Image src={lena} alt="userProfile" width={45} height={45} className="rounded-radius-50%" />
                 {dropdown && <HeaderDropDown />}
               </div>
             </>
@@ -49,7 +49,7 @@ const Header = () => {
           )}
         </div>
       </header>
-      <div className="w-full h-80 bg-cyan-200">
+      <div className="w-full h-80 bg-cyan200">
         <div className="max-w-7xl h-full flex items-center justify-between mx-auto">
           <Image src={img} alt="person" />
           <div className="w-full text-4xl font-bold leading-10 tracking-widest">

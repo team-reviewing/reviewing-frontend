@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import ErrorMent from './ErrorMent';
 import { ILinkUserIdType, IReviewRegisterType } from './ReviewRegisterType';
 import { reviewModify, reviewRegister } from '../../pages/api/reviewRegister';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Loading from '../Loading';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/router';
@@ -16,8 +16,8 @@ function RegisterForm({ reviewerId, reviewerName, reviewId, title, content, prUr
     handleSubmit,
     setValue,
     watch,
-    trigger,
     setError,
+    trigger,
     formState: { errors },
   } = useForm<IReviewRegisterType>({
     mode: 'onTouched',
@@ -34,18 +34,20 @@ function RegisterForm({ reviewerId, reviewerName, reviewId, title, content, prUr
 
   useRedirectMain();
 
+  useEffect(() => {
+    register('content', {
+      required: '필수 사항입니다.',
+    });
+  }, []);
+
   const onSubmitHandler = async ({ title, content, prUrl }: IReviewRegisterType) => {
     try {
-      if (editorRef.current?.unprivilegedEditor?.getText().trim().length) {
-        setLoading((prev) => !prev);
-        await reviewRegister({ reviewerId, title, content, prUrl }).then(() => {
-          setLoading(false);
-          toast.success('리뷰 신청이 완료되었습니다.');
-          router.push('/');
-        });
-      } else {
-        setError('content', { type: 'minLength', message: '필수 사항입니다.' });
-      }
+      setLoading((prev) => !prev);
+      await reviewRegister({ reviewerId, title, content, prUrl }).then(() => {
+        setLoading(false);
+        toast.success('리뷰 신청이 완료되었습니다.');
+        router.push('/');
+      });
     } catch (err) {
       setLoading(false);
       toast.error('리뷰 신청이 진행되지 않았습니다. 다시 진행 부탁드립니다.');
@@ -53,15 +55,13 @@ function RegisterForm({ reviewerId, reviewerName, reviewId, title, content, prUr
   };
   const onModifyHandler = async ({ content }: Pick<IReviewRegisterType, 'content'>) => {
     try {
-      if (editorRef.current?.unprivilegedEditor?.getText().trim().length && reviewId) {
+      if (reviewId) {
         setLoading((prev) => !prev);
         await reviewModify({ reviewId, content, reviewerId }).then(() => {
           setLoading(false);
           toast.success('리뷰 수정이 완료되었습니다.');
           router.push('/');
         });
-      } else {
-        setError('content', { type: 'minLength', message: '필수 사항입니다.' });
       }
     } catch (err) {
       setLoading(false);
@@ -74,10 +74,10 @@ function RegisterForm({ reviewerId, reviewerName, reviewId, title, content, prUr
       {loading && <Loading />}
       <form className="flex flex-col p-3 gap-6" onSubmit={handleSubmit(reviewId ? onModifyHandler : onSubmitHandler)}>
         <div>
-          <p className="text-slate-400 text-lg">리뷰어 : {reviewerName}</p>
+          <p className="text-neutral400 text-lg">리뷰어 : {reviewerName}</p>
         </div>
         <div>
-          <div className="">
+          <div>
             <label htmlFor="title" className="text-lg">
               제목
             </label>
@@ -95,7 +95,7 @@ function RegisterForm({ reviewerId, reviewerName, reviewId, title, content, prUr
               })}
               placeholder="제목을 입력해주세요. 최대 50자입니다."
               maxLength={50}
-              className="p-2 w-full border-solid border-2 rounded-md outline-none"
+              className="p-2 w-full border-solid border-2 rounded-radius-m outline-none"
               readOnly={reviewId ? true : false}
             />
             {errors.title && <ErrorMent>{errors.title.message}</ErrorMent>}
@@ -107,8 +107,8 @@ function RegisterForm({ reviewerId, reviewerName, reviewId, title, content, prUr
           </div>
           <div>
             <ReviewEditor
-              register={register}
               setValue={setValue}
+              setError={setError}
               watch={watch}
               trigger={trigger}
               editorRef={editorRef}
@@ -124,7 +124,6 @@ function RegisterForm({ reviewerId, reviewerName, reviewId, title, content, prUr
           </div>
           <div>
             <input
-              // 추후 pattern 적용
               {...register('prUrl', {
                 required: '필수 사항입니다.',
                 pattern: {
@@ -135,14 +134,16 @@ function RegisterForm({ reviewerId, reviewerName, reviewId, title, content, prUr
               id="pullRequestEmail"
               type="text"
               placeholder="Pull Request URL을 입력해주세요."
-              className="p-2 w-full border-solid border-2 rounded-md outline-none"
+              className="p-2 w-full border-solid border-2 rounded-radius-m outline-none"
               readOnly={reviewId ? true : false}
             />
             {errors.prUrl && <ErrorMent>{errors.prUrl.message}</ErrorMent>}
           </div>
         </div>
         <div className="flex justify-end">
-          <button className="w-40 flex justify-center items-center bg-black text-white h-10 rounded-md">요청</button>
+          <button className="w-40 flex justify-center items-center bg-c-black text-c-white h-10 rounded-radius-m">
+            요청
+          </button>
         </div>
       </form>
     </>

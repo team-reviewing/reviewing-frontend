@@ -28,8 +28,8 @@ function FilterCategory({ setCategory, categories, setSelectedTags, selectedTags
             return (
               <div
                 key={item.id}
-                className={clsx(`mr-3 border-b-2 tracking-wide cursor-pointer p-3 text-gray-500 hover:text-black`, {
-                  ['border-b-cyan-300']: item.id === isClicked,
+                className={clsx(`mr-3 border-b-2 tracking-wide cursor-pointer p-3 text-gray500 hover:text-c-black`, {
+                  ['border-b-cyan300']: item.id === isClicked,
                   ['border-b-transparent']: item.id !== isClicked,
                 })}
                 onClick={() => {

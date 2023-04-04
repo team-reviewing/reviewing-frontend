@@ -6,12 +6,12 @@ import Link from 'next/link';
 
 function ReviewerCard({ reviewerProps }: { reviewerProps: IReviewerType }) {
   return (
-    <div className="max-w-md rounded-md shadow-md border-2 border-neutral-300 flex justify-center items-center px-3 py-3 hover:border-neutral-400 hover:scale-105 transition-transform ease-in-out">
+    <div className="max-w-md rounded-radius-m shadow-md border-2 border-neutral300 flex justify-center items-center px-3 py-3 hover:border-neutral400 hover:scale-105 transition-transform ease-in-out">
       <div className="flex flex-col w-full h-full">
         <p className="w-full line-clamp-3 overflow-ellipsis whitespace-normal min-h-[3rem] leading-4 mb-1">
           {reviewerProps.introduction}
         </p>
-        <div className="flex flex-col text-stone-500">
+        <div className="flex flex-col text-neutral500">
           <div>
             분야 : <strong>{reviewerProps.job}</strong>
           </div>
@@ -28,11 +28,10 @@ function ReviewerCard({ reviewerProps }: { reviewerProps: IReviewerType }) {
 
         <div className="w-full flex justify-between mt-3">
           <div className="flex justify-center items-center">
-            <Image src={img} alt="img" width={30} height={30} className="rounded-full mr-3"></Image>
+            <Image src={img} alt="img" width={30} height={30} className="rounded-radius-50% mr-3"></Image>
             <span className="text-black">{reviewerProps.username}</span>
           </div>
           <Link
-            as="/register"
             href={{
               pathname: '/register',
               query: {
@@ -40,7 +39,7 @@ function ReviewerCard({ reviewerProps }: { reviewerProps: IReviewerType }) {
                 username: reviewerProps.username,
               },
             }}
-            className=" bg-slate-200 text-black font-bold py-2 px-4 rounded">
+            className=" bg-gray200 text-c-black font-bold py-2 px-4 rounded-radius-s">
             리뷰요청
           </Link>
         </div>

@@ -4,15 +4,16 @@ import { IReviewRoleType } from './ReviewListType';
 
 function ReviewModeButtonGroup({ role, setRole }: IReviewRoleType) {
   return (
-    <div className="flex justify-center rounded-lg text-lg mt-4" role="group">
+    <div className="flex justify-center rounded-radius-m text-lg mt-4" role="group">
       <button
         onClick={() => {
           setRole(false);
         }}
         className={clsx(
-          `bg-black text-white hover:bg-blue-500 border border-r-1 rounded-l-lg px-4 py-2 mx-0 outline-none`,
+          `text-c-white hover:bg-blue500 border border-r-1 rounded-l-radius-m px-4 py-2 mx-0 outline-none`,
           {
-            ['bg-blue-500']: !role,
+            ['bg-blue500']: !role,
+            ['bg-c-black']: role,
           },
         )}>
         요청한 리뷰
@@ -22,9 +23,10 @@ function ReviewModeButtonGroup({ role, setRole }: IReviewRoleType) {
           setRole(true);
         }}
         className={clsx(
-          `bg-black text-white hover:bg-blue-500 border border-l-0 rounded-r-lg px-4 py-2 mx-0 outline-none`,
+          `text-c-white hover:bg-blue500 border border-l-0 rounded-r-radius-m px-4 py-2 mx-0 outline-none`,
           {
-            ['bg-blue-500']: role,
+            ['bg-blue500']: role,
+            ['bg-c-black']: !role,
           },
         )}>
         요청 받은 리뷰

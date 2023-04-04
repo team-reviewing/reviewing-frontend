@@ -8,7 +8,16 @@ const QuillEditor = dynamic(
   async () => {
     const { default: RQ } = await import('react-quill');
 
-    return ({ forwardedRef, value, onChange, modules, formats, placeholder, theme }: IQuillEditorType<ReactQuill>) => (
+    return ({
+      forwardedRef,
+      value,
+      onChange,
+      onBlur,
+      modules,
+      formats,
+      placeholder,
+      theme,
+    }: IQuillEditorType<ReactQuill>) => (
       <RQ
         ref={forwardedRef}
         onChange={onChange}
@@ -17,6 +26,7 @@ const QuillEditor = dynamic(
         formats={formats}
         placeholder={placeholder}
         theme={theme}
+        onBlur={onBlur}
       />
     );
   },
@@ -42,20 +52,28 @@ const formats = [
 
 const EDITORMAX = 500;
 
-function ReviewEditor({ register, setValue, watch, trigger, editorRef }: IRegisterType) {
+function ReviewEditor({ setError, setValue, watch, trigger, editorRef }: IRegisterType) {
   const modules = useMemo(() => editorModule, []);
-  register('content', {
-    required: '필수 사항입니다.',
-  });
+
   const editorContentChange = (content: string) => {
     if (editorRef.current) {
       const getLength = editorRef.current.unprivilegedEditor?.getText().length;
 
       if (getLength && getLength - 1 <= EDITORMAX) {
-        setValue('content', content);
+        if (content === '<p><br></p>') {
+          setValue('content', '');
+        } else {
+          setValue('content', content);
+        }
       }
     }
     trigger('content');
+  };
+
+  const editorBlurHandler = (e: ReactQuill.Range) => {
+    if (!e?.index) {
+      setError('content', { type: 'required', message: '필수 사항입니다.' });
+    }
   };
 
   const editorContentLength = (content: number) => {
@@ -72,10 +90,11 @@ function ReviewEditor({ register, setValue, watch, trigger, editorRef }: IRegist
         modules={modules}
         formats={formats}
         theme="snow"
+        onBlur={editorBlurHandler}
       />
       <p className="flex justify-end w-full pr-3">
         {editorRef.current && editorRef.current.unprivilegedEditor
-          ? editorContentLength(editorRef.current.unprivilegedEditor?.getText().length - 1)
+          ? editorContentLength(editorRef.current.unprivilegedEditor.getText().length - 1)
           : 0}
         / {EDITORMAX} 자
       </p>

@@ -61,14 +61,15 @@ function HookFormDropDown({ name, dropList, regiId, ment, setValue, watch, regis
       <span className="w-full flex flex-col items-start cursor-default">{name}</span>
       <div
         onClick={() => setDrop((prev) => !prev)}
-        className={clsx('p-2 h-10 w-full border-solid border-2 rounded-md cursor-pointer text-[#a9a9a9]', {
-          ['text-black']: isString(watch(regiId)),
+        className={clsx('p-2 h-10 w-full border-solid border-2 rounded-radius-m cursor-pointer', {
+          ['text-c-black']: isString(watch(regiId)),
+          ['text-neutral300']: !isString(watch(regiId)),
         })}>
         {`${isString(watch(regiId)) ? watch(regiId) : ment}`}
       </div>
       {drop && (
         <ul
-          className={clsx('w-full border-2 rounded-md mt-0.5 overflow-y-auto h-44', {
+          className={clsx('w-full border-2 rounded-radius-m mt-0.5 overflow-y-auto h-44', {
             ['animate-down-animation']: true,
           })}>
           {dropList.map((el) => {
@@ -78,7 +79,7 @@ function HookFormDropDown({ name, dropList, regiId, ment, setValue, watch, regis
                 onClick={() => {
                   selectSkill(el);
                 }}
-                className="p-2 cursor-pointer hover:bg-slate-100">
+                className="p-2 cursor-pointer hover:bg-gray100">
                 {isSkill(el) ? el.skill : el}
               </li>
             );
@@ -86,7 +87,7 @@ function HookFormDropDown({ name, dropList, regiId, ment, setValue, watch, regis
         </ul>
       )}
       {Array.isArray(watch(regiId)) && watch(regiId).length > 0 && (
-        <div className="p-2 h-10 w-full border-solid border-2 rounded-md mt-2.5 flex">
+        <div className="p-2 h-10 w-full border-solid border-2 rounded-radius-m mt-2.5 flex">
           {selectSkillList(watch(regiId)).map((el) => {
             return (
               <span className="mr-3 flex items-center" key={el.id}>
@@ -103,7 +104,7 @@ function HookFormDropDown({ name, dropList, regiId, ment, setValue, watch, regis
         </div>
       )}
       {watch('job') === '기타' && register && (
-        <div className="p-2 h-10 w-full border-solid border-2 rounded-md mt-2.5">
+        <div className="p-2 h-10 w-full border-solid border-2 rounded-radius-m mt-2.5">
           <input className="focus:outline-none w-full" type="text" {...register('etc')} />
         </div>
       )}

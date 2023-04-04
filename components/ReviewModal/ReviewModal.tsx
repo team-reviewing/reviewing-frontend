@@ -31,10 +31,10 @@ function ReviewModal({ reviewId, reviewerId, userImage, username, role, closeMod
 
   return (
     <div className="fixed flex inset-0 z-5 flex-col items-center justify-center">
-      <div className="absolute inset-0 bg-[#0b131e5e]" onClick={closeModalHandler} />
+      <div className="absolute inset-0 bg-b-modal" onClick={closeModalHandler} />
       <div
-        className="z-20 bg-white flex relative flex-col p-7 rounded-lg h-[50rem] min-w-[36rem] w-[36rem]
-                  msm:w-full msm:min-w-0 msm:fixed msm:bottom-0 msm:rounded-b-none msm:animate-up-animation">
+        className="z-20 bg-c-white flex relative flex-col p-7 rounded-radius-m h-[50rem] min-w-[36rem] w-[36rem]
+                  msm:w-full msm:min-w-0 msm:fixed msm:bottom-0 msm:rounded-b-radius-none msm:animate-up-animation">
         <div className="w-full h-full flex flex-col">
           <div className="flex justify-between">
             <div>
@@ -53,7 +53,7 @@ function ReviewModal({ reviewId, reviewerId, userImage, username, role, closeMod
           </div>
           <div className="flex-1 overflow-y-auto flex flex-col h-full">
             <ReviewSection option="flex">
-              <Image src={userImage} alt="registerImage" className="w-6 h-6 rounded-full" />
+              <Image src={userImage} alt="registerImage" className="w-6 h-6 rounded-radius-50%" />
               <span className="ml-2">{username}</span>
             </ReviewSection>
             <ReviewSection>

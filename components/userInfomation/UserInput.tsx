@@ -9,7 +9,7 @@ function UserInput({ name, input, setInput, placeholder, disable = true }: IRegi
       <input
         id="user-id"
         type="text"
-        className="p-2 h-10 w-full border-solid border-2 rounded-md"
+        className="p-2 h-10 w-full border-solid border-2 rounded-radius-m"
         placeholder={placeholder}
         onChange={(e) => setInput(e.currentTarget.value)}
         value={input}
