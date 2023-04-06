@@ -2,12 +2,12 @@ import { useRecoilValue } from 'recoil';
 import { userState } from '../../atoms/userState';
 import Loading from '../Loading';
 import InformationForm from './InformationForm';
-import useRedirectMain from '../../useHooks/useRedirectMain';
+import useRedirectInduce from '../../useHooks/useRedirectInduce';
 
 const InformationTemplate = () => {
   const user = useRecoilValue(userState);
 
-  useRedirectMain();
+  useRedirectInduce();
 
   if (!user) {
     return <Loading />;

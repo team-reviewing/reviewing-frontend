@@ -4,16 +4,16 @@ import { useRecoilValue } from 'recoil';
 import { userState } from '../atoms/userState';
 import { getAccessTokenInStorage } from '../utils/authLogic';
 
-function useRedirectMain() {
+function useRedirectInduce() {
   const user = useRecoilValue(userState);
   const router = useRouter();
 
   useEffect(() => {
     const token = getAccessTokenInStorage();
     if (!user && !token) {
-      router.push('/');
+      router.replace('/induceLogin');
     }
   }, [user]);
 }
 
-export default useRedirectMain;
+export default useRedirectInduce;

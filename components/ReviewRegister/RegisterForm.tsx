@@ -8,7 +8,7 @@ import Loading from '../Loading';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import ReactQuill from 'react-quill';
-import useRedirectMain from '../../useHooks/useRedirectMain';
+import useRedirectInduce from '../../useHooks/useRedirectInduce';
 
 function RegisterForm({ reviewerId, reviewerName, reviewId, title, content, prUrl }: ILinkUserIdType) {
   const {
@@ -32,7 +32,7 @@ function RegisterForm({ reviewerId, reviewerName, reviewId, title, content, prUr
   const editorRef = useRef<ReactQuill>(null);
   const router = useRouter();
 
-  useRedirectMain();
+  useRedirectInduce();
 
   useEffect(() => {
     register('content', {

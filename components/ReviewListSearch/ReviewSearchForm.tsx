@@ -3,13 +3,13 @@ import ReviewInquireBox from './ReviewInquireBox';
 import ReviewModeButtonGroup from './ReviewRoleButtonGroup';
 import { useGetRoleReviews } from './queries/getReviewsQuery';
 import Loading from '../Loading';
-import useRedirectMain from '../../useHooks/useRedirectMain';
+import useRedirectInduce from '../../useHooks/useRedirectInduce';
 
 function ReviewSearchForm() {
   const [role, setRole] = useState<boolean>(false);
   const reviewRole = useGetRoleReviews(role);
 
-  useRedirectMain();
+  useRedirectInduce();
 
   if (reviewRole.isLoading) {
     return <Loading />;

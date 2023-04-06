@@ -6,6 +6,8 @@ import '../styles/globals.css';
 import 'react-quill/dist/quill.snow.css';
 import { Toaster } from 'react-hot-toast';
 import Header from '../components/Header';
+import { useRouter } from 'next/router';
+import Carousel from '../components/Carousel';
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
   require('../mocks');
@@ -22,11 +24,18 @@ const client = new QueryClient({
 });
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const router = useRouter();
+
   return (
     <QueryClientProvider client={client}>
       <RecoilRoot>
         <Toaster />
-        <Header />
+        {router.pathname !== '/induceLogin' && (
+          <>
+            <Header />
+            <Carousel />
+          </>
+        )}
         <Component {...pageProps} />
       </RecoilRoot>
       <ReactQueryDevtools />

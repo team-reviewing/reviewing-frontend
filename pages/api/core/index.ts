@@ -35,7 +35,7 @@ instance.interceptors.response.use(
         }
         return instance.request(config);
       } catch (err) {
-        window.location.href = '/';
+        window.location.href = '/induceLogin';
       }
     } else {
       return Promise.reject(error);

@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import img from 'styles/images/person.png';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import lena from 'styles/images/lena.jpg';
@@ -28,7 +27,7 @@ const Header = () => {
   }, [ref]);
 
   return (
-    <div className="w-full sticky mb-3">
+    <div className="w-full sticky">
       <header className="w-full h-24 flex justify-center text-4xl">
         <div className="max-w-7xl mx-16 flex items-center justify-between w-full">
           <Link href="/">
@@ -49,18 +48,6 @@ const Header = () => {
           )}
         </div>
       </header>
-      <div className="w-full h-80 bg-cyan200">
-        <div className="max-w-7xl h-full flex items-center justify-between mx-auto">
-          <Image src={img} alt="person" />
-          <div className="w-full text-4xl font-bold leading-10 tracking-widest">
-            <div className="w-full flex justify-center items-center flex-col">
-              <span className="text-2xl sm:text-2xl md:text-3xl lg:text-4xl">개인 프로젝트의 코드리뷰가</span>
-              <br />
-              <span className="text-2xl sm:text-2xl md:text-3xl lg:text-4xl">필요하신가요?</span>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };
