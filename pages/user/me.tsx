@@ -1,4 +1,4 @@
-import InformationTemplate from '../../components/userInfomation/InformationTemplate';
+import InformationTemplate from '../../components/UserInformation/InformationTemplate';
 
 const UserPage = () => {
   return (

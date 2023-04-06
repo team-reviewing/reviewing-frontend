@@ -1,5 +1,5 @@
 import { rest } from 'msw';
-import { IUserUpdateType } from '../components/userInfomation/informationType';
+import { IUserUpdateType } from '../components/UserInformation/informationType';
 import img from 'styles/images/person.png';
 
 let username = 'kuku';

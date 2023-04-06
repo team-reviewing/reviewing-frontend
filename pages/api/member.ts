@@ -1,4 +1,4 @@
-import { UserType } from '../../components/userInfomation/informationType';
+import { UserType } from '../../components/UserInformation/informationType';
 import instance from './core';
 
 export const logIn = async (params: string | string[]) => {
