@@ -1,4 +1,5 @@
 import { UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
+import { SetterOrUpdater } from 'recoil';
 
 export interface IRegisterInputType {
   name: string;
@@ -48,6 +49,9 @@ export interface UserType extends IUserUpdateType {
   profileUrl: string;
   isReviewer: boolean;
 }
+export interface UserInformationType extends UserType {
+  reviewerRegister: boolean;
+}
 
 export interface IRegisterListOption {
   positionList: string[];
@@ -62,7 +66,8 @@ export interface IUserGetType {
 }
 
 export interface UserPageProps {
-  data: UserType;
+  data: UserInformationType;
+  setUser: SetterOrUpdater<UserInformationType | null>;
 }
 
 export interface IRegisterMutationProps {

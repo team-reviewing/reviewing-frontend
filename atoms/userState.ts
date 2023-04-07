@@ -1,7 +1,7 @@
 import { atom } from 'recoil';
-import { UserType } from '../components/UserInformation/informationType';
+import { UserInformationType } from '../components/UserInformation/informationType';
 
-export const userState = atom<UserType | null>({
+export const userState = atom<UserInformationType | null>({
   key: 'userState',
   default: null,
 });
