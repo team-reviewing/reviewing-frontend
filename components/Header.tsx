@@ -29,7 +29,7 @@ const Header = () => {
   return (
     <div className="w-full sticky">
       <header className="w-full h-24 flex justify-center text-4xl">
-        <div className="max-w-7xl mx-16 flex items-center justify-between w-full">
+        <div className="max-w-7xl mx-8 flex items-center justify-between w-full">
           <Link href="/">
             <span className="cursor-pointer font-bold">Logo</span>
           </Link>
