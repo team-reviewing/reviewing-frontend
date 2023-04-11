@@ -57,7 +57,7 @@ function HookFormDropDown({ name, dropList, regiId, ment, setValue, watch, regis
   }, [watch('job')]);
 
   return (
-    <div className="mt-6">
+    <div>
       <span className="w-full flex flex-col items-start cursor-default">{name}</span>
       <div
         onClick={() => setDrop((prev) => !prev)}

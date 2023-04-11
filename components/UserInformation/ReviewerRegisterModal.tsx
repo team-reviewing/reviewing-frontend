@@ -104,12 +104,12 @@ function ReviewerRegisterModal({ setModal }: IModalPropsType) {
             className="w-full h-full flex flex-col relative"
             onSubmit={handleSubmit(submitHandler, submitValidationHandler)}>
             <div className="flex items-center justify-center">
-              <div className="text-2xl">리뷰어 정보</div>
+              <div className="text-2xl msm:text-xl">리뷰어 정보</div>
               <div className="absolute right-0 cursor-pointer">
                 <Image width={15} height={15} src={cancel} alt="cancel" onClick={() => setModal((prev) => !prev)} />
               </div>
             </div>
-            <div className="overflow-y-auto flex flex-col h-full">
+            <div className="overflow-y-auto flex flex-col h-full space-y-6">
               <HookFormDropDown
                 dropList={data.positionList}
                 name="직무"
@@ -135,7 +135,7 @@ function ReviewerRegisterModal({ setModal }: IModalPropsType) {
                 regiId="techStack"
                 watch={watch}
               />
-              <div className="mt-6">
+              <div>
                 <span className="w-full flex flex-col items-start">소개글</span>
                 <textarea
                   className="p-2 w-full h-20 border-solid border-2 rounded-radius-m outline-none"

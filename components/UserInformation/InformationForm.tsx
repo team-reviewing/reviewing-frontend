@@ -54,37 +54,14 @@ const InformationForm = ({ data, setUser }: UserPageProps) => {
   }
 
   return (
-    <div>
-      <div>
-        {modify ? (
-          <>
-            <UserInput
-              name="활동명"
-              input={userId}
-              setInput={setUserId}
-              placeholder="활동명을 입력해주세요."
-              disable={false}
-            />
-            <UserInput
-              name="이메일"
-              input={email}
-              setInput={setEmail}
-              placeholder="이메일을 입력해주세요."
-              disable={false}
-            />
-            <UserInput name="Github Url" input={profileUrl} setInput={setProfileUrl} />
-          </>
-        ) : (
-          <>
-            <UserInput name="활동명" input={userId} setInput={setUserId} />
-            <UserInput name="이메일" input={email} setInput={setEmail} />
-            <UserInput name="Github Url" input={profileUrl} setInput={setProfileUrl} />
-          </>
-        )}
+    <div className="mt-6">
+      <div className="space-y-5">
+        <UserInput name="활동명" value={userId} onChange={(e) => setUserId(e.currentTarget.value)} disabled={!modify} />
+        <UserInput name="이메일" value={email} onChange={(e) => setEmail(e.currentTarget.value)} disabled={!modify} />
+        <UserInput name="Github Url" value={profileUrl} onChange={(e) => setProfileUrl(e.currentTarget.value)} />
       </div>
-
-      <div className="mt-6">
-        <div className="my-2 flex">
+      <div className="mt-4 space-y-3 ">
+        <div className="flex">
           <label className="relative inline-flex items-center cursor-pointer">
             <input type="checkbox" value="" className="sr-only peer" />
             <div

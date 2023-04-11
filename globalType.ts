@@ -5,3 +5,7 @@ export interface IData {
 export interface IAllPagePropsData extends IData {
   isLogIn: boolean;
 }
+
+export type StrictPropsWithChildren<P = unknown> = P & {
+  children: React.ReactNode;
+};
