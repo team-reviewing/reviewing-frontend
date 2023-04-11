@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 function ReviewerCard({ reviewerProps }: { reviewerProps: IReviewerType }) {
   return (
-    <div className="max-w-md rounded-radius-m shadow-md border-2 border-neutral300 flex justify-center items-center px-3 py-3 hover:border-neutral400 hover:scale-105 transition-transform ease-in-out">
+    <div className="rounded-radius-m shadow-md border-2 border-neutral300 flex justify-center items-center px-3 py-3 hover:border-neutral400 hover:scale-105 transition-transform ease-in-out">
       <div className="flex flex-col w-full h-full">
         <p className="w-full line-clamp-3 overflow-ellipsis whitespace-normal min-h-[3rem] leading-4 mb-1">
           {reviewerProps.introduction}
