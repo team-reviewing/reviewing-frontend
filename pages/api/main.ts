@@ -1,11 +1,11 @@
 import { ICategoriesType, IReviewersRequestType, IGetReivewersType } from '../../components/Main/mainType';
 import qs from 'qs';
 import instance from './core';
+import axios from 'axios';
 
 export const getCategories = async () => {
-  const response = await instance.get('/tags');
-  const data: ICategoriesType = response.data;
-  return data;
+  const response = await axios.get<ICategoriesType>('http://localhost:3000/tags');
+  return response;
 };
 
 export const getReviewers = async (params: IReviewersRequestType) => {
