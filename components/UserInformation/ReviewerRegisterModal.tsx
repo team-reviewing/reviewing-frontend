@@ -1,31 +1,23 @@
-import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import { toast } from 'react-hot-toast';
-import { reviewerGet } from '../../pages/api/userInfo';
-import { IModalPropsType, IRegister, ISkillType, ReviewModalHookFormType } from './informationType';
+import { IModalPropsType, ISkillType, ReviewModalHookFormType } from './informationType';
 import cancel from '../../styles/images/cancel.svg';
 import Loading from '../Loading';
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import ReviewModalDropDownSelect from './ReviewModalDropDownSelect';
 import ReviewModalDropDownSkill from './ReviewModalDropDownSkill';
-import { useReviewerRegisterMutate, useReviewerUpdateMutate } from './getUpdateQuery';
+import { useReviewerGetQuery, useReviewerRegisterMutate, useReviewerUpdateMutate } from './queries/getReviewerQuery';
 import { useRecoilValue } from 'recoil';
 import { userState } from '../../atoms/userState';
 
-function ReviewerRegisterModal({ setModal }: IModalPropsType) {
-  const { data, isLoading } = useQuery<IRegister>({
-    queryKey: ['reviewer'],
-    queryFn: () => reviewerGet(),
-    staleTime: 1000 * 20,
-    onError: () => {
-      toast.error('네트워크 문제가 발생했습니다.다시 시도 부탁드립니다.');
-    },
-  });
+function ReviewerRegisterModal({ userName, setModal }: IModalPropsType) {
+  const { data, isLoading } = useReviewerGetQuery({ userName });
 
-  const userRecoil = useRecoilValue(userState);
   const { mutate: mutateRegister } = useReviewerRegisterMutate({ setModal });
   const { mutate: mutateUpdate } = useReviewerUpdateMutate({ setModal });
+
+  const userRecoil = useRecoilValue(userState);
 
   const [selectJob, setSelectJob] = useState<string>('');
   const [selectCareer, setSelectCareer] = useState<string>('');
@@ -81,12 +73,12 @@ function ReviewerRegisterModal({ setModal }: IModalPropsType) {
   }
 
   return (
-    <div className="fixed flex inset-0 z-10 flex-col items-center justify-center">
+    <div className="fixed inset-0 z-10 flex flex-col items-center justify-center">
       <div className="absolute inset-0 bg-b-modal" onClick={() => setModal((prev) => !prev)} />
       <div className="relative p-7 w-[32rem] h-[38rem] flex rounded-radius-m z-20 bg-c-white msm:w-11/12">
         {data && (
           <form
-            className="w-full h-full flex flex-col relative"
+            className="relative flex flex-col w-full h-full"
             onSubmit={handleSubmit(submitHandler, submitValidationHandler)}>
             <div className="flex items-center justify-center">
               <div className="text-2xl msm:text-xl">리뷰어 정보</div>
@@ -94,7 +86,7 @@ function ReviewerRegisterModal({ setModal }: IModalPropsType) {
                 <Image width={15} height={15} src={cancel} alt="cancel" onClick={() => setModal((prev) => !prev)} />
               </div>
             </div>
-            <div className="overflow-y-auto flex flex-col h-full space-y-6">
+            <div className="flex flex-col h-full space-y-6 overflow-y-auto">
               <ReviewModalDropDownSelect
                 name="직무"
                 itemList={data.positionList}
@@ -115,15 +107,15 @@ function ReviewerRegisterModal({ setModal }: IModalPropsType) {
                 setState={setSelectTech}
               />
               <div>
-                <span className="w-full flex flex-col items-start">소개글</span>
+                <span className="flex flex-col items-start w-full">소개글</span>
                 <textarea
-                  className="p-2 w-full h-20 border-solid border-2 rounded-radius-m outline-none"
+                  className="w-full h-20 p-2 border-2 border-solid outline-none rounded-radius-m"
                   {...register('introduce', { required: true })}
                 />
               </div>
             </div>
-            <div className="text-center flex justify-center">
-              <button className="w-full flex justify-center items-center bg-c-black text-c-white h-10 rounded-radius-m">
+            <div className="flex justify-center text-center">
+              <button className="flex items-center justify-center w-full h-10 bg-c-black text-c-white rounded-radius-m">
                 {userRecoil?.reviewerRegister ? '리뷰어 수정' : '리뷰어 등록'}
               </button>
             </div>
