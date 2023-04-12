@@ -1,9 +1,26 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
-import { registerUpdate, reviewerRegister } from '../../pages/api/userInfo';
-import { IModalPropsType, IReviewerRegisterUpdateType } from './informationType';
+import { registerUpdate, reviewerGet, reviewerRegister } from '../../../pages/api/userInfo';
+import {
+  IRegister,
+  IReviewerRegisterUpdateType,
+  useReviewerMutationType,
+  useReviewerQueryType,
+} from '../informationType';
 
-export function useReviewerRegisterMutate({ setModal }: IModalPropsType) {
+export const REVIEWER = 'reviewer';
+export function useReviewerGetQuery({ userName }: useReviewerQueryType) {
+  return useQuery<IRegister>({
+    queryKey: [REVIEWER, userName],
+    queryFn: () => reviewerGet(),
+    staleTime: 1000 * 20,
+    onError: () => {
+      toast.error('네트워크 문제가 발생했습니다.다시 시도 부탁드립니다.');
+    },
+  });
+}
+
+export function useReviewerRegisterMutate({ setModal }: useReviewerMutationType) {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -21,7 +38,7 @@ export function useReviewerRegisterMutate({ setModal }: IModalPropsType) {
   });
 }
 
-export function useReviewerUpdateMutate({ setModal }: IModalPropsType) {
+export function useReviewerUpdateMutate({ setModal }: useReviewerMutationType) {
   const queryClient = useQueryClient();
 
   return useMutation({

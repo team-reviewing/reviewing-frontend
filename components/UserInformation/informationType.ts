@@ -10,6 +10,7 @@ export interface IRegisterInputType {
 }
 
 export interface IModalPropsType {
+  userName: string;
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -75,3 +76,7 @@ export interface ReviewModalDropDownSkillProps {
   select: ISkillType[];
   setState: React.Dispatch<React.SetStateAction<ISkillType[]>>;
 }
+
+export type useReviewerQueryType = Pick<IModalPropsType, 'userName'>;
+
+export type useReviewerMutationType = Pick<IModalPropsType, 'setModal'>;
