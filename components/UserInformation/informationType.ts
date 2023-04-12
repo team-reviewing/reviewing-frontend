@@ -1,4 +1,4 @@
-import { UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
+import { UseFormRegister } from 'react-hook-form';
 import { SetterOrUpdater } from 'recoil';
 
 export interface IRegisterInputType {
@@ -16,16 +16,6 @@ export interface IModalPropsType {
 export interface ISkillType {
   id: number;
   skill: string;
-}
-
-export interface IReviewerDropDownPropsType {
-  name: string;
-  dropList: string[] | ISkillType[];
-  select: string | ISkillType[];
-  setSelect: React.Dispatch<React.SetStateAction<string | ISkillType[]>>;
-  etc?: string;
-  setEtc?: React.Dispatch<React.SetStateAction<string>>;
-  ment: string;
 }
 
 export interface IReviewerRegisterUpdateType {
@@ -61,34 +51,27 @@ export interface IRegisterListOption {
 
 export interface IRegister extends IReviewerRegisterDataType, IRegisterListOption {}
 
-export interface IUserGetType {
-  userInfo: UserType;
-}
-
 export interface UserPageProps {
   data: UserInformationType;
   setUser: SetterOrUpdater<UserInformationType | null>;
 }
 
-export interface IRegisterMutationProps {
-  register: IReviewerRegisterUpdateType;
-  mutationFnCb: (regi: IReviewerRegisterUpdateType) => Promise<number>;
-}
-
-export interface IHookFormType extends IReviewerRegisterDataType {
+export interface ReviewModalHookFormType {
   etc: string;
+  introduce: string;
 }
 
-export interface IReviewSubmitType extends IHookFormType {
-  mutationFn: (regi: IReviewerRegisterUpdateType) => Promise<number>;
-}
-
-export interface IHookDropDownType {
+export interface ReviewModalDropDownSelectProps {
   name: string;
-  dropList: string[] | ISkillType[];
-  regiId: keyof IHookFormType;
-  ment: string;
-  setValue: UseFormSetValue<IHookFormType>;
-  watch: UseFormWatch<IHookFormType>;
-  register?: UseFormRegister<IHookFormType>;
+  itemList: string[];
+  setState: React.Dispatch<React.SetStateAction<string>>;
+  select: string;
+  register?: UseFormRegister<ReviewModalHookFormType>;
+}
+
+export interface ReviewModalDropDownSkillProps {
+  name: string;
+  itemList: ISkillType[];
+  select: ISkillType[];
+  setState: React.Dispatch<React.SetStateAction<ISkillType[]>>;
 }
