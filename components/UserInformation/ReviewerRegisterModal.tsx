@@ -1,93 +1,78 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import { toast } from 'react-hot-toast';
-import { registerUpdate, reviewerGet, reviewerRegister } from '../../pages/api/userInfo';
-import {
-  IHookFormType,
-  IModalPropsType,
-  IRegister,
-  IRegisterMutationProps,
-  IReviewSubmitType,
-} from './informationType';
+import { reviewerGet } from '../../pages/api/userInfo';
+import { IModalPropsType, IRegister, ISkillType, ReviewModalHookFormType } from './informationType';
 import cancel from '../../styles/images/cancel.svg';
 import Loading from '../Loading';
-import HookFormDropDown from './HookFormDropDown';
 import { useForm } from 'react-hook-form';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import ReviewModalDropDownSelect from './ReviewModalDropDownSelect';
+import ReviewModalDropDownSkill from './ReviewModalDropDownSkill';
+import { useReviewerRegisterMutate, useReviewerUpdateMutate } from './getUpdateQuery';
+import { useRecoilValue } from 'recoil';
+import { userState } from '../../atoms/userState';
 
 function ReviewerRegisterModal({ setModal }: IModalPropsType) {
-  const queryClient = useQueryClient();
   const { data, isLoading } = useQuery<IRegister>({
     queryKey: ['reviewer'],
     queryFn: () => reviewerGet(),
     staleTime: 1000 * 20,
-  });
-
-  const { mutate } = useMutation({
-    mutationFn: ({ register, mutationFnCb }: IRegisterMutationProps) => {
-      return mutationFnCb(register);
-    },
-    onSuccess: () => {
-      toast.success('정보가 업데이트 되었습니다');
-      setModal(false);
-      queryClient.invalidateQueries(['reviewer']);
-    },
     onError: () => {
-      toast.error('오류가 발생했습니다.');
+      toast.error('네트워크 문제가 발생했습니다.다시 시도 부탁드립니다.');
     },
   });
 
-  const { register, setValue, watch, handleSubmit } = useForm<IHookFormType>({
+  const userRecoil = useRecoilValue(userState);
+  const { mutate: mutateRegister } = useReviewerRegisterMutate({ setModal });
+  const { mutate: mutateUpdate } = useReviewerUpdateMutate({ setModal });
+
+  const [selectJob, setSelectJob] = useState<string>('');
+  const [selectCareer, setSelectCareer] = useState<string>('');
+  const [selectTech, setSelectTech] = useState<ISkillType[]>([]);
+  const { register, setValue, handleSubmit } = useForm<ReviewModalHookFormType>({
     defaultValues: {
-      job: '',
-      career: '',
       etc: '',
       introduce: '',
-      techStack: [],
     },
   });
 
   useEffect(() => {
     if (data) {
-      setValue('job', data.job);
-      setValue('career', data.career);
+      setSelectJob(data.job);
+      setSelectCareer(data.career);
+      setSelectTech(data.techStack);
       setValue('introduce', data.introduce);
-      setValue('techStack', data.techStack);
     }
   }, [data]);
-
-  useEffect(() => {
-    register('job', { required: true });
-    register('career', { required: true });
-    register('introduce', { required: true });
-    register('techStack', { required: true });
-  }, []);
-
-  const reviewerSubmit = ({ job, career, introduce, techStack, etc, mutationFn }: IReviewSubmitType) => {
-    mutate({
-      register: {
-        job: job === '기타' ? etc : job,
-        career: career,
-        techStack: techStack.map((el) => el.id),
-        introduce: introduce,
-      },
-      mutationFnCb: mutationFn,
-    });
-  };
 
   const submitValidationHandler = () => {
     toast.error('전부 필수 내용입니다.');
   };
 
-  const submitHandler = ({ job, career, etc, introduce, techStack }: IHookFormType) => {
-    if (job === '기타' && etc === '') {
-      toast.error('전부 필수 내용입니다.');
-    } else {
-      if (data && data.job) {
-        reviewerSubmit({ job, career, etc, introduce, techStack, mutationFn: registerUpdate });
-      } else {
-        reviewerSubmit({ job, career, etc, introduce, techStack, mutationFn: reviewerRegister });
-      }
+  const submitHandler = ({ etc, introduce }: ReviewModalHookFormType) => {
+    if (!(selectJob && selectCareer && selectTech.length)) {
+      return toast.error('전부 필수 내용입니다.');
+    }
+    if (selectJob === '기타' && etc === '') {
+      return toast.error('전부 필수 내용입니다.');
+    }
+
+    if (userRecoil && userRecoil.reviewerRegister) {
+      return mutateUpdate({
+        job: selectJob === '기타' ? etc : selectJob,
+        career: selectCareer,
+        introduce,
+        techStack: selectTech.map((el) => el.id),
+      });
+    }
+    if (userRecoil && !userRecoil.reviewerRegister) {
+      return mutateRegister({
+        job: selectJob === '기타' ? etc : selectJob,
+        career: selectCareer,
+        introduce,
+        techStack: selectTech.map((el) => el.id),
+      });
     }
   };
 
@@ -110,42 +95,36 @@ function ReviewerRegisterModal({ setModal }: IModalPropsType) {
               </div>
             </div>
             <div className="overflow-y-auto flex flex-col h-full space-y-6">
-              <HookFormDropDown
-                dropList={data.positionList}
+              <ReviewModalDropDownSelect
                 name="직무"
-                ment="직무를 선택해주세요"
-                setValue={setValue}
-                regiId="job"
-                watch={watch}
+                itemList={data.positionList}
+                select={selectJob}
+                setState={setSelectJob}
                 register={register}
               />
-              <HookFormDropDown
-                dropList={data.careerList}
+              <ReviewModalDropDownSelect
                 name="경력"
-                ment="경력을 선택해주세요"
-                setValue={setValue}
-                regiId="career"
-                watch={watch}
+                itemList={data.careerList}
+                select={selectCareer}
+                setState={setSelectCareer}
               />
-              <HookFormDropDown
-                dropList={data.techList}
+              <ReviewModalDropDownSkill
                 name="기술 스택"
-                ment="스킬을 선택해주세요"
-                setValue={setValue}
-                regiId="techStack"
-                watch={watch}
+                itemList={data.techList}
+                select={selectTech}
+                setState={setSelectTech}
               />
               <div>
                 <span className="w-full flex flex-col items-start">소개글</span>
                 <textarea
                   className="p-2 w-full h-20 border-solid border-2 rounded-radius-m outline-none"
-                  {...register('introduce')}
+                  {...register('introduce', { required: true })}
                 />
               </div>
             </div>
             <div className="text-center flex justify-center">
               <button className="w-full flex justify-center items-center bg-c-black text-c-white h-10 rounded-radius-m">
-                {data.job ? '리뷰어 수정' : '리뷰어 등록'}
+                {userRecoil?.reviewerRegister ? '리뷰어 수정' : '리뷰어 등록'}
               </button>
             </div>
           </form>
