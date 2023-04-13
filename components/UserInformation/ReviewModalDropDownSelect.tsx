@@ -24,10 +24,10 @@ function ReviewModalDropDownSelect({ name, select, setState, itemList, register 
           className={clsx('w-full border-2 rounded-radius-m mt-0.5 overflow-y-auto h-44', {
             ['animate-down-animation']: true,
           })}>
-          {itemList?.map((el, idx) => {
+          {itemList?.map((el) => {
             return (
               <li
-                key={idx}
+                key={el}
                 onClick={() => selectReviewerInformationHandler(el)}
                 className="p-2 cursor-pointer hover:bg-gray100">
                 {el}
