@@ -1,6 +1,5 @@
 import { RefObject } from 'react';
 import { UseFormSetValue, UseFormTrigger, UseFormSetError, UseFormGetValues } from 'react-hook-form';
-import { ReactNode } from 'react';
 import { ParsedUrlQuery } from 'querystring';
 import { NextApiRequestCookies } from 'next/dist/server/api-utils';
 import ReactQuill from 'react-quill';
@@ -49,10 +48,6 @@ export interface IRegisterType {
   trigger: UseFormTrigger<IReviewRegisterType>;
   editorRef: RefObject<ReactQuill>;
   getValue: UseFormGetValues<IReviewRegisterType>;
-}
-
-export interface IMentType {
-  children: ReactNode;
 }
 
 export interface ILinkUserIdType extends ParsedUrlQuery {
