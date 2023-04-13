@@ -35,12 +35,12 @@ export interface IUserUpdateType {
   email: string;
 }
 
-export interface UserType extends IUserUpdateType {
+export interface IUserType extends IUserUpdateType {
   imageUrl: string;
   profileUrl: string;
   isReviewer: boolean;
 }
-export interface UserInformationType extends UserType {
+export interface IUserInformationType extends IUserType {
   reviewerRegister: boolean;
 }
 
@@ -52,31 +52,31 @@ export interface IRegisterListOption {
 
 export interface IRegister extends IReviewerRegisterDataType, IRegisterListOption {}
 
-export interface UserPageProps {
-  data: UserInformationType;
-  setUser: SetterOrUpdater<UserInformationType | null>;
+export interface IUserPageProps {
+  data: IUserInformationType;
+  setUser: SetterOrUpdater<IUserInformationType | null>;
 }
 
-export interface ReviewModalHookFormType {
+export interface IReviewModalHookFormType {
   etc: string;
   introduce: string;
 }
 
-export interface ReviewModalDropDownSelectProps {
+export interface IReviewModalDropDownSelectProps {
   name: string;
   itemList: string[];
   setState: React.Dispatch<React.SetStateAction<string>>;
   select: string;
-  register?: UseFormRegister<ReviewModalHookFormType>;
+  register?: UseFormRegister<IReviewModalHookFormType>;
 }
 
-export interface ReviewModalDropDownSkillProps {
+export interface IReviewModalDropDownSkillProps {
   name: string;
   itemList: ISkillType[];
   select: ISkillType[];
   setState: React.Dispatch<React.SetStateAction<ISkillType[]>>;
 }
 
-export type useReviewerQueryType = Pick<IModalPropsType, 'userName'>;
+export type ReviewerQueryType = Pick<IModalPropsType, 'userName'>;
 
-export type useReviewerMutationType = Pick<IModalPropsType, 'setModal'>;
+export type ReviewerMutationType = Pick<IModalPropsType, 'setModal'>;

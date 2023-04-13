@@ -2,12 +2,12 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import cancel from '../../styles/images/cancel.svg';
 import { useState } from 'react';
-import { ISkillType, ReviewModalDropDownSkillProps } from './informationType';
+import { ISkillType, IReviewModalDropDownSkillProps } from './informationType';
 import { toast } from 'react-hot-toast';
 
 const MAXSKILL = 3;
 
-function ReviewModalDropDownSkill({ name, select, itemList, setState }: ReviewModalDropDownSkillProps) {
+function ReviewModalDropDownSkill({ name, select, itemList, setState }: IReviewModalDropDownSkillProps) {
   const [drop, setDrop] = useState<boolean>(false);
 
   const deleteSkill = (delSkill: string) => {
@@ -29,10 +29,10 @@ function ReviewModalDropDownSkill({ name, select, itemList, setState }: ReviewMo
 
   return (
     <div>
-      <span className="w-full flex flex-col items-start cursor-default">{name}</span>
+      <span className="flex flex-col items-start w-full cursor-default">{name}</span>
       <div
         onClick={() => setDrop((prev) => !prev)}
-        className="text-neutral300 p-2 h-10 w-full border-solid border-2 rounded-radius-m cursor-pointer">
+        className="w-full h-10 p-2 border-2 border-solid cursor-pointer text-neutral300 rounded-radius-m">
         {`${name}을 선택해주세요.`}
       </div>
       {drop && (
@@ -52,12 +52,12 @@ function ReviewModalDropDownSkill({ name, select, itemList, setState }: ReviewMo
       <div className="p-2 h-10 w-full border-solid border-2 rounded-radius-m mt-2.5 flex">
         {select?.map((el) => {
           return (
-            <span className="mr-3 flex items-center" key={el.id}>
+            <span className="flex items-center mr-3" key={el.id}>
               {el.skill}
               <Image
                 src={cancel}
                 alt="except"
-                className="cursor-pointer w-2 h-2 ml-1"
+                className="w-2 h-2 ml-1 cursor-pointer"
                 onClick={() => deleteSkill(el.skill)}
               />
             </span>

@@ -2,13 +2,13 @@ import clsx from 'clsx';
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { userInfoUpdate } from '../../pages/api/userInfo';
-import { UserPageProps } from './informationType';
+import { IUserPageProps } from './informationType';
 import ReviewerRegisterModal from './ReviewerRegisterModal';
 import UserInput from './UserInput';
 import { reviewerStatusUpdate } from '../../pages/api/userInfo';
 import Loading from '../Loading';
 
-const InformationForm = ({ data, setUser }: UserPageProps) => {
+const InformationForm = ({ data, setUser }: IUserPageProps) => {
   const [userName, setUserName] = useState<string>(data.username);
   const [email, setEmail] = useState<string>(data.email);
   const [profileUrl, setProfileUrl] = useState<string>(data.profileUrl);

@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import { useState } from 'react';
-import { ReviewModalDropDownSelectProps } from './informationType';
+import { IReviewModalDropDownSelectProps } from './informationType';
 
-function ReviewModalDropDownSelect({ name, select, setState, itemList, register }: ReviewModalDropDownSelectProps) {
+function ReviewModalDropDownSelect({ name, select, setState, itemList, register }: IReviewModalDropDownSelectProps) {
   const [drop, setDrop] = useState<boolean>(false);
 
   const selectReviewerInformationHandler = (selectData: string) => {
@@ -12,10 +12,10 @@ function ReviewModalDropDownSelect({ name, select, setState, itemList, register 
 
   return (
     <div>
-      <span className="w-full flex flex-col items-start cursor-default">{name}</span>
+      <span className="flex flex-col items-start w-full cursor-default">{name}</span>
       <div
         onClick={() => setDrop((prev) => !prev)}
-        className="text-c-black p-2 h-10 w-full border-solid border-2 rounded-radius-m cursor-pointer">
+        className="w-full h-10 p-2 border-2 border-solid cursor-pointer text-c-black rounded-radius-m">
         {select ? select : `자신의 ${name}을 선택해주세요.`}
       </div>
 
@@ -38,7 +38,7 @@ function ReviewModalDropDownSelect({ name, select, setState, itemList, register 
       )}
       {select === '기타' && register && (
         <div className="p-2 h-10 w-full border-solid border-2 rounded-radius-m mt-2.5">
-          <input className="focus:outline-none w-full" type="text" {...register('etc')} />
+          <input className="w-full focus:outline-none" type="text" {...register('etc')} />
         </div>
       )}
     </div>

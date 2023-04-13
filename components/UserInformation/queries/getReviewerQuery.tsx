@@ -1,15 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 import { registerUpdate, reviewerGet, reviewerRegister } from '../../../pages/api/userInfo';
-import {
-  IRegister,
-  IReviewerRegisterUpdateType,
-  useReviewerMutationType,
-  useReviewerQueryType,
-} from '../informationType';
+import { IRegister, IReviewerRegisterUpdateType, ReviewerMutationType, ReviewerQueryType } from '../informationType';
 
 export const REVIEWER = 'reviewer';
-export function useReviewerGetQuery({ userName }: useReviewerQueryType) {
+export function useReviewerGetQuery({ userName }: ReviewerQueryType) {
   return useQuery<IRegister>({
     queryKey: [REVIEWER, userName],
     queryFn: () => reviewerGet(),
@@ -20,7 +15,7 @@ export function useReviewerGetQuery({ userName }: useReviewerQueryType) {
   });
 }
 
-export function useReviewerRegisterMutate({ setModal }: useReviewerMutationType) {
+export function useReviewerRegisterMutate({ setModal }: ReviewerMutationType) {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -38,7 +33,7 @@ export function useReviewerRegisterMutate({ setModal }: useReviewerMutationType)
   });
 }
 
-export function useReviewerUpdateMutate({ setModal }: useReviewerMutationType) {
+export function useReviewerUpdateMutate({ setModal }: ReviewerMutationType) {
   const queryClient = useQueryClient();
 
   return useMutation({

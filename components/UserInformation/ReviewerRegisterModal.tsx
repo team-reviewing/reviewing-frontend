@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { toast } from 'react-hot-toast';
-import { IModalPropsType, ISkillType, ReviewModalHookFormType } from './informationType';
+import { IModalPropsType, ISkillType, IReviewModalHookFormType } from './informationType';
 import cancel from '../../styles/images/cancel.svg';
 import Loading from '../Loading';
 import { useForm } from 'react-hook-form';
@@ -22,7 +22,7 @@ function ReviewerRegisterModal({ userName, setModal }: IModalPropsType) {
   const [selectJob, setSelectJob] = useState<string>('');
   const [selectCareer, setSelectCareer] = useState<string>('');
   const [selectTech, setSelectTech] = useState<ISkillType[]>([]);
-  const { register, setValue, handleSubmit } = useForm<ReviewModalHookFormType>({
+  const { register, setValue, handleSubmit } = useForm<IReviewModalHookFormType>({
     defaultValues: {
       etc: '',
       introduce: '',
@@ -42,7 +42,7 @@ function ReviewerRegisterModal({ userName, setModal }: IModalPropsType) {
     toast.error('전부 필수 내용입니다.');
   };
 
-  const submitHandler = ({ etc, introduce }: ReviewModalHookFormType) => {
+  const submitHandler = ({ etc, introduce }: IReviewModalHookFormType) => {
     if (!(selectJob && selectCareer && selectTech.length)) {
       return toast.error('전부 필수 내용입니다.');
     }
