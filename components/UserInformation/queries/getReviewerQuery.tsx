@@ -1,12 +1,12 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 import { registerUpdate, reviewerGet, reviewerRegister } from '../../../pages/api/userInfo';
-import { IRegister, IReviewerRegisterUpdateType, ReviewerMutationType, ReviewerQueryType } from '../informationType';
+import { IRegister, IReviewerRegisterUpdateType, ReviewerMutationType } from '../informationType';
 
 export const REVIEWER = 'reviewer';
-export function useReviewerGetQuery({ userName }: ReviewerQueryType) {
+export function useReviewerGetQuery() {
   return useQuery<IRegister>({
-    queryKey: [REVIEWER, userName],
+    queryKey: [REVIEWER],
     queryFn: () => reviewerGet(),
     staleTime: 1000 * 20,
     onError: () => {

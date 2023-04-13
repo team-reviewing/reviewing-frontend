@@ -11,8 +11,8 @@ import { useReviewerGetQuery, useReviewerRegisterMutate, useReviewerUpdateMutate
 import { useRecoilValue } from 'recoil';
 import { userState } from '../../atoms/userState';
 
-function ReviewerRegisterModal({ userName, setModal }: IModalPropsType) {
-  const { data, isLoading } = useReviewerGetQuery({ userName });
+function ReviewerRegisterModal({ setModal }: IModalPropsType) {
+  const { data, isLoading } = useReviewerGetQuery();
 
   const { mutate: mutateRegister } = useReviewerRegisterMutate({ setModal });
   const { mutate: mutateUpdate } = useReviewerUpdateMutate({ setModal });

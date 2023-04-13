@@ -102,7 +102,7 @@ const InformationForm = ({ data, setUser }: IUserPageProps) => {
           </button>
         </div>
       </div>
-      {modal && <ReviewerRegisterModal setModal={setModal} userName={userName} />}
+      {modal && <ReviewerRegisterModal setModal={setModal} />}
     </div>
   );
 };
