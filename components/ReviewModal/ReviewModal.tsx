@@ -1,9 +1,9 @@
 import dynamic from 'next/dynamic';
-import Loading from '../Loading';
+import Loading from '../Commons/Loading';
 import cancel from '../../styles/images/cancel.svg';
 import Image from 'next/image';
 import ReviewSection from './ReviewSection';
-import ButtonWrapper from '../ButtonWrapper';
+import ButtonWrapper from '../Commons/ButtonWrapper';
 import { useQuery } from '@tanstack/react-query';
 import { getReviewDetailInfo } from '../../pages/api/inquire';
 import { IReviewModalApiDetailType, IReviewModalPropsType } from './reviewModalType';
@@ -30,15 +30,15 @@ function ReviewModal({ reviewId, reviewerId, userImage, username, role, closeMod
   };
 
   return (
-    <div className="fixed flex inset-0 z-5 flex-col items-center justify-center">
+    <div className="fixed inset-0 flex flex-col items-center justify-center z-5">
       <div className="absolute inset-0 bg-b-modal" onClick={closeModalHandler} />
       <div
         className="z-20 bg-c-white flex relative flex-col p-7 rounded-radius-m h-[50rem] min-w-[36rem] w-[36rem]
                   msm:w-full msm:min-w-0 msm:fixed msm:bottom-0 msm:rounded-b-radius-none msm:animate-up-animation">
-        <div className="w-full h-full flex flex-col">
+        <div className="flex flex-col w-full h-full">
           <div className="flex justify-between">
             <div>
-              <h2 className="font-bold text-lg ">리뷰 신청 내용</h2>
+              <h2 className="text-lg font-bold ">리뷰 신청 내용</h2>
             </div>
             <div className="flex">
               <Image
@@ -51,32 +51,32 @@ function ReviewModal({ reviewId, reviewerId, userImage, username, role, closeMod
               />
             </div>
           </div>
-          <div className="flex-1 overflow-y-auto flex flex-col h-full">
+          <div className="flex flex-col flex-1 h-full overflow-y-auto">
             <ReviewSection option="flex">
               <Image src={userImage} alt="registerImage" className="w-6 h-6 rounded-radius-50%" />
               <span className="ml-2">{username}</span>
             </ReviewSection>
             <ReviewSection>
-              <h2 className="font-medium text-base">리뷰 제목</h2>
+              <h2 className="text-base font-medium">리뷰 제목</h2>
               <p>{data?.title}</p>
             </ReviewSection>
             <ReviewSection option="modal">
-              <h2 className="font-medium text-base">리뷰 상세 내용</h2>
+              <h2 className="text-base font-medium">리뷰 상세 내용</h2>
               <QuillEditor modules={{ toolbar: false }} theme="snow" readOnly value={data?.content} />
             </ReviewSection>
-            <div className="mt-6 flex flex-col ">
-              <h2 className="font-medium text-base">Pull Request URL</h2>
+            <div className="flex flex-col mt-6 ">
+              <h2 className="text-base font-medium">Pull Request URL</h2>
               <a
-                className="inline-block whitespace-nowrap overflow-hidden text-ellipsis max-w-full"
+                className="inline-block max-w-full overflow-hidden whitespace-nowrap text-ellipsis"
                 target="_blank"
                 href="http://localhost:3000">
-                <span className="inline-block whitespace-nowrap overflow-hidden text-ellipsis max-w-full">
+                <span className="inline-block max-w-full overflow-hidden whitespace-nowrap text-ellipsis">
                   {data?.prUrl}
                 </span>
               </a>
             </div>
           </div>
-          <div className="text-center flex justify-center gap-2">
+          <div className="flex justify-center gap-2 text-center">
             {!role ? (
               <>
                 {data && (

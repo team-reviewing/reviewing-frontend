@@ -1,5 +1,5 @@
 import React from 'react';
-import Loading from '../Loading';
+import Loading from '../Commons/Loading';
 import useRedirectBefore from '../../useHooks/useRedirectBefore';
 
 function Template() {

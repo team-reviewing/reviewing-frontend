@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ReviewInquireBox from './ReviewInquireBox';
 import ReviewModeButtonGroup from './ReviewRoleButtonGroup';
 import { useGetRoleReviews } from './queries/getReviewsQuery';
-import Loading from '../Loading';
+import Loading from '../Commons/Loading';
 import useRedirectInduce from '../../useHooks/useRedirectInduce';
 
 function ReviewSearchForm() {
@@ -16,9 +16,9 @@ function ReviewSearchForm() {
   }
 
   return (
-    <div className="flex items-center justify-center flex-col">
+    <div className="flex flex-col items-center justify-center">
       <ReviewModeButtonGroup role={role} setRole={setRole} />
-      <div className="w-full flex justify-center items-center flex-col">
+      <div className="flex flex-col items-center justify-center w-full">
         {reviewRole.data?.reviews.map((review) => (
           <ReviewInquireBox
             key={review.id}

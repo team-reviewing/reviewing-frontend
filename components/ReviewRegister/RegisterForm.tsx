@@ -4,7 +4,7 @@ import ErrorMent from './ErrorMent';
 import { ILinkUserIdType, IReviewRegisterType } from './ReviewRegisterType';
 import { reviewModify, reviewRegister } from '../../pages/api/reviewRegister';
 import { useEffect, useRef, useState } from 'react';
-import Loading from '../Loading';
+import Loading from '../Commons/Loading';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import ReactQuill from 'react-quill';
@@ -72,9 +72,9 @@ function RegisterForm({ reviewerId, reviewerName, reviewId, title, content, prUr
   return (
     <>
       {loading && <Loading />}
-      <form className="flex flex-col p-3 gap-6" onSubmit={handleSubmit(reviewId ? onModifyHandler : onSubmitHandler)}>
+      <form className="flex flex-col gap-6 p-3" onSubmit={handleSubmit(reviewId ? onModifyHandler : onSubmitHandler)}>
         <div>
-          <p className="text-neutral400 text-lg">리뷰어 : {reviewerName}</p>
+          <p className="text-lg text-neutral400">리뷰어 : {reviewerName}</p>
         </div>
         <div>
           <div>
@@ -95,7 +95,7 @@ function RegisterForm({ reviewerId, reviewerName, reviewId, title, content, prUr
               })}
               placeholder="제목을 입력해주세요. 최대 50자입니다."
               maxLength={50}
-              className="p-2 w-full border-solid border-2 rounded-radius-m outline-none"
+              className="w-full p-2 border-2 border-solid outline-none rounded-radius-m"
               readOnly={reviewId ? true : false}
             />
             {errors.title && <ErrorMent>{errors.title.message}</ErrorMent>}
@@ -134,14 +134,14 @@ function RegisterForm({ reviewerId, reviewerName, reviewId, title, content, prUr
               id="pullRequestEmail"
               type="text"
               placeholder="Pull Request URL을 입력해주세요."
-              className="p-2 w-full border-solid border-2 rounded-radius-m outline-none"
+              className="w-full p-2 border-2 border-solid outline-none rounded-radius-m"
               readOnly={reviewId ? true : false}
             />
             {errors.prUrl && <ErrorMent>{errors.prUrl.message}</ErrorMent>}
           </div>
         </div>
         <div className="flex justify-end">
-          <button className="w-40 flex justify-center items-center bg-c-black text-c-white h-10 rounded-radius-m">
+          <button className="flex items-center justify-center w-40 h-10 bg-c-black text-c-white rounded-radius-m">
             요청
           </button>
         </div>

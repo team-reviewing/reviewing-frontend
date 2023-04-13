@@ -6,7 +6,7 @@ import { UserPageProps } from './informationType';
 import ReviewerRegisterModal from './ReviewerRegisterModal';
 import UserInput from './UserInput';
 import { reviewerStatusUpdate } from '../../pages/api/userInfo';
-import Loading from '../Loading';
+import Loading from '../Commons/Loading';
 
 const InformationForm = ({ data, setUser }: UserPageProps) => {
   const [userId, setUserId] = useState<string>(data.username);
@@ -86,13 +86,13 @@ const InformationForm = ({ data, setUser }: UserPageProps) => {
                 setModify((prev) => !prev);
               }
             }}
-            className="w-full flex justify-center items-center bg-c-black text-c-white h-10 rounded-radius-m">
+            className="flex items-center justify-center w-full h-10 bg-c-black text-c-white rounded-radius-m">
             {modify ? '수정 반영' : '정보 수정'}
           </button>
           <button
             onClick={() => setModal(true)}
             type="submit"
-            className="w-full flex justify-center items-center bg-c-black text-c-white h-10 rounded-radius-m">
+            className="flex items-center justify-center w-full h-10 bg-c-black text-c-white rounded-radius-m">
             리뷰어 정보
           </button>
         </div>

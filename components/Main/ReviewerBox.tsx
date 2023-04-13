@@ -4,7 +4,7 @@ import CategoryCard from './ReviewerCard';
 import { ICategoryBoxPropsType, IGetReivewersType } from './mainType';
 import { useInView } from 'react-intersection-observer';
 import useGetReviewers from './queries/getReviewersQuery';
-import Loading from '../Loading';
+import Loading from '../Commons/Loading';
 
 function ReviewerBox({ category, selectedTags }: ICategoryBoxPropsType) {
   const { ref, inView } = useInView();

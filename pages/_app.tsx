@@ -5,9 +5,9 @@ import { RecoilRoot, RecoilEnv } from 'recoil';
 import '../styles/globals.css';
 import 'react-quill/dist/quill.snow.css';
 import { Toaster } from 'react-hot-toast';
-import Header from '../components/Header';
+import Header from '../components/Commons/Header';
 import { useRouter } from 'next/router';
-import Carousel from '../components/Carousel';
+import Carousel from '../components/Commons/Carousel';
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
   require('../mocks');
