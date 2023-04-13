@@ -1,5 +1,5 @@
 import { ComponentProps } from 'react';
-import { StrictPropsWithChildren } from '../globalType';
+import { StrictPropsWithChildren } from '../../globalType';
 
 function ButtonWrapper({ children, className, onClick }: StrictPropsWithChildren<ComponentProps<'button'>>) {
   return (
