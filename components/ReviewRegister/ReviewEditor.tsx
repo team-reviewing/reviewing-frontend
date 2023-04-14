@@ -52,7 +52,7 @@ const formats = [
 
 const EDITORMAX = 500;
 
-function ReviewEditor({ setError, setValue, watch, trigger, editorRef }: IRegisterType) {
+function ReviewEditor({ setError, setValue, getValue, trigger, editorRef }: IRegisterType) {
   const modules = useMemo(() => editorModule, []);
 
   const editorContentChange = (content: string) => {
@@ -84,7 +84,7 @@ function ReviewEditor({ setError, setValue, watch, trigger, editorRef }: IRegist
     <div>
       <QuillEditor
         forwardedRef={editorRef}
-        value={watch('content')}
+        value={getValue('content')}
         onChange={(e) => editorContentChange(e)}
         placeholder="리뷰 받고싶은 내용을 입력해주세요. 최대 500글자까지 작성 가능합니다."
         modules={modules}

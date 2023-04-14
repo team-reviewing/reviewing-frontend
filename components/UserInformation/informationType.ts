@@ -1,4 +1,4 @@
-import { UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
+import { UseFormRegister } from 'react-hook-form';
 import { SetterOrUpdater } from 'recoil';
 
 export interface IRegisterInputType {
@@ -18,16 +18,6 @@ export interface ISkillType {
   skill: string;
 }
 
-export interface IReviewerDropDownPropsType {
-  name: string;
-  dropList: string[] | ISkillType[];
-  select: string | ISkillType[];
-  setSelect: React.Dispatch<React.SetStateAction<string | ISkillType[]>>;
-  etc?: string;
-  setEtc?: React.Dispatch<React.SetStateAction<string>>;
-  ment: string;
-}
-
 export interface IReviewerRegisterUpdateType {
   job: string;
   career: string;
@@ -44,12 +34,12 @@ export interface IUserUpdateType {
   email: string;
 }
 
-export interface UserType extends IUserUpdateType {
+export interface IUserType extends IUserUpdateType {
   imageUrl: string;
   profileUrl: string;
   isReviewer: boolean;
 }
-export interface UserInformationType extends UserType {
+export interface IUserInformationType extends IUserType {
   reviewerRegister: boolean;
 }
 
@@ -61,34 +51,29 @@ export interface IRegisterListOption {
 
 export interface IRegister extends IReviewerRegisterDataType, IRegisterListOption {}
 
-export interface IUserGetType {
-  userInfo: UserType;
+export interface IUserPageProps {
+  data: IUserInformationType;
+  setUser: SetterOrUpdater<IUserInformationType | null>;
 }
 
-export interface UserPageProps {
-  data: UserInformationType;
-  setUser: SetterOrUpdater<UserInformationType | null>;
-}
-
-export interface IRegisterMutationProps {
-  register: IReviewerRegisterUpdateType;
-  mutationFnCb: (regi: IReviewerRegisterUpdateType) => Promise<number>;
-}
-
-export interface IHookFormType extends IReviewerRegisterDataType {
+export interface IReviewModalHookFormType {
   etc: string;
+  introduce: string;
 }
 
-export interface IReviewSubmitType extends IHookFormType {
-  mutationFn: (regi: IReviewerRegisterUpdateType) => Promise<number>;
-}
-
-export interface IHookDropDownType {
+export interface IReviewModalDropDownSelectProps {
   name: string;
-  dropList: string[] | ISkillType[];
-  regiId: keyof IHookFormType;
-  ment: string;
-  setValue: UseFormSetValue<IHookFormType>;
-  watch: UseFormWatch<IHookFormType>;
-  register?: UseFormRegister<IHookFormType>;
+  itemList: string[];
+  setState: React.Dispatch<React.SetStateAction<string>>;
+  select: string;
+  register?: UseFormRegister<IReviewModalHookFormType>;
 }
+
+export interface IReviewModalDropDownSkillProps {
+  name: string;
+  itemList: ISkillType[];
+  select: ISkillType[];
+  setState: React.Dispatch<React.SetStateAction<ISkillType[]>>;
+}
+
+export type ReviewerMutationType = Pick<IModalPropsType, 'setModal'>;

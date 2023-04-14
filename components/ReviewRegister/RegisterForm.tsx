@@ -15,8 +15,8 @@ function RegisterForm({ reviewerId, reviewerName, reviewId, title, content, prUr
     register,
     handleSubmit,
     setValue,
-    watch,
     setError,
+    getValues,
     trigger,
     formState: { errors },
   } = useForm<IReviewRegisterType>({
@@ -109,9 +109,9 @@ function RegisterForm({ reviewerId, reviewerName, reviewId, title, content, prUr
             <ReviewEditor
               setValue={setValue}
               setError={setError}
-              watch={watch}
               trigger={trigger}
               editorRef={editorRef}
+              getValue={getValues}
             />
             {errors.content && <ErrorMent>{errors.content.message}</ErrorMent>}
           </div>

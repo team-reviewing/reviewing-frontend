@@ -4,11 +4,10 @@ import cancel from '../../styles/images/cancel.svg';
 import Image from 'next/image';
 import ReviewSection from './ReviewSection';
 import ButtonWrapper from '../Commons/ButtonWrapper';
-import { useQuery } from '@tanstack/react-query';
-import { getReviewDetailInfo } from '../../pages/api/inquire';
-import { IReviewModalApiDetailType, IReviewModalPropsType } from './reviewModalType';
+import { IReviewModalPropsType } from './reviewModalType';
 import ReviewModifyLink from './ReviewModifyLink';
 import { useAcceptReview, useRefuseReview } from '../ReviewListSearch/queries/getReviewsQuery';
+import { useReviewModalGetQuery } from './queries/getReviewModalQuery';
 
 const QuillEditor = dynamic(import('react-quill'), {
   ssr: false,
@@ -16,11 +15,7 @@ const QuillEditor = dynamic(import('react-quill'), {
 });
 
 function ReviewModal({ reviewId, reviewerId, userImage, username, role, closeModal }: IReviewModalPropsType) {
-  const { data } = useQuery<IReviewModalApiDetailType>({
-    queryKey: ['modalDetail', reviewId],
-    queryFn: () => getReviewDetailInfo({ reviewerId, reviewId }),
-    staleTime: 1000 * 20,
-  });
+  const { data } = useReviewModalGetQuery({ reviewId, reviewerId });
 
   const { mutate: mutateAccept } = useAcceptReview({ reviewerId: reviewerId, reviewId: reviewId });
   const { mutate: mutateRefuse } = useRefuseReview({ reviewerId: reviewerId, reviewId: reviewId });

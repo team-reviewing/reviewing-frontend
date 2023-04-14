@@ -27,9 +27,9 @@ const Header = () => {
   }, [ref]);
 
   return (
-    <div className="sticky w-full">
+    <div className="w-full">
       <header className="flex justify-center w-full h-24 text-4xl">
-        <div className="flex items-center justify-between w-full mx-16 max-w-7xl">
+        <div className="flex items-center justify-between w-full mx-8 max-w-7xl">
           <Link href="/">
             <span className="font-bold cursor-pointer">Logo</span>
           </Link>

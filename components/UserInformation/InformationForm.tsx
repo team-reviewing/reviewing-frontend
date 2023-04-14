@@ -2,14 +2,14 @@ import clsx from 'clsx';
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { userInfoUpdate } from '../../pages/api/userInfo';
-import { UserPageProps } from './informationType';
+import { IUserPageProps } from './informationType';
 import ReviewerRegisterModal from './ReviewerRegisterModal';
 import UserInput from './UserInput';
 import { reviewerStatusUpdate } from '../../pages/api/userInfo';
 import Loading from '../Commons/Loading';
 
-const InformationForm = ({ data, setUser }: UserPageProps) => {
-  const [userId, setUserId] = useState<string>(data.username);
+const InformationForm = ({ data, setUser }: IUserPageProps) => {
+  const [userName, setUserName] = useState<string>(data.username);
   const [email, setEmail] = useState<string>(data.email);
   const [profileUrl, setProfileUrl] = useState<string>(data.profileUrl);
   const [modal, setModal] = useState<boolean>(false);
@@ -20,7 +20,7 @@ const InformationForm = ({ data, setUser }: UserPageProps) => {
   const userUpdateHandler = async () => {
     setUpdateLoading((prev) => !prev);
     try {
-      await userInfoUpdate({ username: userId, email });
+      await userInfoUpdate({ username: userName, email });
       setUpdateLoading(false);
       setModify((prev) => !prev);
       toast.success('데이터가 업데이트 되었습니다.');
@@ -56,7 +56,12 @@ const InformationForm = ({ data, setUser }: UserPageProps) => {
   return (
     <div className="mt-6">
       <div className="space-y-5">
-        <UserInput name="활동명" value={userId} onChange={(e) => setUserId(e.currentTarget.value)} disabled={!modify} />
+        <UserInput
+          name="활동명"
+          value={userName}
+          onChange={(e) => setUserName(e.currentTarget.value)}
+          disabled={!modify}
+        />
         <UserInput name="이메일" value={email} onChange={(e) => setEmail(e.currentTarget.value)} disabled={!modify} />
         <UserInput name="Github Url" value={profileUrl} onChange={(e) => setProfileUrl(e.currentTarget.value)} />
       </div>

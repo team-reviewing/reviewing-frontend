@@ -1,7 +1,7 @@
-import { IMentType } from './ReviewRegisterType';
+import { StrictPropsWithChildren } from '../../globalType';
 
-function ErrorMent({ children }: IMentType) {
-  return <p className="text-red500">{children}</p>;
+function ErrorMent({ children }: StrictPropsWithChildren) {
+  return <p className="mt-2 text-red500">{children}</p>;
 }
 
 export default ErrorMent;
