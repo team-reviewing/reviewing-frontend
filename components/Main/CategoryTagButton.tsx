@@ -20,7 +20,7 @@ function CategoryTagButton({ tag, setSelectTags }: ICategoryTagButtonPropsType) 
 
   return (
     <button
-      className="bg-blue500 hover:bg-blue400 text-c-white font-bold py-2 px-4 rounded-radius-full hover:scale-110"
+      className="px-4 py-2 font-bold bg-blue500 hover:bg-blue400 text-c-white rounded-radius-full hover:scale-110"
       onClick={onClickTag}>
       {tag && tag.name}
     </button>

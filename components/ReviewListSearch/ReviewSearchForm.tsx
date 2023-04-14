@@ -16,9 +16,9 @@ function ReviewSearchForm() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex-cc-col">
       <ReviewModeButtonGroup role={role} setRole={setRole} />
-      <div className="flex flex-col items-center justify-center w-full">
+      <div className="w-full flex-cc-col">
         {reviewRole.data?.reviews.map((review) => (
           <ReviewInquireBox
             key={review.id}

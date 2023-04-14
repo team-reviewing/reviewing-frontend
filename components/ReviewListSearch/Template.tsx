@@ -6,7 +6,7 @@ function Template() {
   useSetLocalPath();
 
   return (
-    <div className="w-full h-full max-w-7xl">
+    <div className="wh-f max-w-7xl">
       <ReviewSearchForm />
     </div>
   );

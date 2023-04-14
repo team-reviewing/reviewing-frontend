@@ -141,9 +141,7 @@ function RegisterForm({ reviewerId, reviewerName, reviewId, title, content, prUr
           </div>
         </div>
         <div className="flex justify-end">
-          <button className="flex items-center justify-center w-40 h-10 bg-c-black text-c-white rounded-radius-m">
-            요청
-          </button>
+          <button className="w-40 h-10 flex-cc bg-c-black text-c-white rounded-radius-m">요청</button>
         </div>
       </form>
     </>

@@ -11,8 +11,8 @@ const InformationTemplate = () => {
   useRedirectInduce();
 
   return (
-    <div className="h-full w-full max-w-md">
-      <h2 className="text-center text-3xl msm:text-2xl">계정 정보</h2>
+    <div className="max-w-md wh-f">
+      <h2 className="text-3xl text-center msm:text-2xl">계정 정보</h2>
       {user && <InformationForm data={user} setUser={setUser} />}
     </div>
   );

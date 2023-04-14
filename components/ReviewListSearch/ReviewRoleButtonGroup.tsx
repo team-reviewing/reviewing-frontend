@@ -4,7 +4,7 @@ import { IReviewRoleType } from './ReviewListType';
 
 function ReviewModeButtonGroup({ role, setRole }: IReviewRoleType) {
   return (
-    <div className="flex justify-center rounded-radius-m text-lg mt-4" role="group">
+    <div className="flex justify-center mt-4 text-lg rounded-radius-m" role="group">
       <button
         onClick={() => {
           setRole(false);

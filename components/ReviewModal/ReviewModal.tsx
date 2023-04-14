@@ -25,12 +25,12 @@ function ReviewModal({ reviewId, reviewerId, userImage, username, role, closeMod
   };
 
   return (
-    <div className="fixed inset-0 flex flex-col items-center justify-center z-5">
-      <div className="absolute inset-0 bg-b-modal" onClick={closeModalHandler} />
+    <div className="fixed inset-0 flex-cc-col z-5">
+      <div className="modal_bg" onClick={closeModalHandler} />
       <div
         className="z-20 bg-c-white flex relative flex-col p-7 rounded-radius-m h-[50rem] min-w-[36rem] w-[36rem]
                   msm:w-full msm:min-w-0 msm:fixed msm:bottom-0 msm:rounded-b-radius-none msm:animate-up-animation">
-        <div className="flex flex-col w-full h-full">
+        <div className="flex flex-col wh-f">
           <div className="flex justify-between">
             <div>
               <h2 className="text-lg font-bold ">리뷰 신청 내용</h2>

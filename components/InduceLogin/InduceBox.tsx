@@ -25,9 +25,9 @@ function InduceBox() {
   return (
     <div className="flex flex-col w-full h-80 max-w-xl msm:max-w-full msm:fixed  msm:animate-up-animation msm:bottom-0 msm:h-[80%]">
       <div>
-        <h1 className="text-7xl font-bold text-c-white text-center">Review</h1>
+        <h1 className="font-bold text-center text-7xl text-c-white">Review</h1>
       </div>
-      <div className="flex-1 w-full flex h-80 justify-center items-center border-2 rounded-radius-m bg-c-white msm:min-w-0 msm:rounded-b-radius-none">
+      <div className="flex-1 w-full border-2 flex-cc h-80 rounded-radius-m bg-c-white msm:min-w-0 msm:rounded-b-radius-none">
         <div className="flex flex-col cursor-pointer" onClick={logInHandler}>
           <Image src={img} width={100} height={100} alt={'githubImage'} />
           <span className="mt-2 font-semibold">Github 로그인</span>
