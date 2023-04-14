@@ -8,6 +8,7 @@ import { Toaster } from 'react-hot-toast';
 import Header from '../components/Header';
 import { useRouter } from 'next/router';
 import Carousel from '../components/Carousel';
+import Head from 'next/head';
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
   require('../mocks');
@@ -29,6 +30,12 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={client}>
       <RecoilRoot>
+        <Head>
+          <title>리뷰어 리뷰이</title>
+          <meta charSet="UTF-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <meta name="description" content="개인 프로젝트의 코드리뷰를 받을 수 있는 리뷰어 리뷰이 사이트입니다" />
+        </Head>
         <Toaster />
         {router.pathname !== '/induceLogin' && (
           <>
