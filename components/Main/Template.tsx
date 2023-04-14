@@ -11,7 +11,7 @@ function Template({ categories }: ICategoriesType) {
   useSetLocalPath();
 
   return (
-    <div className="w-full h-full max-w-7xl">
+    <div className="w-full h-full max-w-7xl mx-8">
       {
         <>
           <FilterCategory

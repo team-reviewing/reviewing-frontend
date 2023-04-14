@@ -65,6 +65,8 @@ module.exports = {
         msm: { max: '639px' },
         mmd: { max: '757px' },
         mlg: { max: '1023px' },
+        mxl: { max: '1279px' },
+        m2xl: { max: '1535px' },
       },
       keyframes: {
         dropdown: {
