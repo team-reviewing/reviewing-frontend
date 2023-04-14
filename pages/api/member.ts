@@ -1,4 +1,4 @@
-import { IRegister, UserInformationType, UserType } from '../../components/UserInformation/informationType';
+import { IRegister, IUserInformationType, IUserType } from '../../components/UserInformation/informationType';
 import instance from './core';
 
 export const logIn = async (params: string | string[]) => {
@@ -17,10 +17,10 @@ export const logOutUser = async () => {
   });
 };
 
-export const logInUser = async (): Promise<UserInformationType> => {
-  const response = await instance.get<UserType>('/members/me');
+export const logInUser = async (): Promise<IUserInformationType> => {
+  const response = await instance.get<IUserType>('/members/me');
   const reviewInfo = await instance.get<IRegister>('/members/me/reviewer', { withCredentials: true });
-  const userInformation: UserInformationType = {
+  const userInformation: IUserInformationType = {
     ...response.data,
     reviewerRegister: reviewInfo.data.career ? true : false,
   };
