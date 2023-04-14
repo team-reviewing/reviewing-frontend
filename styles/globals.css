@@ -6,6 +6,9 @@
   #__next {
     @apply w-full h-full;
   }
+  body {
+    font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+  }
 }
 .quill > .ql-container {
   @apply h-96 rounded-b-md;
@@ -15,13 +18,30 @@
   @apply rounded-lg;
 }
 
-body {
-  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
-}
-
 @font-face {
   font-family: 'Spoqa Han Sans Neo';
   src: url('/fonts/SpoqaHanSansNeo-Regular.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
+}
+
+@layer components {
+  .wh-f {
+    @apply w-full h-full;
+  }
+  .flex-cc {
+    @apply flex items-center justify-center;
+  }
+
+  .flex-cc-col {
+    @apply flex flex-col items-center justify-center;
+  }
+
+  .nav_b_link {
+    @apply block px-4 py-2 hover:bg-gray100 dark:hover:bg-gray600 dark:hover:text-c-white;
+  }
+
+  .modal_bg {
+    @apply absolute inset-0 bg-b-modal;
+  }
 }
