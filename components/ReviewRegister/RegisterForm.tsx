@@ -4,7 +4,7 @@ import ErrorMent from './ErrorMent';
 import { ILinkUserIdType, IReviewRegisterType } from './ReviewRegisterType';
 import { reviewModify, reviewRegister } from '../../pages/api/reviewRegister';
 import { useEffect, useRef, useState } from 'react';
-import Loading from '../Loading';
+import Loading from '../Commons/Loading';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import ReactQuill from 'react-quill';
@@ -141,9 +141,7 @@ function RegisterForm({ reviewerId, reviewerName, reviewId, title, content, prUr
           </div>
         </div>
         <div className="flex justify-end">
-          <button className="flex items-center justify-center w-40 h-10 bg-c-black text-c-white rounded-radius-m">
-            요청
-          </button>
+          <button className="w-40 h-10 flex-cc bg-c-black text-c-white rounded-radius-m">요청</button>
         </div>
       </form>
     </>

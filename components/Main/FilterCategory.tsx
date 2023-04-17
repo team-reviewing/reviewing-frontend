@@ -22,7 +22,7 @@ function FilterCategory({ setCategory, categories, setSelectedTags, selectedTags
 
   return (
     <>
-      <div className="w-full flex flex-wrap font-bold border-b text-xl mb-3">
+      <div className="flex flex-wrap w-full mb-3 text-xl font-bold border-b">
         {categories &&
           categories.map((item: ICategoryType) => {
             return (

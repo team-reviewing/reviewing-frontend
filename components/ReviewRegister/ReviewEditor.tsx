@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic';
 import { useMemo } from 'react';
 import { editorModule, IQuillEditorType, IRegisterType } from './ReviewRegisterType';
 import ReactQuill from 'react-quill';
-import Loading from '../Loading';
+import Loading from '../Commons/Loading';
 
 const QuillEditor = dynamic(
   async () => {

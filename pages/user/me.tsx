@@ -2,7 +2,7 @@ import InformationTemplate from '../../components/UserInformation/InformationTem
 
 const UserPage = () => {
   return (
-    <div className="h-full flex justify-center mt-14 px-6">
+    <div className="flex justify-center h-full px-6 mt-14">
       <InformationTemplate />
     </div>
   );

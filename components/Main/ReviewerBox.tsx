@@ -4,7 +4,7 @@ import CategoryCard from './ReviewerCard';
 import { ICategoryBoxPropsType, IGetReivewersType } from './mainType';
 import { useInView } from 'react-intersection-observer';
 import useGetReviewers from './queries/getReviewersQuery';
-import Loading from '../Loading';
+import Loading from '../Commons/Loading';
 
 function ReviewerBox({ category, selectedTags }: ICategoryBoxPropsType) {
   const { ref, inView } = useInView();
@@ -31,7 +31,7 @@ function ReviewerBox({ category, selectedTags }: ICategoryBoxPropsType) {
   return (
     <>
       <div
-        className={clsx(`w-full h-full mt-6`, {
+        className={clsx(`wh-f mt-6`, {
           ['grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5']: !isInitialLoading,
         })}>
         {data &&

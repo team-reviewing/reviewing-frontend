@@ -12,7 +12,7 @@ function GithubLogInButton() {
     <button
       type="button"
       onClick={moveInduceHandler}
-      className="cursor-pointer font-bold text-lg text-center inline-flex items-center">
+      className="inline-flex items-center text-lg font-bold text-center cursor-pointer">
       로그인
     </button>
   );

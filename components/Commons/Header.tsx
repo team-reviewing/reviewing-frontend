@@ -2,11 +2,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import lena from 'styles/images/lena.jpg';
-import GithubLogInButton from './HeaderSub/GithubLogInButton';
-import HeaderDropDown from './HeaderSub/HeaderDropDown';
+import GithubLogInButton from '../HeaderSub/GithubLogInButton';
+import HeaderDropDown from '../HeaderSub/HeaderDropDown';
 import { useRecoilValue } from 'recoil';
-import { userState } from '../atoms/userState';
-import useLoginMaintain from '../useHooks/useLoginMaintain';
+import { userState } from '../../atoms/userState';
+import useLoginMaintain from '../../useHooks/useLoginMaintain';
 
 const Header = () => {
   const [dropdown, setDropdown] = useState<boolean>(false);
@@ -28,16 +28,16 @@ const Header = () => {
 
   return (
     <div className="w-full">
-      <header className="w-full h-24 flex justify-center text-4xl">
-        <div className="max-w-7xl mx-8 flex items-center justify-between w-full">
+      <header className="flex justify-center w-full h-24 text-4xl">
+        <div className="flex items-center justify-between w-full mx-8 max-w-7xl">
           <Link href="/">
-            <span className="cursor-pointer font-bold">Logo</span>
+            <span className="font-bold cursor-pointer">Logo</span>
           </Link>
           {user ? (
             <>
               <div
                 ref={ref}
-                className="flex items-center cursor-pointer relative"
+                className="relative flex items-center cursor-pointer"
                 onClick={() => setDropdown((prev) => !prev)}>
                 <Image src={lena} alt="userProfile" width={45} height={45} className="rounded-radius-50%" />
                 {dropdown && <HeaderDropDown />}

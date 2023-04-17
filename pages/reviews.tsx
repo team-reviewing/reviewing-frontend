@@ -3,7 +3,7 @@ import Template from '../components/ReviewListSearch/Template';
 
 function reviews() {
   return (
-    <div className="w-full h-full flex justify-center">
+    <div className="flex justify-center wh-f">
       <Template />
     </div>
   );

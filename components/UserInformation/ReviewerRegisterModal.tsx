@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { toast } from 'react-hot-toast';
 import { IModalPropsType, ISkillType, IReviewModalHookFormType } from './informationType';
 import cancel from '../../styles/images/cancel.svg';
-import Loading from '../Loading';
+import Loading from '../Commons/Loading';
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import ReviewModalDropDownSelect from './ReviewModalDropDownSelect';
@@ -73,14 +73,12 @@ function ReviewerRegisterModal({ setModal }: IModalPropsType) {
   }
 
   return (
-    <div className="fixed inset-0 z-10 flex flex-col items-center justify-center">
-      <div className="absolute inset-0 bg-b-modal" onClick={() => setModal((prev) => !prev)} />
+    <div className="fixed inset-0 z-10 flex-cc-col">
+      <div className="modal_bg" onClick={() => setModal((prev) => !prev)} />
       <div className="relative p-7 w-[32rem] h-[38rem] flex rounded-radius-m z-20 bg-c-white msm:w-11/12">
         {data && (
-          <form
-            className="relative flex flex-col w-full h-full"
-            onSubmit={handleSubmit(submitHandler, submitValidationHandler)}>
-            <div className="flex items-center justify-center">
+          <form className="relative flex flex-col wh-f" onSubmit={handleSubmit(submitHandler, submitValidationHandler)}>
+            <div className="flex-cc">
               <div className="text-2xl msm:text-xl">리뷰어 정보</div>
               <div className="absolute right-0 cursor-pointer">
                 <Image width={15} height={15} src={cancel} alt="cancel" onClick={() => setModal((prev) => !prev)} />
@@ -115,7 +113,7 @@ function ReviewerRegisterModal({ setModal }: IModalPropsType) {
               </div>
             </div>
             <div className="flex justify-center text-center">
-              <button className="flex items-center justify-center w-full h-10 bg-c-black text-c-white rounded-radius-m">
+              <button className="w-full h-10 flex-cc bg-c-black text-c-white rounded-radius-m">
                 {userRecoil?.reviewerRegister ? '리뷰어 수정' : '리뷰어 등록'}
               </button>
             </div>
