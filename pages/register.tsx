@@ -4,9 +4,9 @@ import { ILinkUserIdType, IRegisterPropsType } from '../components/ReviewRegiste
 
 const Register = ({ reviewerInfo }: IRegisterPropsType) => {
   return (
-    <div className="h-full">
+    <main className="h-full">
       <ReviewRegisterTemplate reviewerInfo={reviewerInfo} />
-    </div>
+    </main>
   );
 };
 

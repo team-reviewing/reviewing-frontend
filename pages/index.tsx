@@ -8,9 +8,9 @@ import { handlers } from '../mocks/handlers';
 const Home = ({ categories }: ICategoriesType) => {
   return (
     <>
-      <div className="flex justify-center wh-f">
+      <main className="flex justify-center wh-f">
         <Template categories={categories} />
-      </div>
+      </main>
     </>
   );
 };

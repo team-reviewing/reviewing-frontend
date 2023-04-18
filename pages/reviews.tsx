@@ -3,9 +3,9 @@ import Template from '../components/ReviewListSearch/Template';
 
 function reviews() {
   return (
-    <div className="flex justify-center wh-f">
+    <main className="flex justify-center wh-f">
       <Template />
-    </div>
+    </main>
   );
 }
 

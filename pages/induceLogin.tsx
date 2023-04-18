@@ -3,9 +3,9 @@ import Template from '../components/InduceLogin/Template';
 
 function InduceLogin() {
   return (
-    <div className="w-full h-screen">
+    <main className="w-full h-screen">
       <Template />
-    </div>
+    </main>
   );
 }
 
