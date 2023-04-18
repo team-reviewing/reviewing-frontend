@@ -15,7 +15,7 @@ function HeaderDropDown() {
 
   return (
     <div className="z-100 bg-c-white divide-y divide-gray100 rounded-radius-m shadow w-40 dark:bg-gray700 absolute mt-3 left-2/4 m2xl:left-[10%] m2xl:w-32 -translate-x-2/4 top-12 text-center">
-      <div className="py-2 text-sm text-gray-700 dark:text-gray-200">
+      <nav className="py-2 text-sm text-gray-700 dark:text-gray-200">
         <ul className="font-semibold cursor-pointer">
           <li>
             <Link href="/user/me" className="nav_b_link">
@@ -35,7 +35,7 @@ function HeaderDropDown() {
             </button>
           </li>
         </ul>
-      </div>
+      </nav>
     </div>
   );
 }
