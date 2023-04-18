@@ -27,7 +27,7 @@ function ReviewModal({ reviewId, reviewerId, userImage, username, role, closeMod
   return (
     <div className="fixed inset-0 flex-cc-col z-5">
       <div className="modal_bg" onClick={closeModalHandler} />
-      <div
+      <section
         className="z-20 bg-c-white flex relative flex-col p-7 rounded-radius-m h-[50rem] min-w-[36rem] w-[36rem]
                   msm:w-full msm:min-w-0 msm:fixed msm:bottom-0 msm:rounded-b-radius-none msm:animate-up-animation">
         <div className="flex flex-col wh-f">
@@ -97,7 +97,7 @@ function ReviewModal({ reviewId, reviewerId, userImage, username, role, closeMod
             )}
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }
