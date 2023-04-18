@@ -4,6 +4,7 @@ import { ICategoriesType } from '../components/Main/mainType';
 import { getCategories } from './api/main';
 import { setupServer } from 'msw/node';
 import { handlers } from '../mocks/handlers';
+import HeadHoc from '../components/Commons/HeadHoc';
 
 const Home = ({ categories }: ICategoriesType) => {
   return (
@@ -29,4 +30,4 @@ export const getServerSideProps: GetServerSideProps = async () => {
   };
 };
 
-export default Home;
+export default HeadHoc({ desc: '메인 페이지', Component: Home });

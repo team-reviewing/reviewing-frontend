@@ -1,5 +1,6 @@
 import React from 'react';
 import Template from '../components/InduceLogin/Template';
+import HeadHoc from '../components/Commons/HeadHoc';
 
 function InduceLogin() {
   return (
@@ -9,4 +10,4 @@ function InduceLogin() {
   );
 }
 
-export default InduceLogin;
+export default HeadHoc({ desc: '로그인 페이지', Component: InduceLogin });
