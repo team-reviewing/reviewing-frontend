@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 function ReviewerCard({ reviewerProps }: { reviewerProps: IReviewerType }) {
   return (
-    <div className="px-3 py-3 transition-transform ease-in-out border-2 shadow-md flex-cc rounded-radius-m border-neutral300 hover:border-neutral400 hover:scale-105">
+    <article className="px-3 py-3 transition-transform ease-in-out border-2 shadow-md flex-cc rounded-radius-m border-neutral300 hover:border-neutral400 hover:scale-105">
       <div className="flex flex-col wh-f">
         <p className="w-full line-clamp-3 overflow-ellipsis whitespace-normal min-h-[3rem] leading-4 mb-1">
           {reviewerProps.introduction}
@@ -27,10 +27,10 @@ function ReviewerCard({ reviewerProps }: { reviewerProps: IReviewerType }) {
         </div>
 
         <div className="flex justify-between w-full mt-3">
-          <div className="flex-cc">
+          <figure className="flex-cc">
             <Image src={img} alt="img" width={30} height={30} className="rounded-radius-50% mr-3"></Image>
-            <span className="text-black">{reviewerProps.username}</span>
-          </div>
+            <figcaption className="text-black">{reviewerProps.username}</figcaption>
+          </figure>
           <Link
             href={{
               pathname: '/register',
@@ -44,7 +44,7 @@ function ReviewerCard({ reviewerProps }: { reviewerProps: IReviewerType }) {
           </Link>
         </div>
       </div>
-    </div>
+    </article>
   );
 }
 
