@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import clsx from 'clsx';
-import CategoryCard from './ReviewerCard';
+import ReviewerCard from './ReviewerCard';
 import { ICategoryBoxPropsType, IGetReivewersType } from './mainType';
 import { useInView } from 'react-intersection-observer';
 import useGetReviewers from './queries/getReviewersQuery';
@@ -36,7 +36,7 @@ function ReviewerBox({ category, selectedTags }: ICategoryBoxPropsType) {
         })}>
         {data &&
           data.pages.map(({ reviewers }) =>
-            reviewers.map((item) => <CategoryCard key={item.id} reviewerProps={item} />),
+            reviewers.map((item) => <ReviewerCard key={item.id} reviewerProps={item} />),
           )}
       </div>
       {isFetchingNextPage ? (
