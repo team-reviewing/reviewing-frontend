@@ -19,7 +19,7 @@ export const getReviewDetailInfo = async ({ reviewerId, reviewId }: IReviewDetai
 };
 
 export const acceptReview = async ({ reviewerId, reviewId }: IReviewDetailInfoApiPropsType) => {
-  await instance.patch(`/reviewers/${reviewerId}/reviews/${reviewId}/status`, null, { withCredentials: true });
+  await instance.patch(`/reviewers/${reviewerId}/reviews/${reviewId}/status-accepted`, null, { withCredentials: true });
 };
 
 export const refuseReview = async ({ reviewerId, reviewId }: IReviewDetailInfoApiPropsType) => {
