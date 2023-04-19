@@ -30,7 +30,7 @@ function ReviewerBox({ category, selectedTags }: ICategoryBoxPropsType) {
 
   return (
     <>
-      <div
+      <section
         className={clsx(`wh-f mt-6`, {
           ['grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5']: !isInitialLoading,
         })}>
@@ -38,7 +38,7 @@ function ReviewerBox({ category, selectedTags }: ICategoryBoxPropsType) {
           data.pages.map(({ reviewers }) =>
             reviewers.map((item) => <ReviewerCard key={item.id} reviewerProps={item} />),
           )}
-      </div>
+      </section>
       {isFetchingNextPage ? (
         <div className="w-full h-20">
           <Loading />
