@@ -1,6 +1,7 @@
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import ReviewRegisterTemplate from '../components/ReviewRegister/ReviewRegisterTemplate';
 import { ILinkUserIdType, IRegisterPropsType } from '../components/ReviewRegister/ReviewRegisterType';
+import HeadHoc from '../components/Commons/HeadHoc';
 
 const Register = ({ reviewerInfo }: IRegisterPropsType) => {
   return (
@@ -46,4 +47,4 @@ export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSideP
   };
 };
 
-export default Register;
+export default HeadHoc({ desc: '리뷰 등록 및 수정 페이지', Component: Register });

@@ -1,4 +1,5 @@
 import InformationTemplate from '../../components/UserInformation/InformationTemplate';
+import HeadHoc from '../../components/Commons/HeadHoc';
 
 const UserPage = () => {
   return (
@@ -8,4 +9,4 @@ const UserPage = () => {
   );
 };
 
-export default UserPage;
+export default HeadHoc({ desc: '개인 페이지', Component: UserPage });
