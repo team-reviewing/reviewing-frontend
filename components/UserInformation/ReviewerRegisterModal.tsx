@@ -75,7 +75,7 @@ function ReviewerRegisterModal({ setModal }: IModalPropsType) {
   return (
     <div className="fixed inset-0 z-10 flex-cc-col">
       <div className="modal_bg" onClick={() => setModal((prev) => !prev)} />
-      <div className="relative p-7 w-[32rem] h-[38rem] flex rounded-radius-m z-20 bg-c-white msm:w-11/12">
+      <section className="relative p-7 w-[32rem] h-[38rem] flex rounded-radius-m z-20 bg-c-white msm:w-11/12">
         {data && (
           <form className="relative flex flex-col wh-f" onSubmit={handleSubmit(submitHandler, submitValidationHandler)}>
             <div className="flex-cc">
@@ -119,7 +119,7 @@ function ReviewerRegisterModal({ setModal }: IModalPropsType) {
             </div>
           </form>
         )}
-      </div>
+      </section>
     </div>
   );
 }

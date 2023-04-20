@@ -16,11 +16,11 @@ function ReviewInquireBox({ id, title, reviewerId, member, role }: ReviewCommonW
       <div className="w-full mt-6 max-w-[80%] flex flex-col cursor-pointer" onClick={modalOpenHandler}>
         <p className="text-lg text-neutral400">{member.username}</p>
         <div className="flex transition-transform ease-in-out border-2 rounded-radius-m hover:scale-105">
-          <div className="flex items-center w-full">
+          <figure className="flex items-center w-full">
             {/*member.imageUrl*/}
             <Image src={lena} alt="userProfile" width={40} height={40} className="rounded-radius-50% m-3" />
             <span className="w-full ml-2 text-lg line-clamp-1">{title}</span>
-          </div>
+          </figure>
         </div>
       </div>
       {modal && (

@@ -4,9 +4,9 @@ import HeadHoc from '../components/Commons/HeadHoc';
 
 function Reviews() {
   return (
-    <div className="flex justify-center wh-f">
+    <main className="flex justify-center wh-f">
       <Template />
-    </div>
+    </main>
   );
 }
 

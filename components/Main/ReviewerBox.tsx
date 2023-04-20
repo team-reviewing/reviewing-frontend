@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import clsx from 'clsx';
-import CategoryCard from './ReviewerCard';
+import ReviewerCard from './ReviewerCard';
 import { ICategoryBoxPropsType, IGetReivewersType } from './mainType';
 import { useInView } from 'react-intersection-observer';
 import useGetReviewers from './queries/getReviewersQuery';
@@ -30,15 +30,15 @@ function ReviewerBox({ category, selectedTags }: ICategoryBoxPropsType) {
 
   return (
     <>
-      <div
+      <section
         className={clsx(`wh-f mt-6`, {
           ['grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5']: !isInitialLoading,
         })}>
         {data &&
           data.pages.map(({ reviewers }) =>
-            reviewers.map((item) => <CategoryCard key={item.id} reviewerProps={item} />),
+            reviewers.map((item) => <ReviewerCard key={item.id} reviewerProps={item} />),
           )}
-      </div>
+      </section>
       {isFetchingNextPage ? (
         <div className="w-full h-20">
           <Loading />

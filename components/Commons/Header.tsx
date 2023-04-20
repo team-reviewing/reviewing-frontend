@@ -27,28 +27,28 @@ const Header = () => {
   }, [ref]);
 
   return (
-    <div className="w-full">
-      <header className="flex justify-center w-full h-24 text-4xl">
+    <header className="w-full">
+      <div className="flex justify-center w-full h-24 text-4xl">
         <div className="flex items-center justify-between w-full mx-8 max-w-7xl">
           <Link href="/">
             <span className="font-bold cursor-pointer">Logo</span>
           </Link>
           {user ? (
             <>
-              <div
+              <figure
                 ref={ref}
                 className="relative flex items-center cursor-pointer"
                 onClick={() => setDropdown((prev) => !prev)}>
                 <Image src={lena} alt="userProfile" width={45} height={45} className="rounded-radius-50%" />
                 {dropdown && <HeaderDropDown />}
-              </div>
+              </figure>
             </>
           ) : (
             <GithubLogInButton />
           )}
         </div>
-      </header>
-    </div>
+      </div>
+    </header>
   );
 };
 

@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 function Carousel() {
   return (
-    <div className="w-full h-80 bg-cyan200">
+    <section className="w-full h-80 bg-cyan200">
       <div className="flex items-center justify-between h-full mx-auto max-w-7xl">
         <Image src={img} alt="person" />
         <div className="w-full text-4xl font-bold leading-10 tracking-widest">
@@ -15,7 +15,7 @@ function Carousel() {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 
