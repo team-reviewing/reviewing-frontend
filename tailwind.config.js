@@ -61,6 +61,9 @@ module.exports = {
         'radius-50%': '50%',
         'radius-full': '9999px',
       },
+      backgroundImage: {
+        carouselBg: "url('../styles/images/computer.jpg')",
+      },
       screens: {
         msm: { max: '639px' },
         mmd: { max: '757px' },
