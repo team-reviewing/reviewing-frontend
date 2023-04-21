@@ -3,12 +3,13 @@ import { getReviewsRole } from '../../../pages/api/inquire';
 import { IReviewDetailInfoApiPropsType } from '../../ReviewModal/reviewModalType';
 import { acceptReview, refuseReview } from '../../../pages/api/inquire';
 import { toast } from 'react-hot-toast';
+import { IGetReivewWithRoleType } from '../ReviewListType';
 
 const ROLE = 'REVIEWS';
 
-export function useGetRoleReviews(role: boolean) {
+export function useGetRoleReviews({ role, status }: IGetReivewWithRoleType) {
   const stringRole = !role ? 'reviewee' : 'reviewer';
-  return useQuery(['getReviews', ROLE, stringRole], () => getReviewsRole(role), {
+  return useQuery(['getReviews', ROLE, stringRole, status], () => getReviewsRole({ role: role, status: status }), {
     retry: false,
     staleTime: 1000 * 20,
   });
