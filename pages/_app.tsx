@@ -7,7 +7,7 @@ import 'react-quill/dist/quill.snow.css';
 import { Toaster } from 'react-hot-toast';
 import Header from '../components/Commons/Header';
 import { useRouter } from 'next/router';
-import Carousel from '../components/Commons/Carousel';
+import CarouselSwiper from '../components/Commons/CarouselSwiper';
 import Head from 'next/head';
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
@@ -40,7 +40,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         {router.pathname !== '/induceLogin' && (
           <>
             <Header />
-            <Carousel />
+            <CarouselSwiper />
           </>
         )}
         <Component {...pageProps} />
