@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import { IReviewRoleType } from './ReviewListType';
 
-function ReviewModeButtonGroup({ role, setRole }: IReviewRoleType) {
+function ReviewRoleButtonGroup({ role, setRole }: IReviewRoleType) {
   return (
     <div className="flex justify-center mt-4 text-lg rounded-radius-m" role="group">
       <button
@@ -16,7 +16,7 @@ function ReviewModeButtonGroup({ role, setRole }: IReviewRoleType) {
             ['bg-c-black']: role,
           },
         )}>
-        요청한 리뷰
+        리뷰이
       </button>
       <button
         onClick={() => {
@@ -29,10 +29,10 @@ function ReviewModeButtonGroup({ role, setRole }: IReviewRoleType) {
             ['bg-c-black']: !role,
           },
         )}>
-        요청 받은 리뷰
+        리뷰어
       </button>
     </div>
   );
 }
 
-export default ReviewModeButtonGroup;
+export default ReviewRoleButtonGroup;
