@@ -18,6 +18,7 @@ export interface IReviewModalApiDetailType {
   title: string;
   content: string;
   prUrl: string;
+  status: string;
 }
 
 export interface IReviewSectionProps {

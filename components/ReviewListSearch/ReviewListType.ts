@@ -2,6 +2,7 @@ export interface IReviewType {
   id: number;
   title: string;
   reviewerId: number;
+  status: string;
 }
 
 export interface IUserReviewType extends IReviewType {
@@ -24,3 +25,13 @@ export interface IReviewRoleType {
 }
 
 export type ReviewCommonWithRole<T> = T & Omit<IReviewRoleType, 'setRole'>;
+
+export interface IGetReivewWithRoleType {
+  role: boolean;
+  status: string;
+}
+
+export interface IStatusButtonGroupType {
+  status: string;
+  setStatus: React.Dispatch<React.SetStateAction<string>>;
+}
