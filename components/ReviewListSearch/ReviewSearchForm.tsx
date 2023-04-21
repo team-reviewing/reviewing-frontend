@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import ReviewInquireBox from './ReviewInquireBox';
-import ReviewModeButtonGroup from './ReviewRoleButtonGroup';
+import ReviewRoleButtonGroup from './ReviewRoleButtonGroup';
 import { useGetRoleReviews } from './queries/getReviewsQuery';
 import Loading from '../Commons/Loading';
 import useRedirectInduce from '../../useHooks/useRedirectInduce';
+import ReviewStatusButtonGroup from './ReviewStatusButtonGroup';
 
 function ReviewSearchForm() {
   const [role, setRole] = useState<boolean>(false);
-  const reviewRole = useGetRoleReviews(role);
+  const [reviewStatus, setReviewStatus] = useState<string>('WHOLE');
+  const reviewRole = useGetRoleReviews({ role: role, status: reviewStatus });
 
   useRedirectInduce();
 
@@ -17,7 +19,8 @@ function ReviewSearchForm() {
 
   return (
     <div className="flex-cc-col">
-      <ReviewModeButtonGroup role={role} setRole={setRole} />
+      <ReviewRoleButtonGroup role={role} setRole={setRole} />
+      <ReviewStatusButtonGroup status={reviewStatus} setStatus={setReviewStatus} />
       <div className="w-full flex-cc-col">
         {reviewRole.data?.reviews.map((review) => (
           <ReviewInquireBox
@@ -25,6 +28,7 @@ function ReviewSearchForm() {
             role={role}
             id={review.id}
             title={review.title}
+            status={review.status}
             member={review.member}
             reviewerId={review.reviewerId}
           />
