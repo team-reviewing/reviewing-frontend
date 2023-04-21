@@ -46,6 +46,9 @@ function ReviewModal({ reviewId, reviewerId, userImage, username, role, closeMod
               />
             </div>
           </div>
+          <div className="mt-6">
+            <span>{data?.status === 'CREATED' ? '요청' : data?.status === 'ACCEPTED' ? '수락' : '완료'}상태</span>
+          </div>
           <div className="flex flex-col flex-1 h-full overflow-y-auto">
             <ReviewSection option="flex">
               <Image src={userImage} alt="registerImage" className="w-6 h-6 rounded-radius-50%" />
@@ -76,23 +79,39 @@ function ReviewModal({ reviewId, reviewerId, userImage, username, role, closeMod
               <>
                 {data && (
                   <>
-                    <ReviewModifyLink
-                      reviewId={reviewId}
-                      reviewerId={reviewerId}
-                      title={data.title}
-                      content={data.content}
-                      prUrl={data.prUrl}
-                      username={username}
-                    />
-                    <ButtonWrapper>리뷰 취소</ButtonWrapper>
+                    {data.status === 'APPROVED' ? (
+                      '완료된 리뷰입니다.'
+                    ) : (
+                      <>
+                        <ReviewModifyLink
+                          reviewId={reviewId}
+                          reviewerId={reviewerId}
+                          title={data.title}
+                          content={data.content}
+                          prUrl={data.prUrl}
+                          username={username}
+                          status={data.status}
+                        />
+                        <ButtonWrapper>리뷰 취소</ButtonWrapper>
+                      </>
+                    )}
                   </>
                 )}
               </>
             ) : (
               <>
-                <ButtonWrapper onClick={() => mutateAccept()}>리뷰 수락</ButtonWrapper>
-                <ButtonWrapper onClick={() => mutateRefuse()}>리뷰 거절</ButtonWrapper>
-                <ButtonWrapper>리뷰 승인</ButtonWrapper>
+                {data && (
+                  <>
+                    {data.status === 'CREATED' && (
+                      <>
+                        <ButtonWrapper onClick={() => mutateAccept()}>리뷰 수락</ButtonWrapper>
+                        <ButtonWrapper onClick={() => mutateRefuse()}>리뷰 거절</ButtonWrapper>
+                      </>
+                    )}
+                    {data.status === 'ACCEPTED' && <ButtonWrapper>리뷰 승인</ButtonWrapper>}
+                    {data.status === 'APPROVED' && '완료된 리뷰입니다.'}
+                  </>
+                )}
               </>
             )}
           </div>
