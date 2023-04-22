@@ -4,7 +4,13 @@ import lena from 'styles/images/lena.jpg';
 import { IUserReviewType, ReviewCommonWithRole } from './ReviewListType';
 import ReviewModal from '../ReviewModal/ReviewModal';
 
-function ReviewInquireBox({ id, title, reviewerId, member, role }: ReviewCommonWithRole<IUserReviewType>) {
+function ReviewInquireBox({
+  id,
+  title,
+  reviewerId,
+  member,
+  role,
+}: ReviewCommonWithRole<Omit<IUserReviewType, 'status'>>) {
   const [modal, setModal] = useState<boolean>(false);
 
   const modalOpenHandler = () => {

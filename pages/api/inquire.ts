@@ -2,11 +2,14 @@ import { IReviewsType } from '../../components/ReviewListSearch/ReviewListType';
 import { IReviewDetailInfoApiPropsType, IReviewModalApiDetailType } from '../../components/ReviewModal/reviewModalType';
 import instance from './core';
 
-export const getReviewsRole = async (role: boolean) => {
-  const params = !role ? { role: 'reviewee' } : { role: 'reviewer' };
+export const getReviewsRole = async ({ role, status }: { role: boolean; status: string }) => {
+  const reviewRole = !role ? 'reviewee' : 'reviewer';
   const response = await instance.get<IReviewsType>('/reviews', {
     withCredentials: true,
-    params: params,
+    params: {
+      role: reviewRole,
+      ...(status !== 'WHOLE' && { status: status }),
+    },
   });
   return response.data;
 };

@@ -159,6 +159,7 @@ export const handlers = [
       ctx.json({
         id: 1,
         reviewerId: 1,
+        status: 'CREATED',
         title: '코드 리뷰 부탁드립니다!!',
         content: 'Spring 관련 개인 프로젝트를 진행하고 있는데 코드 리뷰를 받고 싶습니다.',
         prUrl: 'https://github.com/name/project/pull/1',
@@ -415,6 +416,7 @@ export const handlers = [
               id: 1,
               title: '요청한 리뷰 리스트 첫번째 목록',
               reviewerId: 1,
+              status: 'CREATED',
               member: {
                 id: 1,
                 username: '리뷰어 이름 1',
@@ -425,6 +427,7 @@ export const handlers = [
               id: 2,
               title: '요청한 리뷰 리스트 두번째 목록',
               reviewerId: 2,
+              status: 'ACCEPTED',
               member: {
                 id: 2,
                 username: '리뷰어 이름 2',
@@ -435,6 +438,7 @@ export const handlers = [
               id: 3,
               title: '요청한 리뷰 리스트 세번째 목록',
               reviewerId: 3,
+              status: 'APPROVED',
               member: {
                 id: 3,
                 username: '리뷰어 이름 3',
@@ -454,6 +458,7 @@ export const handlers = [
               id: 1,
               title: '요청받은 리뷰 리스트 첫번째 목록',
               reviewerId: 1,
+              status: 'CREATED',
               member: {
                 id: 1,
                 username: '리뷰이 이름 1',
@@ -464,6 +469,7 @@ export const handlers = [
               id: 2,
               title: '요청받은 리뷰 리스트 두번째 목록',
               reviewerId: 1,
+              status: 'ACCEPTED',
               member: {
                 id: 2,
                 username: '리뷰이 이름 2',
@@ -474,6 +480,7 @@ export const handlers = [
               id: 3,
               title: '요청받은 리뷰 리스트 세번째 목록',
               reviewerId: 1,
+              status: 'APPROVED',
               member: {
                 id: 3,
                 username: '리뷰이 이름 3',
