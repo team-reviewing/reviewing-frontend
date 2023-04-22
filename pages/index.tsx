@@ -9,7 +9,7 @@ import HeadHoc from '../components/Commons/HeadHoc';
 const Home = ({ categories }: ICategoriesType) => {
   return (
     <>
-      <main className="flex justify-center wh-f">
+      <main className="flex justify-center px-8 wh-f">
         <Template categories={categories} />
       </main>
     </>

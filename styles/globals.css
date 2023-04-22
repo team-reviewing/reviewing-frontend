@@ -18,6 +18,10 @@
   @apply rounded-lg;
 }
 
+.swiper-pagination-bullet-active {
+  @apply bg-c-white !important;
+}
+
 @font-face {
   font-family: 'Spoqa Han Sans Neo';
   src: url('/fonts/SpoqaHanSansNeo-Regular.woff2') format('woff2');
