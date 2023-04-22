@@ -502,4 +502,8 @@ export const handlers = [
   rest.delete('http://localhost:3000/reviewers/:reviewerId/reviews/:reviewId', (req, res, ctx) => {
     return res(ctx.status(204));
   }),
+
+  rest.patch('http://localhost:3000/reviewers/:reviewerId/reviews/:reviewId/status-approved', (req, res, ctx) => {
+    return res(ctx.status(204));
+  }),
 ];
