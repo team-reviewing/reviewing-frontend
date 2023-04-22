@@ -1,8 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { getReviewsRole } from '../../../pages/api/inquire';
+import { approveReview, getReviewsRole } from '../../../pages/api/inquire';
 import { acceptReview, refuseReview } from '../../../pages/api/inquire';
 import { toast } from 'react-hot-toast';
-import { IGetReivewWithRoleType, IStatusType } from '../ReviewListType';
+import { IGetReivewWithRoleType, IReviewModalMutateType } from '../ReviewListType';
 import { IAcceptRefuseQueryType } from '../../ReviewModal/reviewModalType';
 
 const ROLE = 'REVIEWS';
@@ -15,12 +15,18 @@ export function useGetRoleReviews({ role, status }: IGetReivewWithRoleType) {
   });
 }
 
-export function useAcceptReview({ reviewerId, reviewId, status }: IAcceptRefuseQueryType<IStatusType>) {
+export function useAcceptReview({
+  reviewerId,
+  reviewId,
+  status,
+  closeModal,
+}: IAcceptRefuseQueryType<IReviewModalMutateType>) {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: () => acceptReview({ reviewerId: reviewerId, reviewId: reviewId }),
     onSuccess: () => {
       toast.success('리뷰를 수락했습니다');
+      closeModal();
       queryClient.invalidateQueries(['getReviews', ROLE, 'reviewer', status]);
     },
     onError: () => {
@@ -29,16 +35,41 @@ export function useAcceptReview({ reviewerId, reviewId, status }: IAcceptRefuseQ
   });
 }
 
-export function useRefuseReview({ reviewerId, reviewId, status }: IAcceptRefuseQueryType<IStatusType>) {
+export function useRefuseReview({
+  reviewerId,
+  reviewId,
+  status,
+  closeModal,
+}: IAcceptRefuseQueryType<IReviewModalMutateType>) {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: () => refuseReview({ reviewerId: reviewerId, reviewId: reviewId }),
     onSuccess: () => {
       toast.success('리뷰를 거절했습니다');
+      closeModal();
       queryClient.invalidateQueries(['getReviews', ROLE, 'reviewer', status]);
     },
     onError: () => {
       toast.error('오류가 발생했습니다.');
+    },
+  });
+}
+export function useApproveReview({
+  reviewerId,
+  reviewId,
+  status,
+  closeModal,
+}: IAcceptRefuseQueryType<IReviewModalMutateType>) {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: () => approveReview({ reviewerId, reviewId }),
+    onSuccess: () => {
+      toast.success('리뷰를 완료했습니다.');
+      closeModal();
+      queryClient.invalidateQueries(['getReviews', ROLE, 'reviewer', status]);
+    },
+    onError: () => {
+      toast.error('완료 처리의 오류가 발생했습니다.');
     },
   });
 }

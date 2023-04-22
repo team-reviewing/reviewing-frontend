@@ -1,3 +1,7 @@
+export interface IReviewModalMutateType extends IStatusType {
+  closeModal: () => void;
+}
+
 export interface IStatusType {
   status: string;
 }
