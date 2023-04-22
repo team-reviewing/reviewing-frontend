@@ -17,8 +17,16 @@ const QuillEditor = dynamic(import('react-quill'), {
 function ReviewModal({ reviewId, reviewerId, userImage, username, role, closeModal }: IReviewModalPropsType) {
   const { data } = useReviewModalGetQuery({ reviewId, reviewerId });
 
-  const { mutate: mutateAccept } = useAcceptReview({ reviewerId: reviewerId, reviewId: reviewId });
-  const { mutate: mutateRefuse } = useRefuseReview({ reviewerId: reviewerId, reviewId: reviewId });
+  const { mutate: mutateAccept } = useAcceptReview({
+    reviewerId: reviewerId,
+    reviewId: reviewId,
+    status: data?.status as string,
+  });
+  const { mutate: mutateRefuse } = useRefuseReview({
+    reviewerId: reviewerId,
+    reviewId: reviewId,
+    status: data?.status as string,
+  });
 
   const closeModalHandler = () => {
     closeModal((prev) => !prev);
@@ -80,7 +88,7 @@ function ReviewModal({ reviewId, reviewerId, userImage, username, role, closeMod
                 {data && (
                   <>
                     {data.status === 'APPROVED' ? (
-                      '완료된 리뷰입니다.'
+                      <p>완료된 리뷰입니다</p>
                     ) : (
                       <>
                         <ReviewModifyLink
@@ -108,8 +116,8 @@ function ReviewModal({ reviewId, reviewerId, userImage, username, role, closeMod
                         <ButtonWrapper onClick={() => mutateRefuse()}>리뷰 거절</ButtonWrapper>
                       </>
                     )}
-                    {data.status === 'ACCEPTED' && <ButtonWrapper>리뷰 승인</ButtonWrapper>}
-                    {data.status === 'APPROVED' && '완료된 리뷰입니다.'}
+                    {data.status === 'ACCEPTED' && <ButtonWrapper>리뷰 완료</ButtonWrapper>}
+                    {data.status === 'APPROVED' && <p>완료된 리뷰입니다</p>}
                   </>
                 )}
               </>
