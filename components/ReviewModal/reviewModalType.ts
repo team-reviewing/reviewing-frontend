@@ -3,6 +3,8 @@ export interface IReviewDetailInfoApiPropsType {
   reviewId: number;
 }
 
+export type IAcceptRefuseQueryType<T> = IReviewDetailInfoApiPropsType & T;
+
 export interface IReviewModalPropsType {
   reviewId: number;
   reviewerId: number;

@@ -1,8 +1,11 @@
-export interface IReviewType {
+export interface IStatusType {
+  status: string;
+}
+
+export interface IReviewType extends IStatusType {
   id: number;
   title: string;
   reviewerId: number;
-  status: string;
 }
 
 export interface IUserReviewType extends IReviewType {
@@ -26,12 +29,10 @@ export interface IReviewRoleType {
 
 export type ReviewCommonWithRole<T> = T & Omit<IReviewRoleType, 'setRole'>;
 
-export interface IGetReivewWithRoleType {
+export interface IGetReivewWithRoleType extends IStatusType {
   role: boolean;
-  status: string;
 }
 
-export interface IStatusButtonGroupType {
-  status: string;
+export interface IStatusButtonGroupType extends IStatusType {
   setStatus: React.Dispatch<React.SetStateAction<string>>;
 }
