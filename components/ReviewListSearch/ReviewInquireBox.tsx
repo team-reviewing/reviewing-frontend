@@ -4,12 +4,17 @@ import lena from 'styles/images/lena.jpg';
 import { IUserReviewType, ReviewCommonWithRole } from './ReviewListType';
 import ReviewModal from '../ReviewModal/ReviewModal';
 
-function ReviewInquireBox({ id, title, reviewerId, status, member, role }: ReviewCommonWithRole<IUserReviewType>) {
+function ReviewInquireBox({
+  id,
+  title,
+  reviewerId,
+  member,
+  role,
+}: ReviewCommonWithRole<Omit<IUserReviewType, 'status'>>) {
   const [modal, setModal] = useState<boolean>(false);
 
   const modalOpenHandler = () => {
     setModal((prev) => !prev);
-    console.log(status); //제거 가능, status가 어디서 추가적으로 더 필요한지 ?
   };
 
   return (

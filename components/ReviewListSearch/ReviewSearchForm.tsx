@@ -28,7 +28,6 @@ function ReviewSearchForm() {
             role={role}
             id={review.id}
             title={review.title}
-            status={review.status}
             member={review.member}
             reviewerId={review.reviewerId}
           />
