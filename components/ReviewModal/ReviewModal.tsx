@@ -6,8 +6,11 @@ import ReviewSection from './ReviewSection';
 import ButtonWrapper from '../Commons/ButtonWrapper';
 import { IReviewModalPropsType } from './reviewModalType';
 import ReviewModifyLink from './ReviewModifyLink';
-import { useAcceptReview, useApproveReview, useRefuseReview } from '../ReviewListSearch/queries/getReviewsQuery';
+import { ROLE, useReviewMutation } from '../ReviewListSearch/queries/getReviewsQuery';
 import { useReviewModalGetQuery } from './queries/getReviewModalQuery';
+import { useQueryClient } from '@tanstack/react-query';
+import { toast } from 'react-hot-toast';
+import { acceptReview, approveReview, refuseReview } from '../../pages/api/inquire';
 
 const QuillEditor = dynamic(import('react-quill'), {
   ssr: false,
@@ -16,28 +19,29 @@ const QuillEditor = dynamic(import('react-quill'), {
 
 function ReviewModal({ reviewId, reviewerId, userImage, username, role, closeModal }: IReviewModalPropsType) {
   const { data } = useReviewModalGetQuery({ reviewId, reviewerId });
+  const queryClient = useQueryClient();
 
   const closeModalHandler = () => {
     closeModal((prev) => !prev);
   };
 
-  const { mutate: mutateAccept } = useAcceptReview({
-    reviewerId: reviewerId,
-    reviewId: reviewId,
-    status: data?.status as string,
-    closeModal: closeModalHandler,
+  const mutationSuccessFn = () => {
+    toast.success('처리가 완료됬습니다.');
+    queryClient.invalidateQueries(['getReviews', ROLE, 'reviewer', data?.status]);
+    closeModalHandler();
+  };
+
+  const { mutate: mutateAccept } = useReviewMutation({
+    mutationFn: () => acceptReview({ reviewId, reviewerId }),
+    onSuccess: mutationSuccessFn,
   });
-  const { mutate: mutateRefuse } = useRefuseReview({
-    reviewerId: reviewerId,
-    reviewId: reviewId,
-    status: data?.status as string,
-    closeModal: closeModalHandler,
+  const { mutate: mutateRefuse } = useReviewMutation({
+    mutationFn: () => refuseReview({ reviewId, reviewerId }),
+    onSuccess: mutationSuccessFn,
   });
-  const { mutate: mutateApprove } = useApproveReview({
-    reviewerId: reviewerId,
-    reviewId: reviewId,
-    status: data?.status as string,
-    closeModal: closeModalHandler,
+  const { mutate: mutateApprove } = useReviewMutation({
+    mutationFn: () => approveReview({ reviewerId, reviewId }),
+    onSuccess: mutationSuccessFn,
   });
 
   return (

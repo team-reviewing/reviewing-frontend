@@ -1,5 +1,6 @@
-export interface IReviewModalMutateType extends IStatusType {
-  closeModal: () => void;
+export interface IReviewModalMutateType {
+  mutationFn: () => Promise<void>;
+  onSuccess: () => void;
 }
 
 export interface IStatusType {
