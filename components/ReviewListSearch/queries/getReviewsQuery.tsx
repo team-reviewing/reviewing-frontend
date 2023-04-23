@@ -3,7 +3,7 @@ import { approveReview, getReviewsRole } from '../../../pages/api/inquire';
 import { acceptReview, refuseReview } from '../../../pages/api/inquire';
 import { toast } from 'react-hot-toast';
 import { IGetReivewWithRoleType, IReviewModalMutateType } from '../ReviewListType';
-import { IAcceptRefuseQueryType } from '../../ReviewModal/reviewModalType';
+import { IReviewModalQueryType } from '../../ReviewModal/reviewModalType';
 
 const ROLE = 'REVIEWS';
 
@@ -20,7 +20,7 @@ export function useAcceptReview({
   reviewId,
   status,
   closeModal,
-}: IAcceptRefuseQueryType<IReviewModalMutateType>) {
+}: IReviewModalQueryType<IReviewModalMutateType>) {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: () => acceptReview({ reviewerId: reviewerId, reviewId: reviewId }),
@@ -40,7 +40,7 @@ export function useRefuseReview({
   reviewId,
   status,
   closeModal,
-}: IAcceptRefuseQueryType<IReviewModalMutateType>) {
+}: IReviewModalQueryType<IReviewModalMutateType>) {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: () => refuseReview({ reviewerId: reviewerId, reviewId: reviewId }),
@@ -59,7 +59,7 @@ export function useApproveReview({
   reviewId,
   status,
   closeModal,
-}: IAcceptRefuseQueryType<IReviewModalMutateType>) {
+}: IReviewModalQueryType<IReviewModalMutateType>) {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: () => approveReview({ reviewerId, reviewId }),
