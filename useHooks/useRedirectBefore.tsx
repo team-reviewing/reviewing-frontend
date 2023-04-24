@@ -11,7 +11,7 @@ function useRedirectBefore() {
       console.log(router.query.code);
       logIn(router.query.code).then((res) => {
         if (res?.status === 200) {
-          setAccessTokenInStorage(res.data.access_token);
+          setAccessTokenInStorage(res.data.accessToken);
           router.replace(localStorage.getItem('path') || '/');
         }
       });

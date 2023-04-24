@@ -4,7 +4,7 @@ import instance from './core';
 import axios from 'axios';
 
 export const getCategories = async () => {
-  const response = await axios.get<ICategoriesType>('http://localhost:3000/tags');
+  const response = await axios.get<ICategoriesType>(`${process.env.NEXT_PUBLIC_BACK_API}/tags`);
   return response;
 };
 

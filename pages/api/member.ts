@@ -3,7 +3,7 @@ import instance from './core';
 
 export const logIn = async (params: string | string[]) => {
   try {
-    const response = await instance.post('/auth/login/github', { code: params });
+    const response = await instance.post('/auth/login/github', { authorizationCode: params });
     console.log(response);
     return response;
   } catch (error) {
@@ -18,7 +18,7 @@ export const logOutUser = async () => {
 };
 
 export const logInUser = async (): Promise<IUserInformationType> => {
-  const response = await instance.get<IUserType>('/members/me');
+  const response = await instance.get<IUserType>('/members/me', { withCredentials: true });
   const reviewInfo = await instance.get<IRegister>('/members/me/reviewer', { withCredentials: true });
   const userInformation: IUserInformationType = {
     ...response.data,
