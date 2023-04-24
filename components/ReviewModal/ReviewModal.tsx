@@ -6,8 +6,11 @@ import ReviewSection from './ReviewSection';
 import ButtonWrapper from '../Commons/ButtonWrapper';
 import { IReviewModalPropsType } from './reviewModalType';
 import ReviewModifyLink from './ReviewModifyLink';
-import { useAcceptReview, useRefuseReview } from '../ReviewListSearch/queries/getReviewsQuery';
+import { ROLE, useReviewMutation } from '../ReviewListSearch/queries/getReviewsQuery';
 import { useReviewModalGetQuery } from './queries/getReviewModalQuery';
+import { useQueryClient } from '@tanstack/react-query';
+import { toast } from 'react-hot-toast';
+import { acceptReview, approveReview, refuseReview } from '../../pages/api/inquire';
 
 const QuillEditor = dynamic(import('react-quill'), {
   ssr: false,
@@ -16,24 +19,33 @@ const QuillEditor = dynamic(import('react-quill'), {
 
 function ReviewModal({ reviewId, reviewerId, userImage, username, role, closeModal }: IReviewModalPropsType) {
   const { data } = useReviewModalGetQuery({ reviewId, reviewerId });
-
-  const { mutate: mutateAccept } = useAcceptReview({
-    reviewerId: reviewerId,
-    reviewId: reviewId,
-    status: data?.status as string,
-  });
-  const { mutate: mutateRefuse } = useRefuseReview({
-    reviewerId: reviewerId,
-    reviewId: reviewId,
-    status: data?.status as string,
-  });
+  const queryClient = useQueryClient();
 
   const closeModalHandler = () => {
     closeModal((prev) => !prev);
   };
 
+  const mutationSuccessFn = () => {
+    toast.success('처리가 완료됬습니다.');
+    queryClient.invalidateQueries(['getReviews', ROLE, 'reviewer', data?.status]);
+    closeModalHandler();
+  };
+
+  const { mutate: mutateAccept } = useReviewMutation({
+    mutationFn: () => acceptReview({ reviewId, reviewerId }),
+    onSuccess: mutationSuccessFn,
+  });
+  const { mutate: mutateRefuse } = useReviewMutation({
+    mutationFn: () => refuseReview({ reviewId, reviewerId }),
+    onSuccess: mutationSuccessFn,
+  });
+  const { mutate: mutateApprove } = useReviewMutation({
+    mutationFn: () => approveReview({ reviewerId, reviewId }),
+    onSuccess: mutationSuccessFn,
+  });
+
   return (
-    <div className="fixed inset-0 flex-cc-col z-5">
+    <div className="fixed inset-0 z-10 flex-cc-col">
       <div className="modal_bg" onClick={closeModalHandler} />
       <section
         className="z-20 bg-c-white flex relative flex-col p-7 rounded-radius-m h-[50rem] min-w-[36rem] w-[36rem]
@@ -116,7 +128,9 @@ function ReviewModal({ reviewId, reviewerId, userImage, username, role, closeMod
                         <ButtonWrapper onClick={() => mutateRefuse()}>리뷰 거절</ButtonWrapper>
                       </>
                     )}
-                    {data.status === 'ACCEPTED' && <ButtonWrapper>리뷰 완료</ButtonWrapper>}
+                    {data.status === 'ACCEPTED' && (
+                      <ButtonWrapper onClick={() => mutateApprove()}>리뷰 완료</ButtonWrapper>
+                    )}
                     {data.status === 'APPROVED' && <p>완료된 리뷰입니다</p>}
                   </>
                 )}

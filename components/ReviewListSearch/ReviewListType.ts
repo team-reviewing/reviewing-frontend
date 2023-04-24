@@ -1,3 +1,8 @@
+export interface IReviewModalMutateType {
+  mutationFn: () => Promise<void>;
+  onSuccess: () => void;
+}
+
 export interface IStatusType {
   status: string;
 }
