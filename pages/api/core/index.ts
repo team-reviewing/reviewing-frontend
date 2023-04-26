@@ -1,4 +1,11 @@
 import axios, { AxiosInstance, AxiosError } from 'axios';
+import {
+  deleteAccessTokenInStorage,
+  deleteRefreshTokenInStorage,
+  getRefreshTokenInStorage,
+  setAccessTokenInStorage,
+  setRefreshTokenInStorage,
+} from '../../../utils/authLogic';
 
 const instance: AxiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BACK_API,
@@ -27,14 +34,27 @@ instance.interceptors.response.use(
   async (error: AxiosError) => {
     if (error.response?.status === 401) {
       try {
-        const refreshResponse = await instance.post('/auth/refresh', null, { withCredentials: true });
-        sessionStorage.setItem('accessToken', refreshResponse.data.accessToken);
+        deleteAccessTokenInStorage();
+        const refreshToken = getRefreshTokenInStorage();
+        const refreshResponse = await axios.post(
+          `${process.env.NEXT_PUBLIC_BACK_API}/auth/refresh`,
+          {
+            withCredentials: true,
+          },
+          {
+            headers: { Authorization: `Bearer ${refreshToken}` },
+          },
+        );
+        setAccessTokenInStorage(refreshResponse.data.accessToken);
+        setRefreshTokenInStorage(refreshResponse.data.refreshToken);
         const config = error.config;
         if (!config) {
           return Promise.reject(error);
         }
+
         return instance.request(config);
       } catch (err) {
+        deleteRefreshTokenInStorage();
         window.location.href = '/induceLogin';
       }
     } else {
