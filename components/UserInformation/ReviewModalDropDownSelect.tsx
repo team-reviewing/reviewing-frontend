@@ -21,7 +21,7 @@ function ReviewModalDropDownSelect({ name, select, setState, itemList, register 
 
       {drop && (
         <ul
-          className={clsx('w-full border-2 rounded-radius-m mt-0.5 overflow-y-auto h-44', {
+          className={clsx('w-full border-2 rounded-radius-m mt-0.5 overflow-y-auto max-h-44', {
             ['animate-down-animation']: true,
           })}>
           {itemList?.map((el) => {
