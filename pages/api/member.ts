@@ -4,7 +4,6 @@ import instance from './core';
 export const logIn = async (params: string | string[]) => {
   try {
     const response = await instance.post('/auth/login/github', { authorizationCode: params });
-    console.log(response);
     return response;
   } catch (error) {
     console.error(error);
