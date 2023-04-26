@@ -8,7 +8,6 @@ function useRedirectBefore() {
 
   useEffect(() => {
     if (router.query.code) {
-      console.log(router.query.code);
       logIn(router.query.code).then((res) => {
         if (res?.status === 200) {
           setAccessTokenInStorage(res.data.accessToken);
