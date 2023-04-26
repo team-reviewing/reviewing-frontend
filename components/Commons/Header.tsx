@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
-import lena from 'styles/images/lena.jpg';
 import GithubLogInButton from '../HeaderSub/GithubLogInButton';
 import HeaderDropDown from '../HeaderSub/HeaderDropDown';
 import { useRecoilValue } from 'recoil';
@@ -39,7 +38,7 @@ const Header = () => {
                 ref={ref}
                 className="relative flex items-center cursor-pointer"
                 onClick={() => setDropdown((prev) => !prev)}>
-                <Image src={lena} alt="userProfile" width={45} height={45} className="rounded-radius-50%" />
+                <Image src={user.imageUrl} alt="userProfile" width={45} height={45} className="rounded-radius-50%" />
                 {dropdown && <HeaderDropDown />}
               </figure>
             </>
