@@ -26,10 +26,10 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }} 
       - name: Upload to S3 
         run: | 
-          aws s3 cp --region ap-northeast-2 ./review.zip s3://review-s3-bucket-lee/review.zip
+          aws s3 cp --region ap-northeast-2 ./review.zip s3://reviewer-s3-lee/review.zip
       - name: Deploy 
         run: aws deploy create-deployment
-          --application-name review-codedeploy
+          --application-name reviewer-codedeploy
           --deployment-config-name CodeDeployDefault.AllAtOnce 
-          --deployment-group-name review-deploy-group
-          --s3-location bucket=review-s3-bucket-lee,key=review.zip,bundleType=zip
+          --deployment-group-name reviewer-deploy-group
+          --s3-location bucket=reviewer-s3-lee,key=review.zip,bundleType=zip
