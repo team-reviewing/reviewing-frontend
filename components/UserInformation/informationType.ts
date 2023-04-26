@@ -13,22 +13,6 @@ export interface IModalPropsType {
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export interface ISkillType {
-  id: number;
-  skill: string;
-}
-
-export interface IReviewerRegisterUpdateType {
-  job: string;
-  career: string;
-  techStack: number[];
-  introduce: string;
-}
-
-export interface IReviewerRegisterDataType extends Omit<IReviewerRegisterUpdateType, 'techStack'> {
-  techStack: ISkillType[];
-}
-
 export interface IUserUpdateType {
   username: string;
   email: string;
@@ -43,10 +27,26 @@ export interface IUserInformationType extends IUserType {
   reviewerRegister: boolean;
 }
 
+export interface ISkillType {
+  id: number;
+  name: string;
+}
+
+export interface IReviewerRegisterUpdateType {
+  job: string;
+  career: string;
+  techStack: number[];
+  introduction: string;
+}
+
+export interface IReviewerRegisterDataType extends Omit<IReviewerRegisterUpdateType, 'techStack'> {
+  techStack: ISkillType[];
+}
+
 export interface IRegisterListOption {
-  positionList: string[];
+  jobList: string[];
   careerList: string[];
-  techList: ISkillType[];
+  tagList: ISkillType[];
 }
 
 export interface IRegister extends IReviewerRegisterDataType, IRegisterListOption {}
@@ -58,7 +58,7 @@ export interface IUserPageProps {
 
 export interface IReviewModalHookFormType {
   etc: string;
-  introduce: string;
+  introduction: string;
 }
 
 export interface IReviewModalDropDownSelectProps {
@@ -76,4 +76,6 @@ export interface IReviewModalDropDownSkillProps {
   setState: React.Dispatch<React.SetStateAction<ISkillType[]>>;
 }
 
-export type ReviewerMutationType = Pick<IModalPropsType, 'setModal'>;
+export interface ReviewerMutationType extends IModalPropsType {
+  setRecoil: SetterOrUpdater<IUserInformationType | null>;
+}

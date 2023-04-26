@@ -12,7 +12,7 @@ function ReviewModalDropDownSkill({ name, select, itemList, setState }: IReviewM
 
   const deleteSkill = (delSkill: string) => {
     setState((prev) => {
-      return prev.filter((el) => el.skill !== delSkill);
+      return prev.filter((el) => el.name !== delSkill);
     });
   };
 
@@ -43,7 +43,7 @@ function ReviewModalDropDownSkill({ name, select, itemList, setState }: IReviewM
           {itemList?.map((el) => {
             return (
               <li key={el.id} onClick={() => selectSkill(el)} className="p-2 cursor-pointer hover:bg-gray100">
-                {el.skill}
+                {el.name}
               </li>
             );
           })}
@@ -53,12 +53,12 @@ function ReviewModalDropDownSkill({ name, select, itemList, setState }: IReviewM
         {select?.map((el) => {
           return (
             <span className="flex items-center mr-3" key={el.id}>
-              {el.skill}
+              {el.name}
               <Image
                 src={cancel}
                 alt="except"
                 className="w-2 h-2 ml-1 cursor-pointer"
-                onClick={() => deleteSkill(el.skill)}
+                onClick={() => deleteSkill(el.name)}
               />
             </span>
           );

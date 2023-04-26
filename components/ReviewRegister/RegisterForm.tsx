@@ -9,6 +9,7 @@ import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import ReactQuill from 'react-quill';
 import useRedirectInduce from '../../useHooks/useRedirectInduce';
+import { useQueryClient } from '@tanstack/react-query';
 
 function RegisterForm({ reviewerId, reviewerName, reviewId, title, content, prUrl }: ILinkUserIdType) {
   const {
@@ -31,6 +32,7 @@ function RegisterForm({ reviewerId, reviewerName, reviewId, title, content, prUr
   const [loading, setLoading] = useState(false);
   const editorRef = useRef<ReactQuill>(null);
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   useRedirectInduce();
 
@@ -38,6 +40,9 @@ function RegisterForm({ reviewerId, reviewerName, reviewId, title, content, prUr
     register('content', {
       required: '필수 사항입니다.',
     });
+    if (getValues('content')) {
+      trigger('content');
+    }
   }, []);
 
   const onSubmitHandler = async ({ title, content, prUrl }: IReviewRegisterType) => {
@@ -46,6 +51,7 @@ function RegisterForm({ reviewerId, reviewerName, reviewId, title, content, prUr
       await reviewRegister({ reviewerId, title, content, prUrl }).then(() => {
         setLoading(false);
         toast.success('리뷰 신청이 완료되었습니다.');
+        queryClient.invalidateQueries(['modalDetail']);
         router.push('/');
       });
     } catch (err) {
@@ -60,6 +66,7 @@ function RegisterForm({ reviewerId, reviewerName, reviewId, title, content, prUr
         await reviewModify({ reviewId, content, reviewerId }).then(() => {
           setLoading(false);
           toast.success('리뷰 수정이 완료되었습니다.');
+          queryClient.invalidateQueries(['modalDetail']);
           router.push('/');
         });
       }

@@ -71,7 +71,13 @@ function ReviewModal({ reviewId, reviewerId, userImage, username, role, closeMod
           </div>
           <div className="flex flex-col flex-1 h-full overflow-y-auto">
             <ReviewSection option="flex">
-              <Image src={userImage} alt="registerImage" className="w-6 h-6 rounded-radius-50%" />
+              <Image
+                src={userImage}
+                width={40}
+                height={40}
+                alt="registerImage"
+                className="w-6 h-6 rounded-radius-50%"
+              />
               <span className="ml-2">{username}</span>
             </ReviewSection>
             <ReviewSection>
@@ -87,7 +93,7 @@ function ReviewModal({ reviewId, reviewerId, userImage, username, role, closeMod
               <a
                 className="inline-block max-w-full overflow-hidden whitespace-nowrap text-ellipsis"
                 target="_blank"
-                href="http://localhost:3000">
+                href={data?.prUrl}>
                 <span className="inline-block max-w-full overflow-hidden whitespace-nowrap text-ellipsis">
                   {data?.prUrl}
                 </span>

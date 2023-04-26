@@ -1,6 +1,5 @@
 import React from 'react';
 import Image from 'next/image';
-import img from '../../styles/images/lena.jpg';
 import { IReviewerType } from './mainType';
 import Link from 'next/link';
 
@@ -28,7 +27,12 @@ function ReviewerCard({ reviewerProps }: { reviewerProps: IReviewerType }) {
 
         <div className="flex justify-between w-full mt-3">
           <figure className="flex-cc">
-            <Image src={img} alt="img" width={30} height={30} className="rounded-radius-50% mr-3"></Image>
+            <Image
+              src={reviewerProps.imageUrl}
+              alt="img"
+              width={30}
+              height={30}
+              className="rounded-radius-50% mr-3"></Image>
             <figcaption className="text-black">{reviewerProps.username}</figcaption>
           </figure>
           <Link

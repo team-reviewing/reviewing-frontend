@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { userInfoUpdate } from '../../pages/api/userInfo';
 import { IUserPageProps } from './informationType';
@@ -48,6 +48,12 @@ const InformationForm = ({ data, setUser }: IUserPageProps) => {
   const userReviewerInduce = () => {
     toast('리뷰어 등록을 진행해주세요!', { icon: '😆' });
   };
+
+  useEffect(() => {
+    if (data.isReviewer !== reviewerStatus) {
+      setReviewerStatus(data.isReviewer);
+    }
+  }, [data]);
 
   if (updateLoading) {
     return <Loading />;

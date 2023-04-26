@@ -15,20 +15,23 @@ export function useReviewerGetQuery() {
   });
 }
 
-export function useReviewerRegisterMutate({ setModal }: ReviewerMutationType) {
+export function useReviewerRegisterMutate({ setModal, setRecoil }: ReviewerMutationType) {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ job, career, techStack, introduce }: IReviewerRegisterUpdateType) => {
-      return reviewerRegister({ job, career, techStack, introduce });
+    mutationFn: ({ job, career, techStack, introduction }: IReviewerRegisterUpdateType) => {
+      return reviewerRegister({ job, career, techStack, introduction });
     },
     onSuccess: () => {
       toast.success('리뷰어 등록이 되었습니다');
       setModal(false);
+      setRecoil((prev) => {
+        return prev && { ...prev, isReviewer: true, reviewerRegister: true };
+      });
       queryClient.invalidateQueries(['reviewer']);
     },
     onError: () => {
-      toast.error('오류가 발생했습니다.');
+      toast.error('오류가 발생했습니다!.');
     },
   });
 }
@@ -37,8 +40,8 @@ export function useReviewerUpdateMutate({ setModal }: ReviewerMutationType) {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ job, career, techStack, introduce }: IReviewerRegisterUpdateType) => {
-      return registerUpdate({ job, career, techStack, introduce });
+    mutationFn: ({ job, career, techStack, introduction }: IReviewerRegisterUpdateType) => {
+      return registerUpdate({ job, career, techStack, introduction });
     },
     onSuccess: () => {
       toast.success('리뷰어 정보가 업데이트 되었습니다');

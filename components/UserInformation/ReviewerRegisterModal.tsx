@@ -8,16 +8,16 @@ import { useEffect, useState } from 'react';
 import ReviewModalDropDownSelect from './ReviewModalDropDownSelect';
 import ReviewModalDropDownSkill from './ReviewModalDropDownSkill';
 import { useReviewerGetQuery, useReviewerRegisterMutate, useReviewerUpdateMutate } from './queries/getReviewerQuery';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { userState } from '../../atoms/userState';
 
 function ReviewerRegisterModal({ setModal }: IModalPropsType) {
   const { data, isLoading } = useReviewerGetQuery();
 
-  const { mutate: mutateRegister } = useReviewerRegisterMutate({ setModal });
-  const { mutate: mutateUpdate } = useReviewerUpdateMutate({ setModal });
+  const [userRecoil, setUserRecoil] = useRecoilState(userState);
 
-  const userRecoil = useRecoilValue(userState);
+  const { mutate: mutateRegister } = useReviewerRegisterMutate({ setModal, setRecoil: setUserRecoil });
+  const { mutate: mutateUpdate } = useReviewerUpdateMutate({ setModal, setRecoil: setUserRecoil });
 
   const [selectJob, setSelectJob] = useState<string>('');
   const [selectCareer, setSelectCareer] = useState<string>('');
@@ -25,7 +25,7 @@ function ReviewerRegisterModal({ setModal }: IModalPropsType) {
   const { register, setValue, handleSubmit } = useForm<IReviewModalHookFormType>({
     defaultValues: {
       etc: '',
-      introduce: '',
+      introduction: '',
     },
   });
 
@@ -34,7 +34,7 @@ function ReviewerRegisterModal({ setModal }: IModalPropsType) {
       setSelectJob(data.job);
       setSelectCareer(data.career);
       setSelectTech(data.techStack);
-      setValue('introduce', data.introduce);
+      setValue('introduction', data.introduction);
     }
   }, [data]);
 
@@ -42,7 +42,7 @@ function ReviewerRegisterModal({ setModal }: IModalPropsType) {
     toast.error('전부 필수 내용입니다.');
   };
 
-  const submitHandler = ({ etc, introduce }: IReviewModalHookFormType) => {
+  const submitHandler = ({ etc, introduction }: IReviewModalHookFormType) => {
     if (!(selectJob && selectCareer && selectTech.length)) {
       return toast.error('전부 필수 내용입니다.');
     }
@@ -54,7 +54,7 @@ function ReviewerRegisterModal({ setModal }: IModalPropsType) {
       return mutateUpdate({
         job: selectJob === '기타' ? etc : selectJob,
         career: selectCareer,
-        introduce,
+        introduction,
         techStack: selectTech.map((el) => el.id),
       });
     }
@@ -62,7 +62,7 @@ function ReviewerRegisterModal({ setModal }: IModalPropsType) {
       return mutateRegister({
         job: selectJob === '기타' ? etc : selectJob,
         career: selectCareer,
-        introduce,
+        introduction,
         techStack: selectTech.map((el) => el.id),
       });
     }
@@ -87,7 +87,7 @@ function ReviewerRegisterModal({ setModal }: IModalPropsType) {
             <div className="flex flex-col h-full space-y-6 overflow-y-auto">
               <ReviewModalDropDownSelect
                 name="직무"
-                itemList={data.positionList}
+                itemList={data.jobList}
                 select={selectJob}
                 setState={setSelectJob}
                 register={register}
@@ -100,7 +100,7 @@ function ReviewerRegisterModal({ setModal }: IModalPropsType) {
               />
               <ReviewModalDropDownSkill
                 name="기술 스택"
-                itemList={data.techList}
+                itemList={data.tagList}
                 select={selectTech}
                 setState={setSelectTech}
               />
@@ -108,7 +108,7 @@ function ReviewerRegisterModal({ setModal }: IModalPropsType) {
                 <span className="flex flex-col items-start w-full">소개글</span>
                 <textarea
                   className="w-full h-20 p-2 border-2 border-solid outline-none rounded-radius-m"
-                  {...register('introduce', { required: true })}
+                  {...register('introduction', { required: true })}
                 />
               </div>
             </div>

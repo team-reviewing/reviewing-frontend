@@ -5,7 +5,7 @@ import CategoryTagBox from './CategoryTagBox';
 import PickTagCard from './PickTagCard';
 
 function FilterCategory({ setCategory, categories, setSelectedTags, selectedTags }: IFilterCategoryPropsType) {
-  const [isClicked, setClicked] = useState<number>(1);
+  const [isClicked, setClicked] = useState<number>(categories[0].id);
 
   const filterTag = (data: Pick<IFilterCategoryPropsType, 'categories'>) => {
     const filterData = data.categories?.filter((item: ICategoryType) => {
