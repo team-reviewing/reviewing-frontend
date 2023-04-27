@@ -3,6 +3,6 @@ REPOSITORY=/home/ubuntu/deploy
 
 cd $REPOSITORY 
 
-sudo npm install 
+npm install 
 
-sudo pm2 reload all
+pm2 reload all
