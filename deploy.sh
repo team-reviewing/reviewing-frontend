@@ -5,5 +5,4 @@ cd $REPOSITORY
 
 sudo npm install 
 
-sudo npx pm2 start npm --start
-
+sudo pm2 reload all
