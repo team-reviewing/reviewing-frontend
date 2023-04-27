@@ -5,5 +5,5 @@ cd $REPOSITORY
 
 sudo npm install 
 
-pm2 start index.js
+sudo npx pm2 start npm --start
 
