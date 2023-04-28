@@ -5,9 +5,7 @@ import { useRouter } from 'next/router';
 import { getAccessTokenInStorage } from '../../utils/authLogic';
 
 function InduceBox() {
-  const client_id = process.env.NEXT_PUBLIC_CLIENT_ID;
-
-  const loginUri = `https://github.com/login/oauth/authorize?client_id=${client_id}&scope=repo:status read:repo_hook user:email&redirect_uri=http://13.124.78.119:80/githubLogin`;
+  const loginUri = `https://github.com/login/oauth/authorize?client_id=5b4fae5a4ea125933cd8&scope=repo:status read:repo_hook user:email&redirect_uri=http://13.124.78.119:80/githubLogin`;
 
   const logInHandler = () => {
     window.location.href = loginUri;
