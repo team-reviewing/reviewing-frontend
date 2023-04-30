@@ -1,4 +1,4 @@
-# ® reviewer-reviewee-frontend
+# ® reviewer-reviewee-frontend v1.0.0
 
 코드 리뷰를 통해 개발자들은 성장하고 새로운 것을 더 알아가기를 원합니다. 하지만 코드 리뷰를 해주는 사람을 찾기는 쉽지 않은 게 현실입니다. 코드 리뷰를 진행해 줄 리뷰이 와 리뷰어를 연결해 주면 좋겠다는 생각 프로젝트를 시작했습니다.
 
@@ -32,10 +32,8 @@
 **Cloud**
 
 <img src="https://img.shields.io/badge/amazonec2-FF9900?style=for-the-badge&logo=amazonec2&logoColor=white">
-<img src="https://img.shields.io/badge/amazons3-569A31?style=for-the-badge&logo=amazons3&logoColor=white">
-<img src="https://img.shields.io/badge/code deploy-368CCB?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9IndoaXRlIiBkPSJNMjEuOTUgOWExMCAxMCAwIDAgMC0xOS45IDBoLjI0OGw0LjE2MiA2LjAxNmwuODIzLS41N0wzLjUxNCA5aDIuMzYyYTEuMjUgMS4yNSAwIDAgMSAyLjUgMGguNDIybDEuMjQ3IDRsLjk1NS0uMjk4TDkuODQ1IDloLjkwNmExLjI1IDEuMjUgMCAxIDEgMi41IDBoLjkwNEwxMyAxMi43MDJsLjk1NS4yOThsMS4yNDctNGguNDI0YTEuMjUgMS4yNSAwIDEgMSAyLjUgMGgyLjM0M0wxNi43IDE0LjQ0N2wuODIyLjU2OUwyMS42ODUgOVptLTUuMDc0LTMuMjVhMy4yMyAzLjIzIDAgMCAwLTIuNDM4IDEuMTIzYTMuMjA2IDMuMjA2IDAgMCAwLTQuODc0IDBhMy4yMDcgMy4yMDcgMCAwIDAtNC45NTkuMTAxYTcuOTg0IDcuOTg0IDAgMCAxIDE0Ljc4OC0uMDA0YTMuMjMxIDMuMjMxIDAgMCAwLTIuNTE3LTEuMjJaIi8+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0xMSAxNS40MDVMOS41ODYgMTRsLTMuNjE4IDMuNTk1TDQuNTU0IDE5bDUuMDMyIDVMMTEgMjIuNTk1TDcuMzgyIDE5TDExIDE1LjQwNXptMi4wMjEgNy4xOUwxNC40MzUgMjRsMy42MTgtMy41OTVMMTkuNDY3IDE5bC01LjAzMi01bC0xLjQxNCAxLjQwNUwxNi42MzkgMTlsLTMuNjE4IDMuNTk1eiIvPjwvc3ZnPg==&logoColor=white">
 
-**CI/CD**
+**CI**
 
 <img src="https://img.shields.io/badge/githubactions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white">
 
@@ -49,19 +47,21 @@
 
 **❓ Why choose a skill?**
 
-**Typescript**
+**TypeScript**
 
-- Javascript를 사용하는 것보다 Typescript를 사용하는 것이 오류 발생 확률을 15%를 줄여준다고 합니다. Typescript를 사용함으로써 타입을 통한 가독성을 높이고 사이드 이펙트를 최소한으로 줄여 안전성과 효율성을 높이기 위해 선택했습니다.
+- JavaScript를 사용하는 것보다 TypeScript를 사용하는 것이 오류 발생 확률을 15%를 줄여준다고 합니다. TypeScript를 사용함으로써 타입을 통한 가독성을 높이고 휴먼에러를 최소한으로 줄여 안전성과 효율성을 높이기 위해 선택했습니다.
+
+- 백엔드 데이터 모델과의 타입을 일치시키기 위해 선택했습니다.
 
 **NextJS**
 
-- NextJS를 선택하게 된 이유는 React에서는 SPA이기 때문에 SEO의 효과를 볼 수 없어서 따로 React Helmet과 같은 라이브러리를 사용해서 추가를 해줘야 한다.
+- React는 동적으로 페이지가 렌더링되기 때문에 초기 로드 시 검색 엔진 크롤러가 인식하지 못한다는 단점을 가지고 있습니다. SEO를 충족시키고 초기 렌더링이 빠른 특성을 이용해 사용자 경험을 향상시키고자 NextJS를 선택했습니다.
 
 **ReactQuery**
 
 - 클라이언트와 서버의 데이터를 분리하기 위함이였습니다. 기존에 서버 데이터를 상태관리로 관리하는 것은 적합하지 않았습니다. 클라이언트 와 서버의 데이터를 분리함으로써 관심사 분리를 할 수 있기에 선택했습니다.
+
 - 캐싱처리로 API 콜을 줄이기 위함이였습니다. ReactQuery는 데이터를 캐싱하여 중복 요청을 줄이기 때문에, 서버와의 상호작용을 줄일 수 있습니다. 이를 통해 서버 측 부하를 줄이고 애플리케이션 성능을 향상시킬 수 있기 때문에 선택했습니다.
-- 그 외에도 많은 장점들로 인하여 선택했습니다.
 
 **Recoil**
 
@@ -69,11 +69,11 @@
 
 **TailWind**
 
-- 저희는 빠르게 프로토타입을 구현해내기 위해 생산성이 높은 라이브러리인 tailwind를 선택했습니다.
+- CSS에 대한 코드량을 줄이고 생산성을 높이기 위해 선택했습니다.
 
 **MSW**
 
-- 프론트엔드 개발은 백엔드 API의 의존성이 엄청 큰 영역입니다. 백엔드 API가 완성되지 않아 데이터가 없이 개발을 진행하는 것은 속도면에서 더뎌질 수 밖에 없습니다. 이러한 부분을 해결하고자 백엔드 API가 완성되지 않는 상태라도 서버와 유사한 환경에서 개발을 진행하기 위해서 MSW 라이브러리를 선택했습니다.
+- 프론트엔드 개발은 백엔드 API와의 의존성이 있는 영역입니다. 백엔드 API 개발여부에 관한 의존성을 낮추고 완성되지 않는 상태라도 개발을 진행하기 위해서 MSW 라이브러리를 선택했습니다.
 
 ---
 
@@ -104,20 +104,110 @@ instance.interceptors.request.use(
     return Promise.reject(error);
   },
 );
+
+instance.interceptors.response.use(
+  (response) => response,
+  async (error: AxiosError) => {
+    if (error.response?.status === 401) {
+      try {
+        deleteAccessTokenInStorage();
+        const refreshToken = getRefreshTokenInStorage();
+        const refreshResponse = await axios.post(
+          `${process.env.NEXT_PUBLIC_BACK_API}/auth/refresh`,
+          {
+            withCredentials: true,
+          },
+          {
+            headers: { Authorization: `Bearer ${refreshToken}` },
+          },
+        );
+        setAccessTokenInStorage(refreshResponse.data.accessToken);
+        setRefreshTokenInStorage(refreshResponse.data.refreshToken);
+        const config = error.config;
+        if (!config) {
+          return Promise.reject(error);
+        }
+
+        return instance.request(config);
+      } catch (err) {
+        deleteRefreshTokenInStorage();
+        window.location.href = '/induceLogin';
+      }
+    } else {
+      return Promise.reject(error);
+    }
+  },
+);
+```
+
+⌨ Quill Editor 적용
+
+유저가 리뷰어에게 리뷰를 신청할 때 사용자 경험을 향상시키기 위해 Quill Editor라이브러리를 사용해서 구현했습니다. 통합적인 form 관리를 위해 <b>react hook form</b>라이브러리를 접목해서 사용했으며 DOM API를 사용해 글자수 제한 처리를 구현했습니다.
+
+```javascript
+const editorRef = useRef < ReactQuill > null;
+
+function ReviewEditor({ setError, setValue, getValue, trigger, editorRef }: IRegisterType) {
+  const modules = useMemo(() => editorModule, []);
+
+  const editorContentChange = (content: string) => {
+    if (editorRef.current) {
+      const getLength = editorRef.current.unprivilegedEditor?.getText().length;
+
+      if (getLength && getLength - 1 <= EDITORMAX) {
+        if (content === '<p><br></p>') {
+          setValue('content', '');
+        } else {
+          setValue('content', content);
+        }
+      }
+    }
+    trigger('content');
+  };
+
+  const editorBlurHandler = (e: ReactQuill.Range) => {
+    if (!e?.index) {
+      setError('content', { type: 'required', message: '필수 사항입니다.' });
+    }
+  };
+
+  const editorContentLength = (content: number) => {
+    return content > EDITORMAX ? EDITORMAX : content;
+  };
+
+  return (
+    <div>
+      <QuillEditor
+        forwardedRef={editorRef}
+        value={getValue('content')}
+        onChange={(e) => editorContentChange(e)}
+        placeholder="리뷰 받고싶은 내용을 입력해주세요. 최대 500글자까지 작성 가능합니다."
+        modules={modules}
+        formats={formats}
+        theme="snow"
+        onBlur={editorBlurHandler}
+      />
+      <p className="flex justify-end w-full pr-3">
+        {editorRef.current && editorRef.current.unprivilegedEditor
+          ? editorContentLength(editorRef.current.unprivilegedEditor.getText().length - 1)
+          : 0}
+        / {EDITORMAX} 자
+      </p>
+    </div>
+  );
+}
 ```
 
 **Branch Convention**
 
+- branch 생성은 다음과 같은 규칙을 따른다.
+  <br/> ex) BranchName: "feature/{#issue_num}"
+
 - 스프린트 주기에는 main이 아닌 develop 브랜치에 개발한다.
-- develop에서 main으로 merge는 배포 시점에 머지한다.
 
-- Issue 등록시 라벨을 지정하면 해당 라벨로 브랜치 자동 생성한다.
-
-  ex) BranchName: "feature/{#issue_num}"
+- 배포시점엔 develop에서 main으로 일반 머지를 진행한다.
 
 - 매번 코드리뷰를 진행하며 코드리뷰가 완료되면 develop branch에 스쿼시 머지를 진행한다.
-
-- develop 브랜치를 main 브랜치에 머지하는 경우(배포일)엔 일반 머지를 진행한다.
 
 **Commit Convention**
 
@@ -133,10 +223,10 @@ instance.interceptors.request.use(
 - ci: ci 설정 파일 수정
 - chore: 위에 해당하지 않는 애매하거나 자잘한 수정
 
-**동작 화면**
+<!-- **동작 화면**
 
 |                                    메인페이지                                    |                                    마이페이지                                    |
 | :------------------------------------------------------------------------------: | :------------------------------------------------------------------------------: |
 | ![꽃](https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__340.jpg) | ![꽃](https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__340.jpg) |
 
-<br>
+<br> -->
