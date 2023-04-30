@@ -1,8 +1,20 @@
 import type { AppProps } from 'next/app';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { RecoilRoot } from 'recoil';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { RecoilRoot, RecoilEnv } from 'recoil';
 import '../styles/globals.css';
-import Header from '../components/Header';
+import 'react-quill/dist/quill.snow.css';
+import { Toaster } from 'react-hot-toast';
+import Header from '../components/Commons/Header';
+import { useRouter } from 'next/router';
+import CarouselSwiper from '../components/Commons/CarouselSwiper';
+import Head from 'next/head';
+
+if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
+  // require('../mocks');
+}
+
+RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
 
 const client = new QueryClient({
   defaultOptions: {
@@ -13,12 +25,27 @@ const client = new QueryClient({
 });
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const router = useRouter();
+
   return (
     <QueryClientProvider client={client}>
       <RecoilRoot>
-        <Header />
+        <Head>
+          <title>리뷰어 리뷰이</title>
+          <meta charSet="UTF-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <link rel="shortcut icon" href="/review.ico" />
+        </Head>
+        <Toaster />
+        {router.pathname !== '/induceLogin' && (
+          <>
+            <Header />
+            <CarouselSwiper />
+          </>
+        )}
         <Component {...pageProps} />
       </RecoilRoot>
+      <ReactQueryDevtools />
     </QueryClientProvider>
   );
 }
