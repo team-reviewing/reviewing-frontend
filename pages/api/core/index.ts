@@ -8,7 +8,7 @@ import {
 } from '../../../utils/authLogic';
 
 const instance: AxiosInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BACK_API,
+  baseURL: `http://54.180.210.74:8080`,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -37,7 +37,7 @@ instance.interceptors.response.use(
         deleteAccessTokenInStorage();
         const refreshToken = getRefreshTokenInStorage();
         const refreshResponse = await axios.post(
-          `${process.env.NEXT_PUBLIC_BACK_API}/auth/refresh`,
+          `http://54.180.210.74:8080/auth/refresh`,
           {
             withCredentials: true,
           },
