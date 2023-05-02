@@ -6,6 +6,7 @@ import HeaderDropDown from '../HeaderSub/HeaderDropDown';
 import { useRecoilValue } from 'recoil';
 import { userState } from '../../atoms/userState';
 import useLoginMaintain from '../../useHooks/useLoginMaintain';
+import GuideButton from '../HeaderSub/GuideButton';
 
 const Header = () => {
   const [dropdown, setDropdown] = useState<boolean>(false);
@@ -43,7 +44,10 @@ const Header = () => {
               </figure>
             </>
           ) : (
-            <GithubLogInButton />
+            <div className="flex justify-between w-36">
+              <GuideButton />
+              <GithubLogInButton />
+            </div>
           )}
         </div>
       </div>
