@@ -4,7 +4,7 @@ import { IReviewRoleType } from '../ReviewListSearch/ReviewListType';
 
 function NavListItem({ role, setRole }: IReviewRoleType) {
   return (
-    <div className="flex flex-col w-full msm:flex-row msm:w-[100%]" role="group">
+    <div className="flex flex-col w-full msm:flex-row" role="group">
       <button
         onClick={() => {
           setRole(false);
