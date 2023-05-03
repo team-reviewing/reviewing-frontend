@@ -40,7 +40,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         {router.pathname !== '/induceLogin' && (
           <>
             <Header />
-            <CarouselSwiper />
+            {router.pathname !== '/guide' && <CarouselSwiper />}
           </>
         )}
         <Component {...pageProps} />
