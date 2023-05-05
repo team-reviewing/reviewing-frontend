@@ -79,7 +79,7 @@ export const handlers = [
       ctx.json({
         username: username,
         email: email,
-        imageUrl: 'image',
+        imageUrl: 'https://upload.wikimedia.org/wikipedia/ko/thumb/2/24/Lenna.png/440px-Lenna.png',
         profileUrl: 'https://github@url.com/kukus',
         isReviewer: false,
       }),
