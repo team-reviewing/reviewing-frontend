@@ -51,7 +51,7 @@ export interface IReviewersRequestType {
 }
 
 export interface IFilterCategoryPropsType extends ICategoriesType {
-  setCategory: React.Dispatch<React.SetStateAction<ICategoryType | undefined>>;
+  setCategory: React.Dispatch<React.SetStateAction<ICategoryType>>;
   setSelectedTags: React.Dispatch<React.SetStateAction<ITagType[]>>;
   selectedTags: ITagType[];
 }
