@@ -2,7 +2,6 @@ import dynamic from 'next/dynamic';
 import Loading from '../Commons/Loading';
 import cancel from '../../styles/images/cancel.svg';
 import Image from 'next/image';
-import ReviewSection from './ReviewSection';
 import ButtonWrapper from '../Commons/ButtonWrapper';
 import { IReviewModalPropsType } from './reviewModalType';
 import ReviewModifyLink from './ReviewModifyLink';
@@ -44,6 +43,21 @@ function ReviewModal({ reviewId, reviewerId, userImage, username, role, closeMod
     onSuccess: mutationSuccessFn,
   });
 
+  const statusHandler = (status: string | undefined) => {
+    if (status === 'CREATED') {
+      return '요청';
+    }
+    if (status === 'ACCEPTED') {
+      return '수락';
+    }
+    if (status === 'REFUSED') {
+      return '거절';
+    }
+    if (status === 'APPROVED') {
+      return '완료';
+    }
+  };
+
   return (
     <div className="fixed inset-0 z-10 flex-cc-col">
       <div className="modal_bg" onClick={closeModalHandler} />
@@ -66,11 +80,12 @@ function ReviewModal({ reviewId, reviewerId, userImage, username, role, closeMod
               />
             </div>
           </div>
-          <div className="mt-6">
-            <span>{data?.status === 'CREATED' ? '요청' : data?.status === 'ACCEPTED' ? '수락' : '완료'}상태</span>
+          <div className="flex justify-between mt-6">
+            <p>{statusHandler(data?.status)}상태</p>
+            {data?.status === 'REFUSED' && <p>삭제 예정일 : {data?.statusSetAt} </p>}
           </div>
-          <div className="flex flex-col flex-1 h-full overflow-y-auto">
-            <ReviewSection option="flex">
+          <div className="flex flex-col flex-1 h-full mt-6 space-y-6 overflow-y-auto">
+            <div className="flex">
               <Image
                 src={userImage}
                 width={40}
@@ -79,16 +94,16 @@ function ReviewModal({ reviewId, reviewerId, userImage, username, role, closeMod
                 className="w-6 h-6 rounded-radius-50%"
               />
               <span className="ml-2">{username}</span>
-            </ReviewSection>
-            <ReviewSection>
+            </div>
+            <div>
               <h2 className="text-base font-medium">리뷰 제목</h2>
               <p>{data?.title}</p>
-            </ReviewSection>
-            <ReviewSection option="modal">
+            </div>
+            <div className="modal">
               <h2 className="text-base font-medium">리뷰 상세 내용</h2>
               <QuillEditor modules={{ toolbar: false }} theme="snow" readOnly value={data?.content} />
-            </ReviewSection>
-            <div className="flex flex-col mt-6 ">
+            </div>
+            <div className="flex flex-col">
               <h2 className="text-base font-medium">Pull Request URL</h2>
               <a
                 className="inline-block max-w-full overflow-hidden whitespace-nowrap text-ellipsis"
