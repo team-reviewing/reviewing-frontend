@@ -8,7 +8,7 @@ import {
 } from '../../../utils/authLogic';
 
 const instance: AxiosInstance = axios.create({
-  baseURL: `http://54.180.210.74:8080`,
+  baseURL: `http://localhost:3000`, //http://54.180.210.74:8080
   headers: {
     'Content-Type': 'application/json',
   },

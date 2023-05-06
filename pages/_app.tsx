@@ -11,7 +11,7 @@ import CarouselSwiper from '../components/Commons/CarouselSwiper';
 import Head from 'next/head';
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
-  // require('../mocks');
+  require('../mocks');
 }
 
 RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
