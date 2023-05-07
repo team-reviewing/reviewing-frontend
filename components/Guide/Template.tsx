@@ -3,7 +3,7 @@ import GuideForm from './GuideForm';
 
 function Template() {
   return (
-    <div className="wh-f max-w-7xl">
+    <div className="mb-4 wh-f max-w-7xl">
       <GuideForm />
     </div>
   );
