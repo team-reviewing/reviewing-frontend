@@ -93,17 +93,17 @@ export const handlers = [
         job: '프론트엔드',
         career: '주니어(1~3년)',
         techStack: [
-          { id: 1, skill: 'React' },
-          { id: 3, skill: 'Spring' },
+          { id: 1, name: 'React' },
+          { id: 3, name: 'Spring' },
         ],
         introduce: '저는 3년차 개발자입니다.',
-        positionList: ['프론트엔드', '백엔드', '모바일', '기타'],
+        jobList: ['프론트엔드', '백엔드', '모바일', '기타'],
         careerList: ['신입(1년이하)', '주니어(1~3년)', '미들(4~8년)', '시니어(9년이상)'],
-        techList: [
-          { id: 1, skill: 'React' },
-          { id: 2, skill: 'SpringBoot' },
-          { id: 3, skill: 'Spring' },
-          { id: 4, skill: 'View' },
+        tagList: [
+          { id: 1, name: 'React' },
+          { id: 2, name: 'SpringBoot' },
+          { id: 3, name: 'Spring' },
+          { id: 4, name: 'View' },
         ],
       }),
     );
