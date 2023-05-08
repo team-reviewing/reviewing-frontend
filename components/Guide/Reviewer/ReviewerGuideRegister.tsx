@@ -1,12 +1,13 @@
-import { useReviewerGetQuery } from '../../UserInformation/queries/getReviewerQuery';
 import GuideContent from '../GuideContent';
 import GuideImage from '../GuideImage';
 import GuideSubTitle from '../GuideSubTitle';
 import { ReviewGuideRegisterImage } from './ReviewerGuideImageData';
 
-function ReviewerGuideRegister() {
-  const { data } = useReviewerGetQuery();
+const jobList = ['프론트엔드', '백엔드', '모바일', '기타'];
+const carrerList = ['신입(1년이하)', '주니어(1~3년)', '미들(4~8년)', '시니어(9년이상)'];
+const tegList = ['React', 'Spring', 'SpringBoot', 'View'];
 
+function ReviewerGuideRegister() {
   return (
     <div>
       <div className="w-full">
@@ -24,13 +25,13 @@ function ReviewerGuideRegister() {
             </p>
             <ul className="space-y-1">
               <ol>
-                직무 :<strong>{data?.jobList.reduce((a, b) => ` ${a} ${b},`, '').slice(0, -1)}</strong>
+                직무 :<strong>{jobList.reduce((a, b) => ` ${a} ${b},`, '').slice(0, -1)}</strong>
               </ol>
               <ol>
-                경력 :<strong>{data?.careerList.reduce((a, b) => ` ${a} ${b},`, '').slice(0, -1)}</strong>
+                경력 :<strong>{carrerList.reduce((a, b) => ` ${a} ${b},`, '').slice(0, -1)}</strong>
               </ol>
               <ol>
-                기술 스택 :<strong>{data?.tagList.reduce((a, b) => ` ${a} ${b.name},`, '').slice(0, -1)}</strong>
+                기술 스택 :<strong>{tegList.reduce((a, b) => ` ${a} ${b},`, '').slice(0, -1)}</strong>
               </ol>
               <ol>
                 자기소개 : <strong>자유 입력</strong>
