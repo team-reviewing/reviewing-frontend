@@ -347,7 +347,7 @@ export const reviewDatailData = {
   title: '코드 리뷰 부탁드립니다!!',
   content: 'Spring 관련 개인 프로젝트를 진행하고 있는데 코드 리뷰를 받고 싶습니다.',
   prUrl: 'https://github.com/name/project/pull/1',
-  statusSetAt: '2023-05-01 16시',
+  expireDate: '2023-05-01 16시',
 };
 
 // get : http://localhost:3000/members/me/reviewer

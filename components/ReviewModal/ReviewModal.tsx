@@ -82,7 +82,7 @@ function ReviewModal({ reviewId, reviewerId, userImage, username, role, closeMod
           </div>
           <div className="flex justify-between mt-6">
             <p>{statusHandler(data?.status)}상태</p>
-            {data?.status === 'REFUSED' && <p>삭제 예정일 : {data?.statusSetAt} </p>}
+            {data?.status === 'REFUSED' && <p>삭제 예정일 : {data?.expireDate} </p>}
           </div>
           <div className="flex flex-col flex-1 h-full mt-6 space-y-6 overflow-y-auto">
             <div className="flex">

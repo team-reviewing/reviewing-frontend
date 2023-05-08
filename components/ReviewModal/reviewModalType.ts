@@ -19,10 +19,10 @@ export interface IReviewModalApiDetailType {
   content: string;
   prUrl: string;
   status: string;
-  statusSetAt: string;
+  expireDate: string;
 }
 
-export interface IReviewModifyLinkProps extends Omit<IReviewModalApiDetailType, 'id' | 'statusSetAt'> {
+export interface IReviewModifyLinkProps extends Omit<IReviewModalApiDetailType, 'id' | 'expireDate'> {
   reviewId: number;
   username: string;
 }
