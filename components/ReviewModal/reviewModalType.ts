@@ -19,14 +19,10 @@ export interface IReviewModalApiDetailType {
   content: string;
   prUrl: string;
   status: string;
+  expireDate: string;
 }
 
-export interface IReviewSectionProps {
-  children: React.ReactNode;
-  option?: string;
-}
-
-export interface IReviewModifyLinkProps extends Omit<IReviewModalApiDetailType, 'id'> {
+export interface IReviewModifyLinkProps extends Omit<IReviewModalApiDetailType, 'id' | 'expireDate'> {
   reviewId: number;
   username: string;
 }

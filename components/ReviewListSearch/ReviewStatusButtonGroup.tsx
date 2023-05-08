@@ -16,6 +16,10 @@ const StatusBtnObj = [
     name: '수락',
   },
   {
+    status: 'REFUSED',
+    name: '거절',
+  },
+  {
     status: 'APPROVED',
     name: '완료',
   },
