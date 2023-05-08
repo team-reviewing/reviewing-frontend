@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import Image from 'next/image';
 import { IGuideImageList } from './guideType';
+import { v4 as uuidv4 } from 'uuid';
 
 function GuideImage({ imageList }: IGuideImageList) {
   return (
@@ -10,12 +11,12 @@ function GuideImage({ imageList }: IGuideImageList) {
       })}>
       {imageList.map((img) => {
         return (
-          <>
-            <figure key={img.src}>
+          <div key={uuidv4()}>
+            <figure>
               <Image src={img.src} alt={img.alt} width={img.width} height={img.height} />
               <figcaption className="text-neutral400">{img.figcaption}</figcaption>
             </figure>
-          </>
+          </div>
         );
       })}
     </div>
