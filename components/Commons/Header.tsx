@@ -34,7 +34,8 @@ const Header = () => {
             <span className="font-bold cursor-pointer">REVIEWING</span>
           </Link>
           {user ? (
-            <>
+            <div className="flex justify-between w-36">
+              <GuideButton />
               <figure
                 ref={ref}
                 className="relative flex items-center cursor-pointer"
@@ -42,7 +43,7 @@ const Header = () => {
                 <Image src={user.imageUrl} alt="userProfile" width={45} height={45} className="rounded-radius-50%" />
                 {dropdown && <HeaderDropDown />}
               </figure>
-            </>
+            </div>
           ) : (
             <div className="flex justify-between w-36">
               <GuideButton />
