@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import clsx from 'clsx';
 import { IFilterCategoryPropsType, ICategoryType, ITagType } from './mainType';
 import CategoryTagBox from './CategoryTagBox';
@@ -15,10 +15,6 @@ function FilterCategory({ setCategory, categories, setSelectedTags, selectedTags
     });
     return filterData[0].tags;
   };
-
-  useEffect(() => {
-    setCategory(categories[0]);
-  }, []);
 
   return (
     <>

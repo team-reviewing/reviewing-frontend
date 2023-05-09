@@ -5,7 +5,7 @@ import useSetLocalPath from '../../useHooks/useSetLocalPath';
 import { ITagType, ICategoryType, ICategoriesType } from './mainType';
 
 function Template({ categories }: ICategoriesType) {
-  const [category, setCategory] = useState<ICategoryType | undefined>();
+  const [category, setCategory] = useState<ICategoryType>(categories[0]);
   const [selectedTags, setSelectedTags] = useState<ITagType[]>([]);
 
   useSetLocalPath();
