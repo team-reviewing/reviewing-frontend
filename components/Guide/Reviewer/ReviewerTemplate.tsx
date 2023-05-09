@@ -3,7 +3,7 @@ import GuideTitleMent from '../GuideTitleMent';
 import ReviewerGuideRegister from './ReviewerGuideRegister';
 import ReviewerGuideReviewList from './ReviewerGuideReviewList';
 
-function Template() {
+function ReviewerTemplate() {
   return (
     <div className="space-y-10">
       <GuideTitle>Reveiwer 가이드</GuideTitle>
@@ -16,4 +16,4 @@ function Template() {
   );
 }
 
-export default Template;
+export default ReviewerTemplate;

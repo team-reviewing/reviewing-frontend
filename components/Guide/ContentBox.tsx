@@ -1,11 +1,9 @@
 import React from 'react';
-import Template from './Reviewer/Template';
-function ContentBox() {
-  return (
-    <div className="w-full">
-      <Template />
-    </div>
-  );
+import ReviewerTemplate from './Reviewer/ReviewerTemplate';
+import RevieweeTemplate from './Reviewee/RevieweeTemplate';
+
+function ContentBox({ role }: { role: boolean }) {
+  return <div className="w-full">{role ? <ReviewerTemplate /> : <RevieweeTemplate />}</div>;
 }
 
 export default ContentBox;
