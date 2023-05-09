@@ -7,7 +7,7 @@ function GuideForm() {
   return (
     <div className="flex justify-between w-full gap-3 msm:flex-col">
       <NavListBox role={role} setRole={setRole} />
-      <ContentBox></ContentBox>
+      <ContentBox role={role} />
     </div>
   );
 }
