@@ -27,6 +27,8 @@ export interface IReviewCommonType {
   imageUrl: string;
 }
 
+export type IReviewInquireBoxContentType = Omit<IReviewCommonType, 'id'> & IReviewType & IStatusType;
+
 export interface IReviewRoleType {
   role: boolean;
   setRole: React.Dispatch<React.SetStateAction<boolean>>;
