@@ -5,6 +5,7 @@ import {
   reviewDatailData,
   reviewerDetailInformationData,
   reviewersData,
+  reviewRateDetailData,
   reviewsData,
   userData,
 } from './mockApiData';
@@ -131,5 +132,13 @@ export const handlers = [
 
   rest.patch('http://localhost:3000/reviewers/:reviewerId/reviews/:reviewId/status-approved', (req, res, ctx) => {
     return res(ctx.status(204));
+  }),
+
+  rest.get('http://localhost:3000/evaluations/:reviewId', (req, res, ctx) => {
+    return res(ctx.status(200), ctx.delay(2000), ctx.json(reviewRateDetailData));
+  }),
+
+  rest.post('http://localhost:3000/reviewers/:reviewerId/evaluations', (req, res, ctx) => {
+    return res(ctx.status(201));
   }),
 ];

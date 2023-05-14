@@ -260,6 +260,17 @@ export const reviewsData = [
       imageUrl: 'https://upload.wikimedia.org/wikipedia/ko/thumb/2/24/Lenna.png/440px-Lenna.png',
     },
   },
+  {
+    id: 5,
+    title: '요청한 리뷰 리스트 평가완료 목록',
+    reviewerId: 5,
+    status: 'EVALUATED',
+    member: {
+      id: 5,
+      username: '리뷰어 이름 5',
+      imageUrl: 'https://upload.wikimedia.org/wikipedia/ko/thumb/2/24/Lenna.png/440px-Lenna.png',
+    },
+  },
 ];
 
 // get : http://localhost:3000/tags
@@ -367,4 +378,10 @@ export const reviewerDetailInformationData = {
     { id: 3, name: 'Spring' },
     { id: 4, name: 'View' },
   ],
+};
+
+export const reviewRateDetailData = {
+  id: 1,
+  score: 4.5,
+  content: '좋은 리뷰 감사합니다.',
 };
