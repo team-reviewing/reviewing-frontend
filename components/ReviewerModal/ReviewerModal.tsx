@@ -24,7 +24,12 @@ function ReviewerModal({ id, closeModal }: IReviewerModalType) {
   };
 
   const nextHandler = () => {
-    setPage((prev) => prev + 1);
+    setPage((prev) => {
+      if (reviewerScoreList?.hasNext) {
+        return prev + 1;
+      }
+      return prev;
+    });
   };
 
   const closeModalHandler = () => {
