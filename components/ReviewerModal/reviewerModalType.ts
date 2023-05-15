@@ -25,8 +25,3 @@ export interface IReviewerModalType {
   id: number;
   closeModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
-
-export interface IReviewerPaginationButtonType {
-  handler: React.MouseEventHandler<HTMLButtonElement>;
-  children: React.ReactNode;
-}

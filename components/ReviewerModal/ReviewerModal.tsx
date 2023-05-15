@@ -60,8 +60,8 @@ function ReviewerModal({ id, closeModal }: IReviewerModalType) {
               {reviewerScoreList && <ReviewerScoreListBox reviewerScoreList={reviewerScoreList} />}
 
               <nav className="flex justify-center w-full gap-5">
-                <ReviewPaginationButton handler={prevHandler}>⪻</ReviewPaginationButton>
-                <ReviewPaginationButton handler={nextHandler}>⪼</ReviewPaginationButton>
+                <ReviewPaginationButton onClick={prevHandler}>⪻</ReviewPaginationButton>
+                <ReviewPaginationButton onClick={nextHandler}>⪼</ReviewPaginationButton>
               </nav>
               <Link
                 href={{
