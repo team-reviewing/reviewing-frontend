@@ -392,6 +392,7 @@ export const reviewerDetailInfoData = {
   ],
 };
 
+// get : http://localhost:3000/reviewers/:reviewerId/evaluations
 export const reviewerScoreListData = {
   evaluations: [
     {
