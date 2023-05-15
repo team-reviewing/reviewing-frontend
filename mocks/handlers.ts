@@ -139,7 +139,7 @@ export const handlers = [
     return res(ctx.status(200), ctx.json(reviewerDetailInfoData));
   }),
 
-  rest.get('http://localhost:3000/reviewers/:reviewerId/evaluations', (req, res, ctx) => {
+  rest.get('http://localhost:3000/evaluations', (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(reviewerScoreListData));
   }),
 ];
