@@ -3,7 +3,3 @@ export interface IStarRatingPropsType {
   setRate: (num: number) => void;
   readOnly: boolean;
 }
-
-export interface IStarRateFillColor {
-  fillColor?: string;
-}

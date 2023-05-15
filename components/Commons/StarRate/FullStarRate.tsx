@@ -1,6 +1,4 @@
-import { IStarRateFillColor } from './starRateType';
-
-function FullStarRate({ fillColor = '#ffc342' }: IStarRateFillColor) {
+function FullStarRate({ fillColor = '#ffc342' }: { fillColor?: string }) {
   return (
     <svg height={40} viewBox="0 0 24 24">
       <path
