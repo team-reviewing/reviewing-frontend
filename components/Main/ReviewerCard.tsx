@@ -12,7 +12,7 @@ function ReviewerCard({ reviewerProps }: { reviewerProps: IReviewerType }) {
   return (
     <>
       <article
-        className="px-3 py-3 transition-transform ease-in-out border-2 shadow-md flex-cc rounded-radius-m border-neutral300 hover:border-neutral400 hover:scale-105"
+        className="px-3 py-3 transition-transform ease-in-out border-2 shadow-md cursor-pointer flex-cc rounded-radius-m border-neutral300 hover:border-neutral400 hover:scale-105"
         onClick={openModalHandler}>
         <div className="flex flex-col wh-f">
           <p className="w-full line-clamp-3 overflow-ellipsis whitespace-normal min-h-[3rem] leading-4 mb-1">
