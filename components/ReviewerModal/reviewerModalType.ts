@@ -1,4 +1,4 @@
-import { IReviewerType } from '../Main/mainType';
+import { IReviewersType, IReviewerType } from '../Main/mainType';
 
 export interface IReviewerModalResponseType extends IReviewerType {
   score: number;
@@ -7,9 +7,10 @@ export interface IReviewerModalResponseType extends IReviewerType {
 export interface IReviewerScoreListType {
   page: number;
   size: number;
+  reviewerId: number;
 }
 
-export interface IReviewerScoreListResponseType {
+export interface IReviewerScoreListResponseType extends Pick<IReviewersType, 'hasNext'> {
   evaluations: IEvaluationsType[];
 }
 
