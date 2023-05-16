@@ -11,6 +11,9 @@ export function useReviewRateModalGetQuery({ reviewId }: Pick<IReviewDetailInfoA
     queryFn: () => getReviewRateInfo({ reviewId }),
     staleTime: 1000 * 20,
     suspense: true,
+    onError: () => {
+      toast.error('요청이 실패하였습니다.');
+    },
   });
 }
 
