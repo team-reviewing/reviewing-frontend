@@ -9,7 +9,7 @@ function ReviewEvaluation({ reviewerId, reviewId, status, closeHandler }: IRevie
   const [reviewStarRate, setReviewStarRate] = useState<number>(0);
   const [evaluationContent, setEvaluationContent] = useState<string>('');
 
-  const { data } = useReviewRateModalGetQuery({ reviewId });
+  const { data } = useReviewRateModalGetQuery({ reviewId, status });
   const { mutate: mutateRateRegister } = useReviewRateRegisterMutation({
     content: evaluationContent,
     score: reviewStarRate,
