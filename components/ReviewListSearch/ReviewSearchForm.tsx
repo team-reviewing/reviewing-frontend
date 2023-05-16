@@ -26,6 +26,7 @@ function ReviewSearchForm() {
           <ReviewInquireBox
             key={review.id}
             role={role}
+            status={review.status}
             id={review.id}
             title={review.title}
             member={review.member}
