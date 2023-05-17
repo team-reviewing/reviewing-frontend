@@ -380,6 +380,56 @@ export const reviewerDetailInformationData = {
   ],
 };
 
+// get : http://localhost:3000/reviewers/:reviewerId
+export const reviewerDetailInfoData = {
+  id: 1,
+  username: 'nickname',
+  imageUrl: 'https://upload.wikimedia.org/wikipedia/ko/thumb/2/24/Lenna.png/440px-Lenna.png',
+  profileUrl: 'GitHub URL',
+  job: '백엔드',
+  career: '신입(1년 이하)',
+  introduction:
+    '안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕하세요 안녕',
+  score: 4.5,
+  techStack: [
+    {
+      id: 1,
+      name: 'Java',
+    },
+    {
+      id: 2,
+      name: 'Spring',
+    },
+  ],
+};
+
+// get : http://localhost:3000/evaluations
+export const reviewerScoreListData = {
+  evaluations: [
+    {
+      id: 1,
+      username: '리뷰이1',
+      imageUrl: 'https://upload.wikimedia.org/wikipedia/ko/thumb/2/24/Lenna.png/440px-Lenna.png',
+      score: 4.5,
+      content: '정말 도움이 많이 되었습니다!',
+    },
+    {
+      id: 2,
+      username: '리뷰이2',
+      imageUrl: 'https://upload.wikimedia.org/wikipedia/ko/thumb/2/24/Lenna.png/440px-Lenna.png',
+      score: 5.0,
+      content: '감사합니다~!',
+    },
+    {
+      id: 3,
+      username: '리뷰이3',
+      imageUrl: 'https://upload.wikimedia.org/wikipedia/ko/thumb/2/24/Lenna.png/440px-Lenna.png',
+      score: 4.0,
+      content: '리뷰를 통해서 코드를 개선하게 되었습니다. 감사합니다.',
+    },
+  ],
+};
+
 export const reviewRateDetailData = {
   id: 1,
   score: 4.5,

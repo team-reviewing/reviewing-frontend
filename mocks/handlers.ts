@@ -8,6 +8,8 @@ import {
   reviewRateDetailData,
   reviewsData,
   userData,
+  reviewerDetailInfoData,
+  reviewerScoreListData,
 } from './mockApiData';
 
 export const handlers = [
@@ -132,6 +134,14 @@ export const handlers = [
 
   rest.patch('http://localhost:3000/reviewers/:reviewerId/reviews/:reviewId/status-approved', (req, res, ctx) => {
     return res(ctx.status(204));
+  }),
+
+  rest.get('http://localhost:3000/reviewers/:reviewerId', (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(reviewerDetailInfoData));
+  }),
+
+  rest.get('http://localhost:3000/evaluations', (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(reviewerScoreListData));
   }),
 
   rest.get('http://localhost:3000/evaluations/:reviewId', (req, res, ctx) => {

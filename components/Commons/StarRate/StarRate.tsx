@@ -26,7 +26,9 @@ function StarRate({ rateValue, setRate, readOnly = false }: IStarRatingPropsType
     if (readOnly) return false;
 
     setIsHovered(false);
-    setRate(calculateRating(e));
+    if (setRate) {
+      setRate(calculateRating(e));
+    }
   };
 
   const starMouseMoveHandler = (e: MouseEvent<HTMLDivElement, globalThis.MouseEvent>) => {
