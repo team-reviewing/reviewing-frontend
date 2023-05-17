@@ -260,6 +260,17 @@ export const reviewsData = [
       imageUrl: 'https://upload.wikimedia.org/wikipedia/ko/thumb/2/24/Lenna.png/440px-Lenna.png',
     },
   },
+  {
+    id: 5,
+    title: '요청한 리뷰 리스트 평가완료 목록',
+    reviewerId: 5,
+    status: 'EVALUATED',
+    member: {
+      id: 5,
+      username: '리뷰어 이름 5',
+      imageUrl: 'https://upload.wikimedia.org/wikipedia/ko/thumb/2/24/Lenna.png/440px-Lenna.png',
+    },
+  },
 ];
 
 // get : http://localhost:3000/tags
@@ -367,4 +378,60 @@ export const reviewerDetailInformationData = {
     { id: 3, name: 'Spring' },
     { id: 4, name: 'View' },
   ],
+};
+
+// get : http://localhost:3000/reviewers/:reviewerId
+export const reviewerDetailInfoData = {
+  id: 1,
+  username: 'nickname',
+  imageUrl: 'https://upload.wikimedia.org/wikipedia/ko/thumb/2/24/Lenna.png/440px-Lenna.png',
+  profileUrl: 'GitHub URL',
+  job: '백엔드',
+  career: '신입(1년 이하)',
+  introduction:
+    '안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕하세요 안녕',
+  score: 4.5,
+  techStack: [
+    {
+      id: 1,
+      name: 'Java',
+    },
+    {
+      id: 2,
+      name: 'Spring',
+    },
+  ],
+};
+
+// get : http://localhost:3000/evaluations
+export const reviewerScoreListData = {
+  evaluations: [
+    {
+      id: 1,
+      username: '리뷰이1',
+      imageUrl: 'https://upload.wikimedia.org/wikipedia/ko/thumb/2/24/Lenna.png/440px-Lenna.png',
+      score: 4.5,
+      content: '정말 도움이 많이 되었습니다!',
+    },
+    {
+      id: 2,
+      username: '리뷰이2',
+      imageUrl: 'https://upload.wikimedia.org/wikipedia/ko/thumb/2/24/Lenna.png/440px-Lenna.png',
+      score: 5.0,
+      content: '감사합니다~!',
+    },
+    {
+      id: 3,
+      username: '리뷰이3',
+      imageUrl: 'https://upload.wikimedia.org/wikipedia/ko/thumb/2/24/Lenna.png/440px-Lenna.png',
+      score: 4.0,
+      content: '리뷰를 통해서 코드를 개선하게 되었습니다. 감사합니다.',
+    },
+  ],
+};
+
+export const reviewRateDetailData = {
+  id: 1,
+  score: 4.5,
+  content: '좋은 리뷰 감사합니다.',
 };
