@@ -40,7 +40,7 @@ function ReviewerModal({ id, closeModal }: IReviewerModalType) {
     <div className="fixed inset-0 z-10 flex-cc-col">
       <div className="modal_bg" onClick={closeModalHandler} />
       <section
-        className="z-20 bg-c-white flex relative flex-col p-7 rounded-radius-m h-[44rem] min-w-[36rem] w-[36rem]
+        className="z-20 bg-c-white flex relative flex-col p-7 rounded-radius-m min-w-[36rem] w-[36rem]
                   msm:w-full msm:min-w-0 msm:fixed msm:bottom-0 msm:rounded-b-radius-none msm:animate-up-animation">
         <div className="flex flex-col wh-f">
           <div className="flex justify-between">
@@ -65,8 +65,8 @@ function ReviewerModal({ id, closeModal }: IReviewerModalType) {
               {reviewerScoreList && <ReviewerScoreListBox reviewerScoreList={reviewerScoreList} />}
 
               <nav className="flex justify-center w-full gap-5">
-                <ReviewPaginationButton onClick={prevHandler}>⪻</ReviewPaginationButton>
-                <ReviewPaginationButton onClick={nextHandler}>⪼</ReviewPaginationButton>
+                <ReviewPaginationButton onClick={prevHandler}>{'<'}</ReviewPaginationButton>
+                <ReviewPaginationButton onClick={nextHandler}>{'>'}</ReviewPaginationButton>
               </nav>
               <Link
                 href={{
