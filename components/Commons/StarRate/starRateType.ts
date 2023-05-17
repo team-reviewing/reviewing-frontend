@@ -1,5 +1,5 @@
 export interface IStarRatingPropsType {
   rateValue: number;
-  setRate: (num: number) => void;
+  setRate?: (num: number) => void;
   readOnly: boolean;
 }
