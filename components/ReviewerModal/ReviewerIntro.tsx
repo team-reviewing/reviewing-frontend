@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { IReviewerModalResponseType } from './reviewerModalType';
+import StarRate from '../Commons/StarRate/StarRate';
 
 function ReviewerIntro({ reviewerDetail }: { reviewerDetail: IReviewerModalResponseType }) {
   return (
@@ -16,7 +17,9 @@ function ReviewerIntro({ reviewerDetail }: { reviewerDetail: IReviewerModalRespo
           />
           <span className="ml-2">{reviewerDetail.username}</span>
         </div>
-        <span>{reviewerDetail.score}</span>
+        <span>
+          <StarRate rateValue={reviewerDetail.score} readOnly={true} />
+        </span>
       </div>
       <div className="mb-6">
         <p>{reviewerDetail.introduction}</p>
