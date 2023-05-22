@@ -148,6 +148,10 @@ export const handlers = [
     return res(ctx.status(200), ctx.delay(2000), ctx.json(reviewRateDetailData));
   }),
 
+  rest.delete('http://localhost:3000/reviewers/:reviewerId/reviews/:reviewId', (req, res, ctx) => {
+    return res(ctx.status(200));
+  }),
+
   rest.post('http://localhost:3000/reviewers/:reviewerId/evaluations', (req, res, ctx) => {
     return res(ctx.status(201));
   }),
