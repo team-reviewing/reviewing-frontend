@@ -9,7 +9,7 @@ import { ROLE, useReviewMutation } from '../ReviewListSearch/queries/getReviewsQ
 import { useReviewModalGetQuery } from './queries/getReviewModalQuery';
 import { useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
-import { acceptReview, approveReview, refuseReview } from '../../pages/api/inquire';
+import { acceptReview, approveReview, quitReview, refuseReview } from '../../pages/api/inquire';
 
 const QuillEditor = dynamic(import('react-quill'), {
   ssr: false,
@@ -40,6 +40,10 @@ function ReviewModal({ reviewId, reviewerId, userImage, username, role, closeMod
   });
   const { mutate: mutateApprove } = useReviewMutation({
     mutationFn: () => approveReview({ reviewerId, reviewId }),
+    onSuccess: mutationSuccessFn,
+  });
+  const { mutate: mutateQuit } = useReviewMutation({
+    mutationFn: () => quitReview({ reviewerId, reviewId }),
     onSuccess: mutationSuccessFn,
   });
 
@@ -133,7 +137,7 @@ function ReviewModal({ reviewId, reviewerId, userImage, username, role, closeMod
                           username={username}
                           status={data.status}
                         />
-                        <ButtonWrapper>리뷰 취소</ButtonWrapper>
+                        <ButtonWrapper onClick={() => mutateQuit()}>리뷰 취소</ButtonWrapper>
                       </>
                     )}
                   </>
