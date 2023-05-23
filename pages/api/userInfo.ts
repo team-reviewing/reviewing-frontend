@@ -30,3 +30,8 @@ export const reviewerStatusUpdate = async () => {
   const updateReviewerStatus = await instance.patch('/members/me/reviewer-status', null, { withCredentials: true });
   return updateReviewerStatus;
 };
+
+export const reviewerRateGet = async () => {
+  const getReviewerRate = await instance.get('/evaluations/me', { withCredentials: true });
+  return getReviewerRate.data;
+};

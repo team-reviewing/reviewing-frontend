@@ -1,18 +1,24 @@
 import clsx from 'clsx';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { userInfoUpdate } from '../../pages/api/userInfo';
 import { IUserPageProps } from './informationType';
-import ReviewerRegisterModal from './ReviewerRegisterModal';
 import UserInput from './UserInput';
 import { reviewerStatusUpdate } from '../../pages/api/userInfo';
 import Loading from '../Commons/Loading';
+import ButtonWrapper from '../Commons/ButtonWrapper';
+import ReviewerRateModal from './ReviewerRateModal';
+import Portal from '../Commons/Portal';
+import ReviewerRateContent from './ReviewerRateContent';
+import ReviewerRegisterContent from './ReviewerRegisterContent';
+import ReviewerRegisterModal from './ReviewerRegisterModals';
 
 const InformationForm = ({ data, setUser }: IUserPageProps) => {
   const [userName, setUserName] = useState<string>(data.username);
   const [email, setEmail] = useState<string>(data.email);
   const [profileUrl, setProfileUrl] = useState<string>(data.profileUrl);
   const [modal, setModal] = useState<boolean>(false);
+  const [reviewerRateModal, setReviewerRateModal] = useState<boolean>(false);
   const [modify, setModify] = useState<boolean>(false);
   const [updateLoading, setUpdateLoading] = useState<boolean>(false);
   const [reviewerStatus, setReviewerStatus] = useState<boolean>(data.isReviewer);
@@ -47,6 +53,14 @@ const InformationForm = ({ data, setUser }: IUserPageProps) => {
 
   const userReviewerInduce = () => {
     toast('리뷰어 등록을 진행해주세요!', { icon: '😆' });
+  };
+
+  const reviewerRegisterModalHandler = () => {
+    setModal((prev) => !prev);
+  };
+
+  const reviewerModalHandler = () => {
+    setReviewerRateModal((prev) => !prev);
   };
 
   useEffect(() => {
@@ -89,7 +103,7 @@ const InformationForm = ({ data, setUser }: IUserPageProps) => {
           <span className="ml-3 text-sm font-medium text-c-black dark:text-gray300">Reviewer 활동여부</span>
         </div>
         <div className="flex gap-2">
-          <button
+          <ButtonWrapper
             onClick={() => {
               if (modify) {
                 userUpdateHandler();
@@ -99,16 +113,36 @@ const InformationForm = ({ data, setUser }: IUserPageProps) => {
             }}
             className="w-full h-10 flex-cc bg-c-black text-c-white rounded-radius-m">
             {modify ? '수정 반영' : '정보 수정'}
-          </button>
-          <button
+          </ButtonWrapper>
+          <ButtonWrapper
             onClick={() => setModal(true)}
             type="submit"
             className="w-full h-10 flex-cc bg-c-black text-c-white rounded-radius-m">
             리뷰어 정보
-          </button>
+          </ButtonWrapper>
+          {data?.reviewerRegister && (
+            <ButtonWrapper onClick={() => setReviewerRateModal(true)}>리뷰 평점</ButtonWrapper>
+          )}
         </div>
       </div>
-      {modal && <ReviewerRegisterModal setModal={setModal} />}
+      {modal && (
+        <Portal>
+          <ReviewerRegisterModal closeHandler={reviewerRegisterModalHandler}>
+            <Suspense fallback={<Loading />}>
+              <ReviewerRegisterContent setModal={setModal} />
+            </Suspense>
+          </ReviewerRegisterModal>
+        </Portal>
+      )}
+      {reviewerRateModal && (
+        <Portal>
+          <ReviewerRateModal closeHandler={reviewerModalHandler}>
+            <Suspense fallback={<Loading />}>
+              <ReviewerRateContent />
+            </Suspense>
+          </ReviewerRateModal>
+        </Portal>
+      )}
     </div>
   );
 };

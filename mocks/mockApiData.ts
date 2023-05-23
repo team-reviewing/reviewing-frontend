@@ -435,3 +435,24 @@ export const reviewRateDetailData = {
   score: 4.5,
   content: '좋은 리뷰 감사합니다.',
 };
+
+// get : http://localhost:3000/evaluations/me
+export const reviewerMeRateDataList = {
+  evaluations: [
+    {
+      id: 1,
+      username: '리뷰이1',
+      imageUrl: '프로필 이미지 URL',
+      score: 4.5,
+      content: '정말 도움이 많이 되었습니다!',
+    },
+    {
+      id: 2,
+      username: '리뷰이2',
+      imageUrl: '프로필 이미지 URL',
+      score: 5.0,
+      content: '감사합니다~!',
+    },
+  ],
+  hasNext: true,
+};
