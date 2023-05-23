@@ -1,7 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
-import { registerUpdate, reviewerGet, reviewerRegister } from '../../../pages/api/userInfo';
+import { registerUpdate, reviewerGet, reviewerRateGet, reviewerRegister } from '../../../pages/api/userInfo';
 import { IRegister, IReviewerRegisterUpdateType, ReviewerMutationType } from '../informationType';
+import { IReviewerScoreListResponseType } from '../../ReviewerModal/reviewerModalType';
 
 export const REVIEWER = 'reviewer';
 export function useReviewerGetQuery() {
@@ -12,6 +13,20 @@ export function useReviewerGetQuery() {
     onError: () => {
       toast.error('네트워크 문제가 발생했습니다.다시 시도 부탁드립니다.');
     },
+    suspense: true,
+  });
+}
+
+export const REVIEWERRATE = 'reviewerRate';
+export function useReviewerGetRateQuery({ page }: { page: number }) {
+  return useQuery<IReviewerScoreListResponseType>({
+    queryKey: [REVIEWERRATE, page],
+    queryFn: () => reviewerRateGet(),
+    staleTime: 1000 * 20,
+    onError: () => {
+      toast.error('데이터 요청에 실패했습니다. 다시 시도 부탁드립니다.');
+    },
+    suspense: true,
   });
 }
 
