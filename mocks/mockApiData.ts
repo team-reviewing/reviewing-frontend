@@ -427,6 +427,13 @@ export const reviewerScoreListData = {
       score: 4.0,
       content: '리뷰를 통해서 코드를 개선하게 되었습니다. 감사합니다.',
     },
+    {
+      id: 4,
+      username: '리뷰이4',
+      imageUrl: 'https://upload.wikimedia.org/wikipedia/ko/thumb/2/24/Lenna.png/440px-Lenna.png',
+      score: 3.0,
+      content: '리뷰를 통해서 코드를 개선하게 되었습니다. 감사합니다.',
+    },
   ],
 };
 
@@ -442,16 +449,30 @@ export const reviewerMeRateDataList = {
     {
       id: 1,
       username: '리뷰이1',
-      imageUrl: '프로필 이미지 URL',
+      imageUrl: 'https://upload.wikimedia.org/wikipedia/ko/thumb/2/24/Lenna.png/440px-Lenna.png',
       score: 4.5,
       content: '정말 도움이 많이 되었습니다!',
     },
     {
       id: 2,
       username: '리뷰이2',
-      imageUrl: '프로필 이미지 URL',
+      imageUrl: 'https://upload.wikimedia.org/wikipedia/ko/thumb/2/24/Lenna.png/440px-Lenna.png',
       score: 5.0,
       content: '감사합니다~!',
+    },
+    {
+      id: 3,
+      username: '리뷰이4',
+      imageUrl: 'https://upload.wikimedia.org/wikipedia/ko/thumb/2/24/Lenna.png/440px-Lenna.png',
+      score: 5.0,
+      content: '감사합니다~!!!',
+    },
+    {
+      id: 4,
+      username: '리뷰이4',
+      imageUrl: 'https://upload.wikimedia.org/wikipedia/ko/thumb/2/24/Lenna.png/440px-Lenna.png',
+      score: 5.0,
+      content: '감사합니다!!....',
     },
   ],
   hasNext: true,
