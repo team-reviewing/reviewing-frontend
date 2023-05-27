@@ -4,7 +4,7 @@ import EmptyStarRate from './EmptyStarRate';
 import FullStarRate from './FullStarRate';
 import { IStarRatingPropsType } from './starRateType';
 
-function StarRate({ rateValue, setRate, readOnly = false }: IStarRatingPropsType) {
+function StarRate({ rateValue, setRate, readOnly = false, size }: IStarRatingPropsType) {
   const rateUnit = 0.5;
   const maxRateNumber = 5;
   const [hoverRateValue, setHoverRateValue] = useState(0);
@@ -66,9 +66,9 @@ function StarRate({ rateValue, setRate, readOnly = false }: IStarRatingPropsType
                   [`w-[50%]`]: showRatingWithrateUnit,
                   [`w-[0%]`]: !showRatingWithrateUnit,
                 })}>
-                <FullStarRate />
+                <FullStarRate size={size} />
               </div>
-              <div>{showEmptyIcon ? <EmptyStarRate /> : <FullStarRate />}</div>
+              <div>{showEmptyIcon ? <EmptyStarRate size={size} /> : <FullStarRate size={size} />}</div>
             </div>
           );
         })}
