@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import EmptyListWrapper from '../Commons/EmptyListWrapper';
 import ReviewerScoreListBox from '../ReviewerModal/ReviewerScoreListBox';
 import ReviewPaginationButton from '../ReviewerModal/ReviewPaginationButton';
 import { useReviewerGetRateQuery } from './queries/getReviewerQuery';
@@ -37,7 +38,7 @@ function ReviewerRateContent() {
           </nav>
         </>
       )}
-      {!reviewerScoreList && <p>평가받은 목록이 아직 없습니다🌟</p>}
+      {!reviewerScoreList && <EmptyListWrapper>평가받은 목록이 아직 없습니다🌟</EmptyListWrapper>}
     </div>
   );
 }
