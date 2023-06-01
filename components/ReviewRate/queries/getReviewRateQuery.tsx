@@ -17,9 +17,6 @@ export function useReviewRateModalGetQuery({ reviewId, status }: Pick<IReviewEva
         : Promise.resolve({ id: reviewId, score: 0, content: '' }),
     staleTime: 1000 * 20,
     suspense: true,
-    onError: () => {
-      toast.error('요청이 실패하였습니다.');
-    },
   });
 }
 
@@ -38,9 +35,6 @@ export function useReviewRateRegisterMutation({
       queryClient.invalidateQueries(['getReviews', ROLE, 'reviewee']);
       queryClient.invalidateQueries(['reviewRate', reviewId]);
       closeHandler();
-    },
-    onError: () => {
-      toast.error('에러가 발생했습니다.');
     },
   });
 }

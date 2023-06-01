@@ -56,7 +56,6 @@ function RegisterForm({ reviewerId, reviewerName, reviewId, title, content, prUr
       });
     } catch (err) {
       setLoading(false);
-      toast.error('리뷰 신청이 진행되지 않았습니다. 다시 진행 부탁드립니다.');
     }
   };
   const onModifyHandler = async ({ content }: Pick<IReviewRegisterType, 'content'>) => {
@@ -72,7 +71,6 @@ function RegisterForm({ reviewerId, reviewerName, reviewId, title, content, prUr
       }
     } catch (err) {
       setLoading(false);
-      toast.error('리뷰 수정이 진행되지 않았습니다. 다시 진행 부탁드립니다.');
     }
   };
 

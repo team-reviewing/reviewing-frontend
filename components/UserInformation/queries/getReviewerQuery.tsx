@@ -10,9 +10,6 @@ export function useReviewerGetQuery() {
     queryKey: [REVIEWER],
     queryFn: () => reviewerGet(),
     staleTime: 1000 * 20,
-    onError: () => {
-      toast.error('네트워크 문제가 발생했습니다.다시 시도 부탁드립니다.');
-    },
     suspense: true,
   });
 }
@@ -23,9 +20,6 @@ export function useReviewerGetRateQuery({ page }: { page: number }) {
     queryKey: [REVIEWERRATE, page],
     queryFn: () => reviewerRateGet(),
     staleTime: 1000 * 20,
-    onError: () => {
-      toast.error('데이터 요청에 실패했습니다. 다시 시도 부탁드립니다.');
-    },
     suspense: true,
   });
 }
@@ -62,9 +56,6 @@ export function useReviewerUpdateMutate({ setModal }: ReviewerMutationType) {
       toast.success('리뷰어 정보가 업데이트 되었습니다');
       setModal(false);
       queryClient.invalidateQueries(['reviewer']);
-    },
-    onError: () => {
-      toast.error('오류가 발생했습니다.');
     },
   });
 }
