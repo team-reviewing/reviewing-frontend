@@ -21,7 +21,7 @@ export const REVIEWERRATE = 'reviewerRate';
 export function useReviewerGetRateQuery({ page }: { page: number }) {
   return useQuery<IReviewerScoreListResponseType>({
     queryKey: [REVIEWERRATE, page],
-    queryFn: () => reviewerRateGet(),
+    queryFn: () => reviewerRateGet({ page, size: 5 }),
     staleTime: 1000 * 20,
     onError: () => {
       toast.error('데이터 요청에 실패했습니다. 다시 시도 부탁드립니다.');
