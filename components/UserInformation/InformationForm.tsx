@@ -32,23 +32,18 @@ const InformationForm = ({ data, setUser }: IUserPageProps) => {
       toast.success('데이터가 업데이트 되었습니다.');
     } catch (err) {
       setUpdateLoading(false);
-      toast.error('데이터 업데이트가 진행되지 않았습니다. 다시 진행해 주시기 바랍니다.');
     }
   };
 
   const userReviewerStatusUpdate = async () => {
-    try {
-      await reviewerStatusUpdate();
-      !reviewerStatus
-        ? toast('리뷰어 활동을 시작합니다!', { icon: '😁' })
-        : toast('리뷰어 활동을 중단합니다!', { icon: '👋' });
-      setReviewerStatus((prev) => !prev);
-      setUser((prev) => {
-        return prev && { ...prev, isReviewer: !reviewerStatus };
-      });
-    } catch (err) {
-      toast.error('리뷰어 활동 업데이트 오류가 발생했습니다!');
-    }
+    await reviewerStatusUpdate();
+    !reviewerStatus
+      ? toast('리뷰어 활동을 시작합니다!', { icon: '😁' })
+      : toast('리뷰어 활동을 중단합니다!', { icon: '👋' });
+    setReviewerStatus((prev) => !prev);
+    setUser((prev) => {
+      return prev && { ...prev, isReviewer: !reviewerStatus };
+    });
   };
 
   const userReviewerInduce = () => {
