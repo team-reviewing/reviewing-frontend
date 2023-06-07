@@ -6,6 +6,5 @@ export function useReviewModalGetQuery({ reviewId, reviewerId }: IReviewDetailIn
   return useQuery<IReviewModalApiDetailType>({
     queryKey: ['modalDetail', reviewId],
     queryFn: () => getReviewDetailInfo({ reviewerId, reviewId }),
-    staleTime: 1000 * 20,
   });
 }

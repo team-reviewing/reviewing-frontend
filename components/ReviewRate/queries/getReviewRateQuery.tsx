@@ -17,9 +17,6 @@ export function useReviewRateModalGetQuery({ reviewId, status }: Pick<IReviewEva
         : Promise.resolve({ id: reviewId, score: 0, content: '' }),
     staleTime: 1000 * 20,
     suspense: true,
-    onError: () => {
-      toast.error('요청이 실패하였습니다.');
-    },
   });
 }
 
@@ -33,14 +30,23 @@ export function useReviewRateRegisterMutation({
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: () => postReviewRate({ reviewId, reviewerId, score, content }),
-    onSuccess: () => {
+    onSuccess: async () => {
       toast.success('평가가 반영되었습니다.');
-      queryClient.invalidateQueries(['getReviews', ROLE, 'reviewee']);
-      queryClient.invalidateQueries(['reviewRate', reviewId]);
+      await queryClient.invalidateQueries({
+        queryKey: ['getReviews', ROLE, 'reviewee'],
+        refetchType: 'all',
+      });
+      await queryClient.invalidateQueries({
+        queryKey: ['reviewRate'],
+        refetchType: 'all',
+      });
+      await queryClient.refetchQueries(['reviewRate']);
       closeHandler();
-    },
-    onError: () => {
-      toast.error('에러가 발생했습니다.');
+      //await Promise.all([
+      //
+      //queryClient.invalidateQueries(['reviewRate']),
+
+      //]);
     },
   });
 }

@@ -1,5 +1,4 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { toast } from 'react-hot-toast';
 import { useRecoilValue } from 'recoil';
 import { userState } from '../../../atoms/userState';
 import { getReviewers } from '../../../pages/api/main';
@@ -15,9 +14,6 @@ function useGetReviewers(params: IReviewersRequestType, options: IReviewerQueryT
     {
       retry: false,
       staleTime: 1000 * 20,
-      onError: () => {
-        toast.error('리뷰어 요청에 실패했습니다');
-      },
       select: (num) => {
         return {
           ...num,

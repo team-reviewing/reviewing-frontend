@@ -31,7 +31,10 @@ export const reviewerStatusUpdate = async () => {
   return updateReviewerStatus;
 };
 
-export const reviewerRateGet = async () => {
-  const getReviewerRate = await instance.get('/evaluations/me', { withCredentials: true });
+export const reviewerRateGet = async ({ page, size }: { page: number; size: number }) => {
+  const getReviewerRate = await instance.get('/evaluations/me', {
+    params: { page: page, size: size },
+    withCredentials: true,
+  });
   return getReviewerRate.data;
 };

@@ -49,16 +49,19 @@ function ReviewModal({ reviewId, reviewerId, userImage, username, role, closeMod
 
   const statusHandler = (status: string | undefined) => {
     if (status === 'CREATED') {
-      return '요청';
+      return '요청 ';
     }
     if (status === 'ACCEPTED') {
-      return '수락';
+      return '수락 ';
     }
     if (status === 'REFUSED') {
-      return '거절';
+      return '거절 ';
     }
     if (status === 'APPROVED') {
-      return '완료';
+      return '완료 ';
+    }
+    if (status === 'EVALUATED') {
+      return '평가 완료 ';
     }
   };
 

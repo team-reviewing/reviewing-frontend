@@ -1,4 +1,5 @@
 import axios, { AxiosInstance, AxiosError } from 'axios';
+import { toast } from 'react-hot-toast';
 import {
   deleteAccessTokenInStorage,
   deleteRefreshTokenInStorage,
@@ -7,6 +8,10 @@ import {
   setRefreshTokenInStorage,
 } from '../../../utils/authLogic';
 
+interface IErrorResponse {
+  message: string;
+  code: string;
+}
 const instance: AxiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BACK_API,
   headers: {
@@ -58,6 +63,7 @@ instance.interceptors.response.use(
         window.location.href = '/induceLogin';
       }
     } else {
+      toast.error((error.response?.data as IErrorResponse)?.message);
       return Promise.reject(error);
     }
   },
