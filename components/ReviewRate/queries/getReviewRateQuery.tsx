@@ -30,11 +30,23 @@ export function useReviewRateRegisterMutation({
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: () => postReviewRate({ reviewId, reviewerId, score, content }),
-    onSuccess: () => {
+    onSuccess: async () => {
       toast.success('평가가 반영되었습니다.');
-      queryClient.invalidateQueries(['getReviews', ROLE, 'reviewee']);
-      queryClient.invalidateQueries(['reviewRate', reviewId]);
+      await queryClient.invalidateQueries({
+        queryKey: ['getReviews', ROLE, 'reviewee'],
+        refetchType: 'all',
+      });
+      await queryClient.invalidateQueries({
+        queryKey: ['reviewRate'],
+        refetchType: 'all',
+      });
+      await queryClient.refetchQueries(['reviewRate']);
       closeHandler();
+      //await Promise.all([
+      //
+      //queryClient.invalidateQueries(['reviewRate']),
+
+      //]);
     },
   });
 }
